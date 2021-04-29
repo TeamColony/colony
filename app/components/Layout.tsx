@@ -1,21 +1,22 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Head from 'next/head'
+import NavBar from './Navbar'
 
 const Layout = (props: any) => {
   return (
-  <>
+  <div>
     <Head>
       <title>{"Colony"}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <link rel="stylesheet" href="node_modules/@splidejs/splide/dist/css/splide.min.css"/>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
     </Head>
     <header>
-    	<div>navbar</div>
+      <NavBar user={props.user}/>
     </header>
-    <div>
-        {props.children}
-    </div>
-  </>
+      {props.children}
+  </div>
 )}
 
 export default Layout
