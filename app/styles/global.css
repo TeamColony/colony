@@ -6,6 +6,7 @@ body {
     margin: 0;
     height: 100%;
     width: 100%;
+    background: #F0F0F0;
     position: fixed; /* FOR DISABLING OVERFLOW GARBAGE ON MOBILE */
 }
 
