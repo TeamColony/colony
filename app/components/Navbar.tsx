@@ -5,18 +5,16 @@ import { User } from '../interfaces/index'
 
 type Props = {
     data?: any 
-    user?: User
+    user: User
 }
 
 function navbar(props: Props) {
     const [activePage, setActivePage] = useState("Home")
 
-    console.log(props);
-
     function NavItem(props: Props) {
         return (
             <div>
-                <div className={`${styles.middleOption} ${activePage == props.data.name ? `${styles.selectedOption}` : ""} noselect`}
+                <div className={`${styles.middleOption} ${activePage == props.data ? `${styles.selectedOption}` : ""} noselect`}
                 onClick={() => {
                     Router.push(`${props.data.route}`);
                     setActivePage(props.data.name);
