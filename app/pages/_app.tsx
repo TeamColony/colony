@@ -1,5 +1,7 @@
 import { signIn, useSession } from 'next-auth/client'
 import Loading from '../components/Loading'
+import Layout from '../components/Layout'
+
 
 export default function App(props: any) {
     const {Component} = props;
@@ -8,7 +10,9 @@ export default function App(props: any) {
     return (
         <div>
             {session?
-                <Component/>
+                <Layout user={session}>
+                        <Component user={session}/>
+                </Layout>
             : loading ? 
                 <Loading/>
             :
