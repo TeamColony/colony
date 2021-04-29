@@ -7,12 +7,14 @@ import '../styles/global.css';
 
 export default function App(props: any) {
     const {Component} = props;
+    const standalone = ['WorkerProfile']
+
     const [session, loading] = useSession();
 
     return (
         <>
             {session?
-                <Layout user={session}>
+                <Layout useNav={standalone.includes(Component.name) ? false : true} user={session}>
                         <Component user={session}/>
                 </Layout>
             : loading ? 
