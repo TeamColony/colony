@@ -1,0 +1,72 @@
+.parent {
+    height: 100%;
+    width: 100%;
+    background: url('../public/background/topRight.svg'), url('../public/background/other.svg'), url('../public/background/other.svg');
+    background-repeat: no-repeat;
+    background-position: -5rem -5rem, -4rem 60%, 106% 106%;
+    background-size: 15rem 15rem, 7rem 7rem, 7rem 7rem;
+}
+
+.contentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.bottomContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.googleIcon {
+    justify-self: center;
+    margin-bottom: 3rem;
+    grid-column: 1;
+    height: 2rem;
+    width: 2rem;
+}
+
+.optionsContainer {
+    flex-basis: 100%;
+    margin: 1rem;
+    gap: 0.5rem;
+    width: 90%;
+    justify-self: center;
+    grid-column: 1;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.loginBtn {
+    transition: 0.2s ease-in-out;
+    flex: 1;
+    margin-right: 0;
+    background: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    min-height: 3rem;
+}
+
+.loginBtn:hover {
+    background: #8D86C9;
+    color: white;
+    border-color: white;
+}
+
+.registerBtn {
+    flex: 1;
+    background: #8D86C9;
+    border: none;
+    color: white;
+    border-radius: 6px;
+}
+
+.logoContainer {
+    height: 100%;
+    max-height: 15rem;
+    width: 100%;
+}

@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import Head from 'next/head'
 
 const Layout = (props: any) => {
   return (
-  <div>
+  <>
     <Head>
       <title>{"test"}</title>
       <meta charSet="utf-8" />
@@ -12,8 +12,10 @@ const Layout = (props: any) => {
     <header>
     	<div>navbar</div>
     </header>
-      {props.children}
-  </div>
+    <div>
+        {props.children}
+    </div>
+  </>
 )}
 
 export default Layout
