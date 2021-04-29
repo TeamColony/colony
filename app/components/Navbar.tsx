@@ -71,11 +71,7 @@ function navbar(props: Props) {
                 </div>
             </div>
         )
-    } else {
-        return (
-            <div></div>
-        )
-    }
+    } 
 }
 
 export default navbar

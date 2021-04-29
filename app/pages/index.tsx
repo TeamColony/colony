@@ -1,5 +1,8 @@
 import React from 'react';
-import { Splide, SplideSlide } from '@splidejs/react-splide/src/js';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+import styles from '../styles/index.module.css'
+import WorkerCard from '../components/WorkerCard';
 
 let nearYou: Array<Object> = [
   {
@@ -16,28 +19,22 @@ let nearYou: Array<Object> = [
 
 const IndexPage = () => {
   return (
-    
-    /*<Splide
-      options={{
-        rewind: true,
-        perPage: 2,
-        perMove: 1,
-        gap: '1rem',
-      }}
-    
-
-      {nearYou.map((worker, index) => (
-        <div key={index}>
-          <SplideSlide key={index}>
-
-            <text>Hello</text>
-          </SplideSlide>
-        </div>
-      ))}
-
-    </Splide>*/
     <div>
-      Homepage
+      <div>Near You</div>
+      <Splide
+        options={{
+          rewind: true,
+          gap: '1rem',
+        }}>
+
+        <SplideSlide>
+          <WorkerCard></WorkerCard>
+        </SplideSlide>
+
+        <SplideSlide>
+          <WorkerCard></WorkerCard>
+        </SplideSlide>
+      </Splide>
     </div>
   )
 }
