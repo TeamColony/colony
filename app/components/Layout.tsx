@@ -6,7 +6,7 @@ const Layout = (props: any) => {
   return (
   <div>
     <Head>
-      <title>{"test"}</title>
+      <title>{"Colony"}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel="stylesheet" href="node_modules/@splidejs/splide/dist/css/splide.min.css"/>

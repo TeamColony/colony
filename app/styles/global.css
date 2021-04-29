@@ -9,6 +9,7 @@ body {
     height: 100%;
     font-family: 'Montserrat';
     width: 100%;
+    background: #F0F0F0;
     position: fixed; /* FOR DISABLING OVERFLOW GARBAGE ON MOBILE */
 }
 
