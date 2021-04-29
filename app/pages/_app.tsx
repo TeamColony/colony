@@ -1,7 +1,7 @@
 import { signIn, useSession } from 'next-auth/client'
 import Loading from '../components/Loading'
+import NavBar from '../components/navbar'
 import Layout from '../components/Layout'
-
 
 export default function App(props: any) {
     const {Component} = props;
