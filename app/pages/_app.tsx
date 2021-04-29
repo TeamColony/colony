@@ -1,6 +1,5 @@
 import { useSession } from 'next-auth/client'
 import Loading from '../components/Loading'
-import NavBar from '../components/navbar'
 import Layout from '../components/Layout'
 import Login from '../components/Login'
 
@@ -12,11 +11,11 @@ export default function App(props: any) {
 
     return (
         <>
-            {!session?
+            {session?
                 <Layout user={session}>
                         <Component user={session}/>
                 </Layout>
-            : !loading ? 
+            : loading ? 
                 <Loading/>
             :
                 <Login/>
