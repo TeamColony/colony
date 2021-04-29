@@ -108,6 +108,18 @@
   "resolved" "https://registry.npmjs.org/@panva/asn1.js/-/asn1.js-1.0.0.tgz"
   "version" "1.0.0"
 
+"@splidejs/react-splide@^0.4.4":
+  "integrity" "sha512-o3WYE7Dt0Kzx9tRM7mnYW2QN+uajJPwIQ2fN0DoYs4hKql+pjwuA18M6u3iy39Rc8nVUk+m1Utn2XgfmX07rNQ=="
+  "resolved" "https://registry.npmjs.org/@splidejs/react-splide/-/react-splide-0.4.4.tgz"
+  "version" "0.4.4"
+  dependencies:
+    "@splidejs/splide" "^2.4.13"
+
+"@splidejs/splide@^2.4.13":
+  "integrity" "sha512-LdIwSnmNsGybCCnA3QG2dOeRv/rQl46jf7FflXxMGX0ADYWyL6UJHWJbMZvHBi5I67uRJY1ga/W+CvJ39nH26A=="
+  "resolved" "https://registry.npmjs.org/@splidejs/splide/-/splide-2.4.21.tgz"
+  "version" "2.4.21"
+
 "@sqltools/formatter@^1.2.2":
   "integrity" "sha512-O3uyB/JbkAEMZaP3YqyHH7TMnex7tWyCbCI4EfJdOCoN6HIhqdJBWTM6aCCiWQ/5f5wxjgU735QAIpJbjDvmzg=="
   "resolved" "https://registry.npmjs.org/@sqltools/formatter/-/formatter-1.2.3.tgz"
@@ -2447,7 +2459,7 @@
     "minimist" "^1.2.0"
     "strip-json-comments" "~2.0.1"
 
-"react-dom@^17.0.1":
+"react-dom@^17.0.1", "react-dom@16.13.1":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -2466,7 +2478,7 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.8.3.tgz"
   "version" "0.8.3"
 
-"react@^17.0.2":
+"react@^17.0.2", "react@16.13.1":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
