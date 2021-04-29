@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import styles from '../styles/navbar.module.css'
 import Router from 'next/router'
+import { User } from '../interfaces/index'
 
 type Props = {
     data?: any 
+    user?: User
 }
 
 function navbar(props: Props) {
     const [activePage, setActivePage] = useState("Home")
+
+    console.log(props);
 
     function NavItem(props: Props) {
         return (
@@ -19,6 +23,7 @@ function navbar(props: Props) {
                 }}>
 
                     <span className="material-icons">{props.data.icon}</span>
+                    
                     <div className={styles.iconText}>
                         {props.data.name}
                     </div>
@@ -32,7 +37,7 @@ function navbar(props: Props) {
         return (
             <div className={`${styles.nav} ${styles.sticky}`}>
                 <div className={styles.leftNav}>
-                    <img className={styles.adaLogo} src="/adaText.svg" />
+                    <img className={styles.adaLogo} src="logo.svg" />
                 </div>
                 <div className={styles.middleNav}>
                     <div className={styles.middleOptions}>
@@ -59,9 +64,9 @@ function navbar(props: Props) {
                     </div>
                 </div>
                 <div className={styles.rightNav}>
-                    <div onClick={() => Router.push(`/profiles/${props.globalProps.session.name.replace(" ", "_")}`)} className={`${styles.rightNavContainer}`}>
-                        <img className={styles.navProfilePic} src={props.globalProps.session.picture} />
-                        <text className={styles.navUserNameText}>{props.globalProps.session.name}</text>
+                    <div onClick={() => Router.push(`/profiles/${props.user?.name.replace(" ", "_")}`)} className={`${styles.rightNavContainer}`}>
+                        <img className={styles.navProfilePic} src={props.user?.picture} />
+                        <text className={styles.navUserNameText}>{props.user?.name}</text>
                     </div>
                 </div>
             </div>
