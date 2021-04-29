@@ -1,1 +1,1 @@
-declare module '@splidejs/react-splide/src/js';
+declare module '@splidejs/react-splide';
