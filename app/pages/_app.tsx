@@ -1,5 +1,6 @@
 import { signIn, useSession } from 'next-auth/client'
 import Loading from '../components/Loading'
+import NavBar from '../components/navbar'
 
 export default function App(props: any) {
     const {Component} = props;
@@ -8,7 +9,8 @@ export default function App(props: any) {
     return (
         <div>
             {session?
-                <Component/>
+                
+                <NavBar globalProps={props} {...props}/>
             : loading ? 
                 <Loading/>
             :
