@@ -41,12 +41,26 @@
 }
 
 .middleOptions div {
+    color: #5E5E5E;
+    font-size: 1.3rem;
+}
+
+.middleOption span {
+    color: #5E5E5E
+}
+
+.selectedOption {
+    background-color: #8D86C9;
+}
+
+.selectedOption div {
     color: white;
     font-size: 1.3rem;
 }
 
-.selectedOption {
-    background-color: #3d3756;
+.selectedOption span {
+    color: white;
+    font-size: 1.3rem;
 }
 
 .middleOption {
@@ -60,7 +74,15 @@
 }
 
 .middleOption:hover {
-    background-color: #3d3756;
+    background-color: #A39DD8;
+}
+
+.middleOption:hover div {
+    color: white;
+}
+
+.middleOption:hover span {
+    color: white;
 }
 
 .navProfilePic {
@@ -84,6 +106,16 @@
 .adaLogo {
     height: 5rem;
     width: 5rem;
+}
+
+@media only screen and (max-width: 640px) {
+    .iconText {
+        display: none;
+    }
+
+    .selectedOption .iconText {
+        display: block;
+    }
 }
 
 
