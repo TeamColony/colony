@@ -18,14 +18,16 @@
 }
 
 .bodyContent {
-    padding: 2rem;
     display: grid;
-    grid-template-rows: auto 0.45fr 0.5fr;
+    grid-template-rows: auto auto 1fr;
 }
 
 .profileInfoContainer {
+    padding: 2rem;
+    padding-bottom: 0;
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 }
 
 .profileInfoContainer img {
@@ -77,7 +79,7 @@
 
 
 .jobsContainer {
-    overflow: hidden;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -86,6 +88,9 @@
 }
 
 .jobsHeader {
+    padding: 2rem;
+    padding-bottom: 0;
+    padding-top: 0;
     height: fit-content;
     display: flex;
     align-items: center;
@@ -99,8 +104,6 @@
 
 .jobScroll {
     padding-left: 1.5rem;
-    margin-top: 3rem;
-    position: absolute;
     left: 0;
     width: 100%;
     display: flex;
@@ -135,4 +138,5 @@
 
 .reviewsContainer {
     margin-top: 0;
+    padding-top: 1.5rem;
 }
