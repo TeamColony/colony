@@ -1,8 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
-import NavBar from './Navbar'
+import NavBar from './NavBar/Navbar';
 
 const Layout = (props: any) => {
+  console.log(props)
   return (
   <>
     <Head>
@@ -13,7 +14,7 @@ const Layout = (props: any) => {
     </Head>
     <header>
       {props.useNav && 
-        <NavBar user={props.user}/>
+        <NavBar activePage={props.children.type.name} user={props.user}/>
       }
     </header>
       {props.children}
