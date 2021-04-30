@@ -1,0 +1,109 @@
+.iChallenge {
+    align-self: center;
+    min-height: auto; 
+    padding: 1rem 1.5rem 1rem 1.5rem;
+}
+
+.myChallenge {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+}
+
+.workTypeImage{
+  width: 10%;
+}
+
+.jobRow{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 18px;
+}
+
+.jobDetails{
+    padding-left: 10px;
+}
+
+.jobSection{
+    margin-bottom: 8px;
+}
+
+.publisher {
+    display: flex;
+    align-items: center;
+    background-color: #342e49;
+    width: fit-content;
+    gap: 0.3rem;
+    padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+    border-radius: 1.6rem;
+    font-size: 1rem;
+}
+
+.iProfilePic {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.horizontalProfileContainer {
+    display: flex;
+    gap: 0.7rem;
+    overflow-x: hidden;
+}
+
+.challengeTitle {
+    margin-top: 0.5rem;
+}
+
+
+.profileInfoContainer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.starContainer{
+    display: flex;
+    flex-direction:row;
+    justify-content: flex-start;
+    margin-top: 8px;
+}
+
+.star{
+    margin-right: 10px;
+}
+
+.circle:before {
+    content: '\25CF';
+    font-size: 20px;
+    color: #65BE57;
+    margin-left: 20px;
+}
+
+.ratingText{
+    margin-top: 0.2rem; /*todo: find suitable replacement */
+}
+
+.profileText{
+    margin-left: 1.1rem;
+}
+
+.profilePicture {
+    height: 4.8rem;
+    border-radius: 50%;
+}
+
+.profileName {
+    font-size: 1.2rem;
+    margin-top: 7px;
+}
+
+.nearHeader {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #5E5E5E;
+}
+
+.nearHeader span {
+    margin-right: 1rem;
+}
