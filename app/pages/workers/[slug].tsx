@@ -28,14 +28,14 @@ export default function WorkerProfile(props) {
                         <span className="material-icons">work_outline</span>
                         <div style={{fontWeight: 500}}>Jobs Available</div>
                     </div>
-                    <div className={styles.jobScroll}>
-                        {[1,2,3,4,5,6,7,8].map(() => (
-                            <div className={styles.jobItem}>
-                                <img style={{height: '75%'}} src="/pizza.svg"/>
-                                <div>delivery</div>
-                            </div>
-                        ))}
-                    </div>
+                        <div className={styles.jobScroll}>
+                            {[1,2,3,4,5,6,7,8].map(() => (
+                                <div className={styles.jobItem}>
+                                    <img style={{height: '75%'}} src="/pizza.svg"/>
+                                    <div>delivery</div>
+                                </div>
+                            ))}
+                        </div>
                 </div>
                 <div className={styles.reviewsContainer}>
                     <div className={`${styles.jobsHeader} ${styles.reviewsHeader}`}>
