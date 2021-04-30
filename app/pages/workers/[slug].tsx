@@ -3,7 +3,7 @@ import styles from '../../styles/workerProfile.module.css';
 import { GetServerSidePropsContext } from 'next';
 
 
-export default function WorkerProfile(props) {
+export default function WorkerProfile(props: any) {
     return (
         <div className={styles.parent}>
             <div className={styles.headerContent}>

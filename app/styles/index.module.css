@@ -1,0 +1,22 @@
+/*.indexBody{
+    padding: 2rem;
+    grid-template-rows: auto 0.45fr 0.5fr;
+}*/
+
+.nearHeader{
+    padding-left: 60px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.navIcon{
+     font-size: 38px;
+}
+
+.navText{
+    margin-left: 20px;
+    font-weight: 400;
+    font-size: 25px;
+}

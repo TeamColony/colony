@@ -1,8 +1,9 @@
 import React from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+
 import styles from '../styles/index.module.css'
-import WorkerCard from '../components/WorkerCard';
+import WorkerCard from '../components/WorkerCard/WorkerCard';
 
 let nearYou: Array<Object> = [
   {
@@ -19,12 +20,20 @@ let nearYou: Array<Object> = [
 
 const IndexPage = () => {
   return (
-    <div>
-      <div>Near You</div>
+    <div className={styles.indexBody}>
+      <div className={styles.nearHeader}>
+           <span className={`material-icons ${styles.navIcon}`}>location_pin</span>
+           <div className={styles.navText}>Near You</div>
+      </div>
+
       <Splide
         options={{
           rewind: true,
-          gap: '1rem',
+          gap: '2rem',
+          pagination: false,
+          autoHeight: true,
+          padding: "60px",
+          fixedWidth: "285px",
         }}>
 
         <SplideSlide>
@@ -34,6 +43,11 @@ const IndexPage = () => {
         <SplideSlide>
           <WorkerCard></WorkerCard>
         </SplideSlide>
+        
+        <SplideSlide>
+          <WorkerCard></WorkerCard>
+        </SplideSlide>
+
       </Splide>
     </div>
   )
