@@ -43,6 +43,7 @@
 
 .profilePicture{
     height: 70px;
+    margin-left: -10px;
 }
 
 .nearHeader{
@@ -54,11 +55,49 @@
 }
 
 .navIcon{
-     font-size: 38px;
+     font-size: 33px;
 }
 
 .navText{
     margin-left: 20px;
     font-weight: 400;
-    font-size: 25px;
+    font-size: 21px;
+}
+
+.splideComponent{
+    margin-bottom: 30px;
+}
+
+
+@media only screen and (max-width: 500px) {
+    .mapParent{
+        margin-left: 35px;
+        margin-right: 40px;
+    
+    }
+
+    .messageCard {
+        margin-left: 35px;
+        margin-right: 40px;
+    }
+
+    .messageCard span{
+        color: white;
+        font-weight: 500;
+        font-size: 18px;
+        padding-left: 20px;
+    }
+
+    .nearHeader{
+        padding-left: 35px;
+    }
+
+    .splideComponent button{
+         display: none !important;
+    }
+
+    .splideComponent > div{
+        margin-left: -25px !important;
+    }
+    
 }

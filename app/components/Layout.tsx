@@ -5,7 +5,7 @@ import NavBar from './NavBar/Navbar';
 const Layout = (props: any) => {
   console.log(props)
   return (
-  <>
+  <div className="overallParent">
     <Head>
       <title>{"Colony"}</title>
       <meta charSet="utf-8" />
@@ -19,7 +19,7 @@ const Layout = (props: any) => {
       }
     </header>
       {props.children}
-  </>
+  </div>
 )}
 
 export default Layout

@@ -55,8 +55,8 @@ const IndexPage = () => {
            <span className={`material-icons ${styles.navIcon}`}>location_pin</span>
            <div className={styles.navText}>Near You</div>
       </div>
-
-      <Splide
+    
+      <Splide className={styles.splideComponent}
         options={{
           rewind: true,
           gap: '2rem',
@@ -66,7 +66,7 @@ const IndexPage = () => {
           fixedWidth: "285px",
         }}>
 
-        <SplideSlide>
+        <SplideSlide className={styles.firstSplide}>
           <WorkerCard></WorkerCard>
         </SplideSlide>
 
