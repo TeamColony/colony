@@ -10,8 +10,9 @@ interface options {
 
 export default function NavItem({options, activePage} : {options: options, activePage: string}) {
     return (
-        <>
-            <div className={`${styles.middleOption} ${activePage === options.key && styles.selectedOption} noselect`} onClick={() => {Router.push(`${options.route}`)}}>
+        <div>
+            <div className={`${styles.middleOption} ${activePage === options.key && styles.selectedOption} noselect`} 
+                    onClick={() => {Router.push(`${options.route}`)}}>
 
                 <span className="material-icons">{options.icon}</span>
                 
@@ -19,6 +20,6 @@ export default function NavItem({options, activePage} : {options: options, activ
                     {options.name}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
