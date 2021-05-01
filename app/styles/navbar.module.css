@@ -1,14 +1,16 @@
 .nav {
-    width: 100%;
     height: 4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    margin-right: 60px;
 }
 
 .sticky {
     position: sticky;
     top: 0;
+    margin-top: 10px;
 }
 
 .fixed {
@@ -26,11 +28,19 @@
     display: flex;
 }
 
+.logo{
+    width: 90px;
+    margin-left: 50px;
+    display: block;
+    align-content: center;
+}
+
 .middleOptions {
     grid-column-start: 2;
     grid-row: 1;
     display: flex;
     list-style: none;
+    align-self: center;
 }
 
 .middleOptions div {
@@ -48,12 +58,10 @@
 
 .selectedOption div {
     color: white;
-    font-size: 1.3rem;
 }
 
 .selectedOption span {
     color: white;
-    font-size: 1.3rem;
 }
 
 .middleOption {
@@ -61,6 +69,7 @@
     border-radius: 1.3rem;
     /* padding: 0.5rem; */
     padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+    margin-right: 20px;
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -88,8 +97,8 @@
     grid-row: 1;
     display: flex;
     align-items: center;
+    align-self: center;
     gap: 20px;
-    align-self: flex-end;
     margin-left: auto;
     grid-column-start: 5;
 }
@@ -118,7 +127,11 @@
     }
 
     .selectedOption .iconText {
-        display: block;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .navUserNameText {
@@ -126,23 +139,110 @@
     }
 
     .nav {
-        justify-content: center;
+        margin-right: 0px;
     }
+
+    .middleOptions {
+        grid-column-start: 1;
+        grid-row: 1;
+        display: flex;
+        list-style: none;
+    }
+
     .middleNav {
         width: auto;
     }
 
-    .middleNav div {
-        margin-right: 1rem;
+    .navProfilePic {
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        margin-right: 50px;
     }
+
+
+    .middleNav{
+        display: flex;
+        width: 100%;
+        
+        justify-content: space-between !important;
+        align-content: space-between !important;
+    }
+
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 960px) {
+    .navUserNameText{
+        display: none;
+    }
+
+    .logo{
+        display: none;
+    }
+
+    .middleNav{
+        display: flex;
+        margin-left: 50px;
+    }
+
 }
 
+@media only screen and (max-width: 500px) {
+    
 
-@media only screen and (max-width: 360px) {
+    .middleOption {
+        padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+        margin-right: 0px !important;
+        
+    }
+
+    .middleOptions {
+        list-style: none;
+        margin-left: 20px;
+
+        display: flex;
+
+        width: 100%;
+        justify-content: space-between !important;
+        align-content: space-between !important;
+        
+    }
+
+    .middleNav{
+        display: flex;
+        width: 100%;
+        margin-left: 0px !important;
+        
+        justify-content: space-between !important;
+        align-content: space-between !important;
+    }
+
+    .nav {
+        display: flex;
+        margin-right: 0px;
+    }
+
+    .navProfilePic {
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        margin-right: 30px;
+        
+    }
+    
+    
+}
+
+@media only screen and (max-width: 390px) {
     .selectedOption .iconText {
         display: none;
     }
+
+    .middleOption {
+        padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+        margin-right: 4px !important;
+        display: flex;
+    }
+    
+    
 }

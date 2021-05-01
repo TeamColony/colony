@@ -13,6 +13,9 @@ function navbar(props: Props) {
     return (
         <div className={`${styles.nav} ${styles.sticky}`}>
             <div className={styles.middleNav}>
+
+            <img className={styles.logo} src="/notext.svg" />
+                
                 <div className={styles.middleOptions}>
 
                     <NavItem {...props} options={{
@@ -36,7 +39,10 @@ function navbar(props: Props) {
                         route: "/settings",
                     }} />
 
+                    <div></div>
+
                 </div>
+
                 <div onClick={() => Router.push(`/profiles/${props.user?.name.replace(" ", "_")}`)} className={`${styles.rightNavContainer}`}>
                     <img className={styles.navProfilePic} src={props.user?.picture} />
                     <text className={styles.navUserNameText}>{props.user?.name}</text>
