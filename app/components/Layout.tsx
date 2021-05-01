@@ -11,6 +11,7 @@ const Layout = (props: any) => {
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+     
     </Head>
     <header>
       {props.useNav && 
