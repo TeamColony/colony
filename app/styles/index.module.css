@@ -146,8 +146,6 @@
 
 
 @media only screen and (max-width: 600px){
-
-   
     .jobList{
         padding-right: 30px;
         padding-left: 30px;
@@ -158,8 +156,6 @@
         padding-right: 34px;
         padding-left: 34px;
     }
-
-
 }
 
 @media only screen and (max-width: 500px) {

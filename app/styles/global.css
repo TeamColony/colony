@@ -42,7 +42,11 @@ body {
 
 @media only screen and (max-width: 960px) {
     .overallParent {
-        overflow-y: hidden !important;
+        -ms-overflow-style: none;
+        scrollbar-width: none; 
+    }
+    .overallParent::-webkit-scrollbar { 
+        display: none;  /* Safari and Chrome */
     }
 }
 

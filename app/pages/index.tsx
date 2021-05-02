@@ -10,7 +10,6 @@ import "leaflet/dist/leaflet.css";
 
 //Components
 import WorkerCard from '../components/WorkerCard/WorkerCard';
-import { map } from 'leaflet';
 const LeafletMap = dynamic(() => import("../components/Map"), { ssr: false });
 
 let nearYou: Array<Object> = [

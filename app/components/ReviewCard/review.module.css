@@ -1,0 +1,55 @@
+.reviewParent {
+    align-self: center;
+    min-height: auto; 
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+}
+
+.reviewRow{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.reviewDetails{
+    padding-left: 10px;
+}
+
+
+.profileInfoContainer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.starContainer{
+    display: flex;
+    flex-direction:row;
+    justify-content: flex-start;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.star{
+    margin-right: 10px;
+}
+
+.profileText{
+    margin-left: 1.1rem;
+    align-self: center;
+}
+
+.profilePicture {
+    height: 3rem;
+    margin-left: 9px;
+    margin-top: 4px;
+    border-radius: 50%;
+}
+
+.profileName {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 7px;
+}
