@@ -26,36 +26,68 @@ let nearYou: Array<Object> = [
   },
 ]
 
-const position: number[] = [51.505, -0.09]
-
 const IndexPage = () => {
 
   return (
     <div className={styles.indexBody}>
 
       <div className={styles.mapParent}>
-          <LeafletMap/>
+        
+        <div className={styles.popular}>
+
+          <div className={styles.jobHeader}>
+            <span className={styles.popularTitle}>Popular Jobs</span>
+            <span className={styles.popularAll}>View all</span>
+          </div>
+
+          <div className={styles.jobList}>
+              <div className={styles.popularJob}>
+                <img className={styles.popularPicture} src="/pizza.svg" />
+                <span>Takeaway</span>
+              </div>
+
+              <div className={styles.popularJob}>
+                <img className={styles.popularPicture} src="/drycleaning.svg" />
+                <span>Dry Cleaning</span>
+              </div>
+
+              <div className={styles.popularJob}>
+                <img className={styles.popularPicture} src="/collection.svg" />
+                <span>Colletion</span>
+              </div>
+
+              <div className={styles.popularJob}>
+                <img className={styles.popularPicture} src="/babysitting.svg" />
+                <span>Babysitting</span>
+              </div>
+          </div>
+        
+
+        </div>
+
+        <LeafletMap/>
+
       </div>
 
       <div className={styles.nearHeader}>
-           <span className={`material-icons ${styles.navIcon}`}>chat</span>
-           <div className={styles.navText}>Messages</div>
+        <span className={`material-icons ${styles.navIcon}`}>chat</span>
+        <div className={styles.navText}>Messages</div>
       </div>
 
       <div className={`${styles.messageCard}`}>
-          <img className={styles.profilePicture} src="profile_pics/grey.png" />
-          <span>James McDaniel</span>
-          <div className={styles.messageEnd}>
-            <span>1</span>
-            <span className={`material-icons ${styles.messageIcon}`}>chat</span>
-          </div>
+        <img className={styles.profilePicture} src="profile_pics/grey.png" />
+        <span>James McDaniel</span>
+        <div className={styles.messageEnd}>
+          <span>1</span>
+          <span className={`material-icons ${styles.messageIcon}`}>chat</span>
+        </div>
       </div>
 
       <div className={styles.nearHeader}>
-           <span className={`material-icons ${styles.navIcon}`}>location_pin</span>
-           <div className={styles.navText}>Near You</div>
+        <span className={`material-icons ${styles.navIcon}`}>location_pin</span>
+        <div className={styles.navText}>Near You</div>
       </div>
-    
+
       <Splide className={styles.splideComponent}
         options={{
           rewind: true,
@@ -73,7 +105,7 @@ const IndexPage = () => {
         <SplideSlide>
           <WorkerCard></WorkerCard>
         </SplideSlide>
-        
+
         <SplideSlide>
           <WorkerCard></WorkerCard>
         </SplideSlide>
