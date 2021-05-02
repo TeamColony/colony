@@ -1,7 +1,7 @@
 .parent {
     height: 100%;
     display: grid;
-    grid-template-rows: minmax(80px, 0.4fr) minmax(100px, 0.6fr) minmax(260px, 1fr) minmax(260px, 1fr);
+    grid-template-rows: minmax(80px, 0.4fr) minmax(100px, auto) minmax(260px, 1fr) minmax(260px, 1fr);
 }
 
 .searchRow {
@@ -50,6 +50,7 @@
 }
 
 .sectionHeader {
+    margin-top: 1rem;
     padding-left: 1.5rem;
     display: flex;
     align-items: center;
@@ -69,6 +70,7 @@
 .nearRow {
     overflow: hidden;
     color: #424242;
+    margin-bottom: -2rem;
 }
 
 

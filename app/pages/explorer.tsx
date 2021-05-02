@@ -52,7 +52,7 @@ export default function Explorer() {
                     <span className="material-icons">location_pin</span>
                     <h2>Near you</h2>
                 </div>
-                <Splide className={styles.splideComponent}
+                <Splide style={{marginBottom: '4rem'}} className={styles.splideComponent}
                     options={{
                         rewind: true,
                         pagination: false,
