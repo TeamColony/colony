@@ -1,0 +1,29 @@
+.jobScroll {
+    padding-left: 1.5rem;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: auto;
+}
+
+.jobScroll div {
+    border-radius: 50%;
+    flex: 0 0 auto;
+}
+
+.jobItem {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 5rem;
+    align-items: center;
+    margin-right: 0.8rem;
+}
+
+.jobItem div {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
