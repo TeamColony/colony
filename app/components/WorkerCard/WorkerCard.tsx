@@ -1,4 +1,5 @@
 import styles from './worker.module.css'
+import Router from 'next/router';
 
 type Props = {
     name?: string
@@ -6,10 +7,10 @@ type Props = {
     jobs?: []
 }
 
-const WorkerCard = (props: Props) => {
+export default function WorkerCard(props: Props){
 
     return (
-        <div className={`${styles.iChallenge} ${styles.myChallenge}`}>
+        <div className={`${styles.iChallenge} ${styles.myChallenge}`} onClick={() => {Router.push(`/workers/1`)}}>
             <div className={styles.profileInfoContainer}>
                 <img className={styles.profilePicture} src="profile_pics/stark.png" />
                 <div className={styles.profileText}>
@@ -38,5 +39,3 @@ const WorkerCard = (props: Props) => {
         </div>
     )
 }
-
-export default WorkerCard
