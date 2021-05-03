@@ -34,7 +34,7 @@ function navbar(props: Props) {
 
                     <NavItem {...props} options={{
                         name: "Settings",
-                        key: "SettingsPage",
+                        key: "Settings",
                         icon: "settings",
                         route: "/settings",
                     }} />
