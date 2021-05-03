@@ -27,9 +27,9 @@ function navbar(props: Props) {
 
                     <NavItem {...props} options={{
                         name: "Explore",
-                        key: "ExplorerPage",
+                        key: "Explorer",
                         icon: "explore",
-                        route: "/submission",
+                        route: "/explorer",
                     }} />
 
                     <NavItem {...props} options={{

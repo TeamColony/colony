@@ -1,0 +1,71 @@
+.cardBody {
+    background: white;
+    box-shadow: -2px 2px 21px -8px rgba(0, 0, 0, 0.25);
+    border-radius: 22px;
+    min-height: auto; 
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    color: #5A5A5A;
+    margin-bottom: 1rem;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    font-size: 0.8rem;
+}
+
+.header img {
+    height: 2rem;
+    padding-right: 0.5rem;
+}
+
+.priceContainer {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+}
+
+.priceContainer h2 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.userPfpList {
+    display: flex;
+    position: relative;
+    height: 2rem;
+    padding-bottom: 1rem;
+}
+
+.userPfpList div {
+    position: absolute;
+    left: 0;
+}
+
+.userPfpList div:nth-child(1) {
+    z-index: 100;
+}
+
+.userPfpList div:nth-child(2) {
+    left: 2rem;
+    z-index: 99;
+}
+
+.userPfpList div:nth-child(3) {
+    left: 4rem;
+    z-index: 98;
+}
+
+.userPfpList div:nth-child(3)::after {
+    height: 100%;
+    width: 2.5rem;
+    color: #958DD4;
+    margin-left: 0.5rem;
+    position: absolute;
+    top: 25%;
+    content: '+5';
+}
+
+.pfp {
+    height: 2.5rem;
+}
