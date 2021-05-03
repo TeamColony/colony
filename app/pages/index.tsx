@@ -31,7 +31,7 @@ const IndexPage = () => {
     <div className={styles.indexBody}>
 
       <div className={styles.mapParent}>
-        
+
         <div className={styles.popular}>
 
           <div className={styles.jobHeader}>
@@ -40,31 +40,31 @@ const IndexPage = () => {
           </div>
 
           <div className={styles.jobList}>
-              <div className={styles.popularJob}>
-                <img className={styles.popularPicture} src="/pizza.svg" />
-                <span>Takeaway</span>
-              </div>
+            <div className={styles.popularJob}>
+              <img className={styles.popularPicture} src="/pizza.svg" />
+              <span>Takeaway</span>
+            </div>
 
-              <div className={styles.popularJob}>
-                <img className={styles.popularPicture} src="/drycleaning.svg" />
-                <span>Dry Cleaning</span>
-              </div>
+            <div className={styles.popularJob}>
+              <img className={styles.popularPicture} src="/drycleaning.svg" />
+              <span>Dry Cleaning</span>
+            </div>
 
-              <div className={styles.popularJob}>
-                <img className={styles.popularPicture} src="/collection.svg" />
-                <span>Colletion</span>
-              </div>
+            <div className={styles.popularJob}>
+              <img className={styles.popularPicture} src="/collection.svg" />
+              <span>Colletion</span>
+            </div>
 
-              <div className={styles.popularJob}>
-                <img className={styles.popularPicture} src="/babysitting.svg" />
-                <span>Babysitting</span>
-              </div>
+            <div className={styles.popularJob}>
+              <img className={styles.popularPicture} src="/babysitting.svg" />
+              <span>Babysitting</span>
+            </div>
           </div>
-        
+
 
         </div>
 
-        <LeafletMap/>
+        <LeafletMap />
 
       </div>
 
