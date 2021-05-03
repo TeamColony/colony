@@ -6,16 +6,17 @@ import Login from '../components/Login'
 import '../styles/global.css';
 
 export default function App(props: any) {
-    const {Component} = props;
-    const standalone = ['WorkerProfile']
+    const {Component, router} = props;
+
+    const standalone = ['/workers']
 
     const [session, loading] = useSession();
 
     return (
         <>
             {session?
-                <Layout useNav={standalone.includes(Component.name) ? false : true} user={session}>
-                        <Component user={session}/>
+                <Layout useNav={standalone.includes(router.pathname) ? false : true} user={session}>
+                        <Component pathname={router.pathname} user={session}/>
                 </Layout>
             : loading ? 
                 <Loading/>

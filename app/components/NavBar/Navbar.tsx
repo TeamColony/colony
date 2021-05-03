@@ -20,21 +20,18 @@ function navbar(props: Props) {
 
                     <NavItem {...props} options={{
                         name: "Home",
-                        key: "IndexPage",
                         icon: "home",
                         route: "/"
                     }} />
 
                     <NavItem {...props} options={{
                         name: "Explore",
-                        key: "Explorer",
                         icon: "explore",
                         route: "/explorer",
                     }} />
 
                     <NavItem {...props} options={{
                         name: "Settings",
-                        key: "Settings",
                         icon: "settings",
                         route: "/settings",
                     }} />
@@ -51,5 +48,6 @@ function navbar(props: Props) {
         </div>
     )
 }
+
 
 export default navbar

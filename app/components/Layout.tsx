@@ -25,11 +25,14 @@ const Layout = (props: any) => {
     </Head>
     <header>
       {props.useNav && 
-        <NavBar activePage={props.children.type.name} user={props.user}/>
+        <NavBar activePage={props.children.props.pathname} user={props.user}/>
       }
     </header>
       {props.children}
   </div>
 )}
+
+
+
 
 export default Layout

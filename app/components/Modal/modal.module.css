@@ -1,0 +1,12 @@
+.dimmed {
+    transition: all 0.4s ease-in;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background: #0000007a;
+    z-index: 9999;
+    color: white;
+}
