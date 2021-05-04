@@ -10,62 +10,30 @@ import "leaflet/dist/leaflet.css";
 
 //Components
 import WorkerCard from '../components/WorkerCard/WorkerCard';
+import nearYou from '../interfaces/worker'
+import popularJobs from '../interfaces/popular'
 const LeafletMap = dynamic(() => import("../components/Map"), { ssr: false });
-
-let nearYou: Array<Object> = [
-  {
-    name: "Clide Calzone",
-    rating: 4.4,
-    jobs: ["Food Delivery", "Collection"]
-  },
-  {
-    name: "Tina Gotschi",
-    rating: 5,
-    jobs: ["Food Delivery", "Collection", "Dry Cleaning", "Babysitting", "Teaching"]
-  },
-]
 
 const IndexPage = () => {
 
   return (
     <div className={styles.indexBody}>
-
       <div className={styles.mapParent}>
-
         <div className={styles.popular}>
-
           <div className={styles.jobHeader}>
             <span className={styles.popularTitle}>Popular Jobs</span>
             <span className={styles.popularAll}>View all</span>
           </div>
-
           <div className={styles.jobList}>
-            <div className={styles.popularJob}>
-              <img className={styles.popularPicture} src="/pizza.svg" />
-              <span>Takeaway</span>
-            </div>
-
-            <div className={styles.popularJob}>
-              <img className={styles.popularPicture} src="/drycleaning.svg" />
-              <span>Dry Cleaning</span>
-            </div>
-
-            <div className={styles.popularJob}>
-              <img className={styles.popularPicture} src="/collection.svg" />
-              <span>Colletion</span>
-            </div>
-
-            <div className={styles.popularJob}>
-              <img className={styles.popularPicture} src="/babysitting.svg" />
-              <span>Babysitting</span>
-            </div>
+              {popularJobs.map((job) => (
+                  <div className={styles.popularJob}>
+                    <img className={styles.popularPicture} src={job.image} />
+                    <span>{job.name}</span>
+                  </div>
+              ))}
           </div>
-
-
         </div>
-
         <LeafletMap />
-
       </div>
 
       <div className={styles.nearHeader}>
@@ -97,18 +65,11 @@ const IndexPage = () => {
           fixedWidth: "285px",
         }}>
 
-        <SplideSlide className={styles.firstSplide}>
-          <WorkerCard></WorkerCard>
-        </SplideSlide>
-
-        <SplideSlide>
-          <WorkerCard></WorkerCard>
-        </SplideSlide>
-
-        <SplideSlide>
-          <WorkerCard></WorkerCard>
-        </SplideSlide>
-
+        {nearYou.map((worker, i) => (
+            <SplideSlide className={`${i == 1 && styles.firstSplide}`}>
+                <WorkerCard worker={worker}></WorkerCard>
+            </SplideSlide>                    
+        ))}
       </Splide>
     </div>
   )
