@@ -7,11 +7,13 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
+import Router from 'next/router'
+
 export default function WorkerProfile(props: any) {
     return (
         <div className={styles.parent}>
             <div className={styles.headerContent}>
-                <img src="/back.svg" />
+                <span onClick={() => Router.back()} className="material-icons">arrow_back</span>
                 <div>Worker Profile</div>
             </div>
 

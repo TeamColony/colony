@@ -1,0 +1,108 @@
+.parent {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 0.2fr 1fr;
+    overflow: hidden;
+}
+
+.header {
+    color: #5A5A5A;
+    font-size: 1.4rem;
+    margin: 1.5rem;
+    margin-bottom: 0;
+    margin-top: 0;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.backContainer {
+    position: absolute;
+    left: 0;
+}
+
+.titleContainer {
+    display: flex;
+    align-items: center;
+}
+
+.titleContainer img {
+    margin-right: 2rem;
+}
+
+.listContainer {
+    position: relative;
+    margin-top: 0;
+    margin: 1.5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.listItem {
+    margin-bottom: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 0.3fr;
+    width: 100%;
+    background: white;
+    box-shadow: -2px 2px 21px -8px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+}
+
+.scrollList {
+    overflow: scroll;
+}
+
+.leftSide {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.rightSide {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.pfp {
+    height: 2.5rem;
+}
+
+.pInfo {
+    margin-left: 1rem;
+}
+
+.starContainer {
+    margin-top: 0.2rem;
+    display: flex;
+}
+
+.starContainer img {
+    margin-bottom: 0.2rem;
+    margin-right: 0.5rem;
+}
+
+.statusCircle {
+    margin-right: 1rem;
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 50%;
+    background: #65BE57
+    ;
+}
+
+.linearFade  {
+    transition: all 1s ease-in-out;
+    z-index: 100;
+    height: 50px;
+    top: 0;
+    position: absolute;
+    background: white;
+    width: 100%;
+    background: rgb(240,240,240);
+    background: linear-gradient(180deg, rgba(240,240,240,1) 25%, rgba(255,255,255,0) 100%);
+}
