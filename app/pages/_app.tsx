@@ -8,7 +8,7 @@ import '../styles/global.css';
 export default function App(props: any) {
     const {Component, router} = props;
 
-    const standalone = ['/workers']
+    const standalone = ['/workers/[slug]']
 
     const [session, loading] = useSession();
 

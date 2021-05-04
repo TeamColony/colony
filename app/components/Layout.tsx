@@ -3,6 +3,7 @@ import Head from 'next/head'
 import NavBar from './NavBar/Navbar';
 
 const Layout = (props: any) => {
+  console.log(props)
   return (
   <div className="overallParent">
     <Head>
