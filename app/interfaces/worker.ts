@@ -4,8 +4,8 @@ export type Worker = {
     rating: number
     picture: string
     jobs: Array<String>
-  }
-  
+}
+
 let nearYou: Array<Worker> = [
     {
       name: "James McDaniel",
