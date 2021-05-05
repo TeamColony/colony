@@ -8,5 +8,6 @@ export type User = {
   sub: string
   name: string
   picture: string,
+  image?: string,
   email: string
 }
