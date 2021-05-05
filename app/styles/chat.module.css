@@ -1,0 +1,145 @@
+.unselectable{
+    -webkit-user-select: none;      
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.chatBody{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.chatNav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popularPicture{
+    margin-left: 20px;
+    width: 50px;
+    height: auto;
+}
+
+.leftNav{
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+}
+
+.rightNav{
+    display: flex;
+    margin-right: 50px;
+}
+
+.rightNav span{
+    font-size: 30px;
+}
+
+.leftNav span:last-child{
+    margin-left: 20px;
+}
+
+.messages{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.messages span{
+    max-width: 300px;
+    padding: 20px;
+    margin-right: 44px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 20px;
+
+    justify-content: flex-start !important;
+}
+
+.flexBox{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.chatBottom{
+    width: 100%;
+
+  position:fixed;
+  bottom: 30px;
+    justify-content: space-between !important;
+}
+
+.chatBottom span:last-child{
+    margin-right: 50px;
+}
+
+.chatBox{
+    margin-right: 20px;
+}
+
+.boxLeft{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px;
+    margin-left: 10px;
+}
+
+.boxLeft span:last-child{
+    margin-left: 20px;
+    font-size: 15px;
+}
+
+.boxLeft input{
+    background-color: transparent;
+    border: none;
+    color: #5E5E5E;
+    margin-left: 20px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.boxLeft input:focus{
+    outline: none;
+}
+
+.boxRight{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.chatBox{
+    width: 100%;
+    border-radius: 20px;
+    background-color: #E2E2E2;
+}
+
+.addButton{
+    margin-right: 20px;
+}
+
+.otherUser{
+    background-color: #8D86C9 !important;
+    color: white;
+
+    justify-content: flex-start !important;
+    align-items: flex-start !important; 
+
+    align-self: flex-start !important; /* This is key! */
+}

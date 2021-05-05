@@ -10,11 +10,11 @@ type Props = {
 }
 
 function navbar(props: Props) {
-    console.log(props.user)
+
     return (
         <div className={`${styles.nav} ${styles.sticky}`}>
             <div className={styles.middleNav}>
-
+              
             <img className={styles.logo} src="/notext.svg" />
                 
                 <div className={styles.middleOptions}>
