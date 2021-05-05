@@ -1,0 +1,62 @@
+
+.messageCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+
+    margin-bottom: 20px;
+    margin-left: 60px;
+    margin-right: 60px;
+
+    background-color: #958DD4;
+    border-radius: 20px;
+}
+
+.noMessages{   
+    background-color: #f8f8f8 !important;
+}
+
+.noMessages span{
+    color: black !important;
+}
+
+.messageCard span{
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    padding-left: 20px;
+}
+
+.messageCard div:last-child {
+    margin-left: auto;
+    display: flex;
+}
+
+.messageIcon{
+    font-size: 25px !important;
+}
+
+.profilePicture{
+    height: 60px;
+    margin-left: -5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+@media only screen and (max-width: 500px) {
+
+    .messageCard {
+        margin-left: 35px;
+        margin-right: 40px;
+    }
+
+    .messageCard span{
+        color: white;
+        font-weight: 500;
+        font-size: 18px;
+        padding-left: 20px;
+    }
+    
+}

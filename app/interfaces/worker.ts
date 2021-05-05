@@ -1,4 +1,3 @@
-
 export type Worker = {
     name: string
     rating: number

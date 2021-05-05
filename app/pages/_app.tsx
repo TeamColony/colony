@@ -9,7 +9,6 @@ export default function App(props: any) {
     const {Component, router} = props;
 
     const standalone = ['/workers/[slug]']
-
     const [session, loading] = useSession();
 
     return (

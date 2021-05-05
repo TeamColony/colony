@@ -3,6 +3,7 @@ import CategoryScroll from '../components/CategoryScroll/CategoryScroll';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
+import nearYou from '../interfaces/worker';
 import QuickJobsCard from '../components/QjobsCard/quickJobs';
 import WorkerCard from '../components/WorkerCard/WorkerCard'
 
@@ -52,26 +53,21 @@ export default function Explorer() {
                     <span className="material-icons">location_pin</span>
                     <h2>Near you</h2>
                 </div>
-                <Splide style={{marginBottom: '4rem'}} className={styles.splideComponent}
+                <Splide className={styles.splideComponent}
                     options={{
-                        rewind: true,
-                        pagination: false,
-                        gap: "30px",
-                        padding: "25px",
-                        arrows: false,
-                        fixedWidth: "285px",
+                    rewind: true,
+                    gap: '2rem',
+                    pagination: false,
+                    autoHeight: true,
+                    padding: "60px",
+                    fixedWidth: "285px",
                     }}>
 
-                    <SplideSlide>
-                        <WorkerCard/>
-                    </SplideSlide>
-                    <SplideSlide>
-                        <WorkerCard/>
-                    </SplideSlide>
-                    <SplideSlide>
-                        <WorkerCard/>
-                    </SplideSlide>
-
+                    {nearYou.map((worker, i) => (
+                        <SplideSlide className={`${i == 1 && styles.firstSplide}`}>
+                            <WorkerCard worker={worker}></WorkerCard>
+                        </SplideSlide>                    
+                    ))}
                 </Splide>
 
             </div>

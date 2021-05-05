@@ -10,6 +10,7 @@ type Props = {
 }
 
 function navbar(props: Props) {
+    console.log(props);
     return (
         <div className={`${styles.nav} ${styles.sticky}`}>
             <div className={styles.middleNav}>
@@ -42,7 +43,7 @@ function navbar(props: Props) {
 
                 <div onClick={() => Router.push(`/profiles/${props.user?.name.replace(" ", "_")}`)} className={`${styles.rightNavContainer}`}>
                     <img className={styles.navProfilePic} src={props.user?.picture} />
-                    <text className={styles.navUserNameText}>{props.user?.name}</text>
+                    <span className={styles.navUserNameText}>{props.user?.name}</span>
                 </div>
             </div>
         </div>

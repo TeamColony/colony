@@ -2,6 +2,7 @@
 import React from 'react';
 import dynamic from "next/dynamic";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import Router from 'next/router';
 
 //Styling
 import styles from '../styles/index.module.css'
@@ -10,8 +11,10 @@ import "leaflet/dist/leaflet.css";
 
 //Components
 import WorkerCard from '../components/WorkerCard/WorkerCard';
-import nearYou from '../interfaces/worker'
-import popularJobs from '../interfaces/popular'
+import nearYou from '../interfaces/worker';
+import popularJobs from '../interfaces/popular';
+import MessageCard from '../components/MessageCard/MessageCard';
+import userMessages from '../interfaces/messages';
 const LeafletMap = dynamic(() => import("../components/Map"), { ssr: false });
 
 const IndexPage = () => {
@@ -22,7 +25,7 @@ const IndexPage = () => {
         <div className={styles.popular}>
           <div className={styles.jobHeader}>
             <span className={styles.popularTitle}>Popular Jobs</span>
-            <span className={styles.popularAll}>View all</span>
+            <span className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
           </div>
           <div className={styles.jobList}>
               {popularJobs.map((job) => (
@@ -36,23 +39,23 @@ const IndexPage = () => {
         <LeafletMap />
       </div>
 
-      <div className={styles.nearHeader}>
-        <span className={`material-icons ${styles.navIcon}`}>chat</span>
-        <div className={styles.navText}>Messages</div>
-      </div>
-
-      <div className={`${styles.messageCard}`}>
-        <img className={styles.profilePicture} src="profile_pics/grey.png" />
-        <span>James McDaniel</span>
-        <div className={styles.messageEnd}>
-          <span>1</span>
-          <span className={`material-icons ${styles.messageIcon}`}>chat</span>
+      <div className={styles.messageHeader}>
+        <div className={styles.headerLeft}>
+           <span className={`material-icons ${styles.navIcon}`}>chat</span>
+           <div className={styles.navText}>Messages</div>
         </div>
+       
+        <span onClick={() => {Router.push(`/messages`)}}
+            className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
       </div>
 
+      <MessageCard message={userMessages[0]}></MessageCard>
+
       <div className={styles.nearHeader}>
-        <span className={`material-icons ${styles.navIcon}`}>location_pin</span>
-        <div className={styles.navText}>Near You</div>
+        <div className={styles.headerLeft}>
+          <span className={`material-icons ${styles.navIcon}`}>location_pin</span>
+          <div className={styles.navText}>Near You</div>
+        </div>
       </div>
 
       <Splide className={styles.splideComponent}
