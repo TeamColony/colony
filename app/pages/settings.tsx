@@ -75,7 +75,7 @@ export default function Settings(props: any) {
                 <div className={styles.profileInfoContainer}>
 
                     <div className={styles.profileLeft}>
-                        <img className={styles.profilePicture} src={props.user.picture} />
+                        <img className={styles.profilePicture} src={props.user.picture || props.user.image} />
                         <div className={styles.profileText}>
                             <div className={styles.profileName}>{props.user.name}</div>
                             <div className={styles.profileEmail}>{props.user.email}</div>

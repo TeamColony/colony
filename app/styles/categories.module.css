@@ -35,8 +35,7 @@
 .listContainer {
     position: relative;
     margin-top: 0;
-    margin: 1.5rem;
-    display: flex;
+     display: flex;
     align-items: center;
     flex-direction: column;
     overflow: auto;
@@ -54,6 +53,7 @@
 
 .scrollList {
     overflow: scroll;
+    width: 90vw;
 }
 
 .leftSide {
