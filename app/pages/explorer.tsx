@@ -29,8 +29,7 @@ export default function Explorer() {
                         rewind: true,
                         pagination: false,
                         gap: "30px",
-                        padding: "25px",
-                        arrows: false,
+                        padding: "60px",
                         fixedWidth: "180px"
                     }}>
 
