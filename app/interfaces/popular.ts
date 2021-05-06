@@ -10,7 +10,7 @@ let popularJobs: Array<Popular> = [
     },
     {
       image: "/drycleaning.svg",
-      name: "Dry Cleaning",
+      name: "Cleaning",
     },
     {
         image: "/collection.svg",
