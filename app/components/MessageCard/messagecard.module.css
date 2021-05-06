@@ -48,8 +48,8 @@
 @media only screen and (max-width: 500px) {
 
     .messageCard {
-        margin-left: 35px;
-        margin-right: 40px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
 
     .messageCard span{

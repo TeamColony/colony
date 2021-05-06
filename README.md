@@ -13,7 +13,7 @@
 <br>
 
   <h2 align="center">Release build</h2>
-  <p align="center"><a>https://colonyapp.co.uk/</a></p>  
+  <p align="center"><a href="https://www.colonyapp.co.uk/">https://colonyapp.co.uk/</a></p>  
 
 <p align="center">
   <img align="center" src="https://media.discordapp.net/attachments/411684146650415104/837454729382592522/Component_14.png?width=754&height=510" alt="Awesome README Templates" />

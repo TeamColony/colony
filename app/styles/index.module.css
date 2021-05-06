@@ -41,6 +41,7 @@
 .jobHeader{
     justify-content: space-between;
     display: flex;
+    align-items: center;
 
     margin-top: 30px;
     padding-right: 60px;
@@ -124,7 +125,7 @@
 }
 
 .messageHeader span:last-child{
-    padding-right: 70px;
+    margin-right: 70px;
 }
 
 
@@ -166,18 +167,17 @@
 
 @media only screen and (max-width: 500px) {
     .mapParent{
-        margin-left: 35px;
-        margin-right: 40px;
+        margin-left: 20px;
+        margin-right: 20px;
     
     }
 
     .nearHeader{
-        padding-left: 35px;
+        padding-left: 20px;
     }
 
     .messageHeader{
-        padding-left: 35px;
-        margin-right: -20px;
+        padding-left: 22px;
     }
 
     .splideComponent button{
@@ -185,7 +185,7 @@
     }
 
     .splideComponent > div{
-        margin-left: -25px !important;
+        margin-left: -40px !important;
     }
 
 
@@ -193,5 +193,34 @@
         padding-right: 44px;
     }
 
+    .messageHeader span:last-child{
+        margin-right: 25px;
+    }
+
     
+}
+
+
+
+@media only screen and (max-width: 360px) {
+
+    .jobList{
+        padding-right: 25px;
+        padding-left: 25px;
+    }
+
+
+    .jobHeader{
+        padding-right: 25px;
+        padding-left: 25px;
+    }
+
+    .popularPicture{
+        height: 60px;
+    }
+
+    .popular{
+        height: 236px;
+        margin-top: 186px;
+    }
 }
