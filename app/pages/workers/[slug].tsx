@@ -19,7 +19,7 @@ export default function WorkerProfile(props: any) {
 
             <div className={styles.bodyContent}>
                 <div className={styles.profileInfoContainer}>
-                    <img className={styles.profilePicture} src={props.user.picture} />
+                    <img className={styles.profilePicture} src={props.user?.picture || props.user.image} />
                     <div className={styles.profileText}>
                         <div className={styles.profileName}>{props.user.name}</div>
                         <div className={styles.workerStatus}>Avaliable</div>
