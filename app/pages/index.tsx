@@ -29,7 +29,7 @@ const IndexPage = () => {
           </div>
           <div className={styles.jobList}>
               {popularJobs.map((job) => (
-                  <div className={styles.popularJob}>
+                  <div onClick={() => {Router.push(`/categories/1`)}} className={styles.popularJob}>
                     <img className={styles.popularPicture} src={job.image} />
                     <span>{job.name}</span>
                   </div>

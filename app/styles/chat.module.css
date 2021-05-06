@@ -79,8 +79,8 @@
 .chatBottom{
     width: 100%;
 
-  position:fixed;
-  bottom: 30px;
+    position:fixed;
+    bottom: 30px;
     justify-content: space-between !important;
 }
 
@@ -107,6 +107,7 @@
 
 .boxLeft input{
     background-color: transparent;
+    width: 100%;
     border: none;
     color: #5E5E5E;
     margin-left: 20px;
@@ -125,6 +126,7 @@
 }
 
 .chatBox{
+    display: flex;
     width: 100%;
     border-radius: 20px;
     background-color: #E2E2E2;
