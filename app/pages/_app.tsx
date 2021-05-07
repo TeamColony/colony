@@ -16,7 +16,7 @@ export default function App(props: any) {
     const client = new ApolloClient({
         link: ApolloLink.from([
           new HttpLink({
-            uri: 'http://localhost:3000/api/graphql',
+            uri: 'http://localhost:4000/graphql',
             credentials: 'same-origin'
           })
         ]),
