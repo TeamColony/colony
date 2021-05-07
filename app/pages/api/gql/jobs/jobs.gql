@@ -1,0 +1,10 @@
+type jobs{
+        _id: ID!,
+        image: String!,
+        name: String!,
+        workers: [worker]
+}
+
+type worker{
+        _id: [ID]!
+}

@@ -15,11 +15,26 @@ import nearYou from '../interfaces/worker';
 import popularJobs from '../interfaces/popular';
 import MessageCard from '../components/MessageCard/MessageCard';
 import userMessages from '../interfaces/messages';
+
+import { useQuery, gql } from '@apollo/client';
 const LeafletMap = dynamic(() => import("../components/Map"), { ssr: false });
 
-const IndexPage = () => {
+export default function IndexPage () {
+
+  const jobs = gql`
+     {
+       findAllJobs{
+         name
+       }
+     }
+  `;
+
+
+  const { loading, error, data } = useQuery(jobs);
 
   return (
+    console.log(data),
+
     <div className={styles.indexBody}>
       <div className={styles.mapParent}>
         <div className={styles.popular}>
@@ -77,5 +92,3 @@ const IndexPage = () => {
     </div>
   )
 }
-
-export default IndexPage
