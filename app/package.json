@@ -2,9 +2,9 @@
   "name": "Colony",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
+    "dev": "ts-node server.ts",
+    "build": "tsc --project tsconfig.json && next build",
+    "start": "NODE_ENV=production ts-node server.ts",
     "type-check": "tsc"
   },
   "dependencies": {
@@ -14,6 +14,8 @@
     "@types/react-leaflet": "^2.8.1",
     "apollo-server-micro": "^2.24.0",
     "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
     "knex": "^0.95.4",
     "leaflet": "^1.7.1",
     "lodash": "^4.17.21",

@@ -1,4 +1,5 @@
 import styles from '../../styles/categories.module.css';
+import React from 'react';
 
 import {useState, useEffect} from 'react';
 
@@ -6,7 +7,7 @@ export default function Categories() {
 
     const [display, setDisplay] = useState(false)
 
-    const linearFade = (e) => {
+    const linearFade = (e: React.UIEvent<HTMLDivElement> & {target : HTMLDivElement}) => {
         if (e.target.scrollTop != 0 && !display) {
             setDisplay(true)
         } else if (e.target.scrollTop == 0) {

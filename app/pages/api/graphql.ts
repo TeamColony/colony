@@ -9,7 +9,7 @@ connect('mongodb://localhost:27017/', {
     useUnifiedTopology: true,
     dbName: 'colony',
 }).then(() => console.log("connected to mongoose"))
-
+console.log("running")
 const Query = gql`
     type Query {
         findAllJobs: [jobs],
