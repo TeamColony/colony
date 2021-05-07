@@ -36,7 +36,6 @@
 
 .rightNav{
     display: flex;
-    margin-right: 50px;
 }
 
 .rightNav span{
@@ -48,12 +47,9 @@
 }
 
 .messages{
-    margin-top: 30px;
-    margin-bottom: 30px;
     width: 100%;
     display: flex;
     flex-direction: column;
-
     justify-content: flex-end;
     align-items: flex-end;
 }
@@ -61,12 +57,16 @@
 .messages span{
     max-width: 300px;
     padding: 20px;
-    margin-right: 44px;
-    margin-bottom: 20px;
     background-color: white;
     border-radius: 20px;
-
+    margin: 1rem;
+    margin-left: 3rem;
+    margin-bottom: 0;
     justify-content: flex-start !important;
+}
+
+.messages span:last-child {
+    margin-bottom: 1rem;
 }
 
 .flexBox{
@@ -144,4 +144,31 @@
     align-items: flex-start !important; 
 
     align-self: flex-start !important; /* This is key! */
+}
+
+.chatGrid {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 4rem calc(100% - 8rem) auto;
+    overflow: hidden;
+}
+
+.navContainer {
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.messageContainer {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.inputContainer {
+    box-sizing: border-box;
+    padding: 1rem;
+    padding-top: 0;
+    display: flex;
+    align-items: center;
 }
