@@ -121,7 +121,8 @@ function ChatScreen(props: any) {
 function MessageList(props: any) {
     const jobs = gql`
         {
-            findMessagesByUser(id: "${String(props.global.user.id)}") {
+            findUserMessages(id: "${String(props.global.user.id)}") {
+                _id
                 messages{
                     user{
                         _id,
@@ -157,7 +158,7 @@ function MessageList(props: any) {
                 </div>
             </div>
 
-            {data.findMessagesByUser.messages.map((message: any) => (
+            {data.findUserMessages.messages.map((message: any) => (
                 
                 <div onClick={() => props.func(1, message.user[0])} 
                     className={`${messages.messageCard} ${messages.noMessages} `}>

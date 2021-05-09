@@ -18,9 +18,10 @@ const Query = gql`
         findJobByID(id: String): jobs
         findAllMessages: [messages],
         findMessagesByUser(id: String): messages,
-        findOneMessage(id: String): messages,
+        findOneMessage(id: String): users,
+        findUserMessages(id: String): users,
         findUserByID(id: String): users,
-        user(id: String): messages,
+        user(id: String): users,
     },
 `
 
