@@ -31,6 +31,8 @@ type Props = {
 }
 
 export default function IndexPage(props: Props) {
+  console.log(props.user);
+
   const jobs = gql`
      {
        findAllJobs{
@@ -43,15 +45,15 @@ export default function IndexPage(props: Props) {
   const oneMessage = gql`
     {
         findOneMessage(id: "${String(props.user.id)}") {
-            messages{
-                user{
-                    _id,
-                    name,
-                    image,
-                }
+          messages{
+            _id
+            user{
+               name
+               image
             }
+          }
             
-        }
+      }
     }
   `;
 

@@ -8,14 +8,6 @@ export default {
         findMessagesByUser(_: any, {id}: any){
             return Messages.findOne({"owner": id}).then(data => data)
         },
-
-        findOneMessage(_: any, {id}: any){
-            return Messages.findOne({"owner": id}).then(data => {
-                data!.messages.length = 1;
-                return data;
-            })
-        },
-        
     },
 
     messages: {
