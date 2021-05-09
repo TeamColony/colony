@@ -15,7 +15,10 @@ export default {
                 return data;
             })
         },
-        
+
+        findAllMessagesForUser(_: any, {id} : {id: string}) {
+            return Users.findOne({_id: id}).then((data) => data!.messages)
+        }
     },
 
     messages: {

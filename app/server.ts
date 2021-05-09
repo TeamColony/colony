@@ -6,6 +6,7 @@ import {merge} from 'lodash';
 import path from 'path';
 import {readFileSync } from 'fs'
 import { Server, Socket } from "socket.io";
+import {connections} from './sockets/connections'
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -21,6 +22,7 @@ const Query = gql`
         findOneMessage(id: String): messages,
         findUserByID(id: String): users,
         user(id: String): messages,
+        findAllMessagesForUser(id: String): [userMessage]
     },
 `
 
@@ -82,7 +84,8 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
         })
 
         io.on('connection', (socket: Socket) => {
-            console.log("connected")
+            console.log(socket.handshake.auth) //todo: ensure auth is passed down properly
+            connections(socket)
         })
 
     } catch (e: any) {

@@ -42,16 +42,15 @@ export default function IndexPage(props: Props) {
 
   const oneMessage = gql`
     {
-        findOneMessage(id: "${String(props.user.id)}") {
-            messages{
-                user{
-                    _id,
-                    name,
-                    image,
-                }
-            }
-            
+      findAllMessagesForUser(id: "609115bfef8edaab341c4cc9") {
+        _id
+        user {
+          user {
+            name
+            image
+          }
         }
+      }
     }
   `;
 
@@ -103,8 +102,9 @@ export default function IndexPage(props: Props) {
           <span onClick={() => { Router.push(`/messages`) }}
             className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
         </div>
-
-        <MessageCard user={messages.findOneMessage.messages[0].user}></MessageCard>
+        {messages && messages.findAllMessagesForUser.map((msg) => {
+          <MessageCard user={msg.user.user[0]}></MessageCard>
+        })}
 
         <div className={styles.nearHeader}>
           <div className={styles.headerLeft}>

@@ -9,7 +9,7 @@ export type Props = {
 
 export default function MessageCard(props: any) {
     return (
-        <div onClick={() => {Router.push(`/chat/1`)}} 
+        <div onClick={() => {Router.push(`/chat/${props.id}`)}} 
          className={`${styles.messageCard} ${styles.noMessages} `}>
             <img className={styles.profilePicture} src={props.user[0].image!} />
             <span>{props.user[0].name}</span>

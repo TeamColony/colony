@@ -7,3 +7,8 @@ type messages{
 type message{
         user: [users]!
 }
+
+type userMessage{
+        _id: ID!,
+        user: message!
+}

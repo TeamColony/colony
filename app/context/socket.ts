@@ -1,5 +1,5 @@
 import React from 'react';
-import {io} from 'socket.io-client';
+import {io, Socket} from 'socket.io-client';
 
-export const socket =  io();
-export const SocketCtx = React.createContext({});
+export const socket = io();
+export const SocketCtx = React.createContext({} as Socket);

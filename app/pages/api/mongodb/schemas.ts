@@ -37,14 +37,14 @@ const messageSchema = new Schema({
         type: Types.ObjectId,
         required: true
     },
-    owner: {
-        type: Types.ObjectId,
+    users: {
+        type: Array,
         required: true
     },
     messages: {
         type: Array,
         required: true
-    },
+    }
 })
 
 export interface IUsers extends Document {
@@ -53,7 +53,8 @@ export interface IUsers extends Document {
     email: string,
     image: string,
     createdAt: string,
-    updatedAt: string
+    updatedAt: string,
+    messages: Array<Object>
 }
 
 const userSchema = new Schema({
@@ -81,6 +82,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    messages: {
+        type: Object,
+        required: false
+    }
 })
 
 export const Jobs: Model<IJobs> = models['jobs'] || model('jobs', jobSchema);

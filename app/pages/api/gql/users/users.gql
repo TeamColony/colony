@@ -3,6 +3,7 @@ type users{
         name: String!,
         email: String!,
         image: String!,
-        createdAt: String!
-        updatedAt: String!
+        createdAt: String!,
+        updatedAt: String!,
+        messages: userMessage
 }

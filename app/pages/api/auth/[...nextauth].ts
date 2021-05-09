@@ -14,13 +14,20 @@ export default NextAuth({
     },
     database: "mongodb://127.0.0.1:27017/colony",
     callbacks: {
-        async signIn() {
+        async signIn(user, account) {
+            user.accessToken = account.accessToken
+            user.refreshToken = account.refreshToken
             return true
         },
         async session(session, user) {
+            user.accessToken = session.accessToken
             return user
         },
-        async jwt(token) {
+        async jwt(token, user) {
+            if (user) {
+                token.accessToken = user.accessToken
+                token.refreshToken = user.refreshToken
+            }
             return token;
         }
     }
