@@ -21,7 +21,7 @@ const jobSchema = new Schema({
         required: true
     },
     workers: {
-        type: Types.ObjectId,
+        type: Array,
         required: true
     },
 })

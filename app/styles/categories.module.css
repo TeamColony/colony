@@ -38,7 +38,21 @@
      display: flex;
     align-items: center;
     flex-direction: column;
-    overflow: auto;
+
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.unselectable{
+    -webkit-user-select: none;      
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.jobImage{
+    height: auto;
+    width: 60px;
 }
 
 .listItem {
@@ -52,7 +66,7 @@
 }
 
 .scrollList {
-    overflow: scroll;
+    overflow: hidden;
     width: 90vw;
 }
 

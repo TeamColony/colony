@@ -10,7 +10,7 @@ import '../styles/global.css';
 export default function App(props: any) {
     const {Component, router} = props;
 
-    const standalone = ['/workers/[slug]']
+    const standalone = ['/workers/[slug]', '/categories/[slug]', '/messages']
     const [session, loading] = useSession();
 
     const client = new ApolloClient({

@@ -13,13 +13,15 @@ import "leaflet/dist/leaflet.css";
 import WorkerCard from '../components/WorkerCard/WorkerCard';
 import nearYou from '../interfaces/worker';
 import MessageCard from '../components/MessageCard/MessageCard';
-import userMessages from '../interfaces/messages';
 import { User } from '../interfaces/index';
+
+import Loading from '../components/Loading';
 
 import { useQuery, gql } from '@apollo/client';
 const LeafletMap = dynamic(() => import("../components/Map"), { ssr: false });
 
 export type job = {
+  _id: string,
   name: string,
   image: string
 }
@@ -31,11 +33,10 @@ type Props = {
 }
 
 export default function IndexPage(props: Props) {
-  console.log(props.user);
-
   const jobs = gql`
      {
        findAllJobs{
+         _id
          name
          image
        }
@@ -69,7 +70,7 @@ export default function IndexPage(props: Props) {
   ] = queryMultiple()
 
   if (loading1 || loading2) {
-    return (<>Loading</>)
+    return <Loading/>
   }
 
   if (popularjobs && messages) {
@@ -86,7 +87,7 @@ export default function IndexPage(props: Props) {
             </div>
             <div className={styles.jobList}>
               {popularjobs.findAllJobs.map((job: job) => (
-                <div onClick={() => { Router.push(`/categories/1`) }} className={styles.popularJob}>
+                <div onClick={() => { Router.push(`/categories/`.concat(job.name)) }} className={styles.popularJob}>
                   <img className={styles.popularPicture} src={job.image} />
                   <span>{job.name}</span>
                 </div>

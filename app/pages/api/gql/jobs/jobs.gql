@@ -2,5 +2,9 @@ type jobs{
         _id: ID!,
         image: String!,
         name: String!,
-        workers: [users]!
+        workers: [jobUser]!
+}
+
+type jobUser{
+        user: [users]!
 }
