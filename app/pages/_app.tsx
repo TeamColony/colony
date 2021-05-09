@@ -3,6 +3,8 @@ import Loading from '../components/Loading'
 import Layout from '../components/Layout'
 import Login from '../components/Login'
 
+import {SocketCtx, socket} from '../context/socket'
+
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, ApolloLink } from "@apollo/client";
 
 import '../styles/global.css';
@@ -37,7 +39,9 @@ export default function App(props: any) {
         <ApolloProvider client={client}>
             {session?
                 <Layout useNav={standalone.includes(router.pathname) ? false : true} user={session}>
+                    <SocketCtx.Provider value={socket}>
                         <Component pathname={router.pathname} user={session}/>
+                    </SocketCtx.Provider>
                 </Layout>
             : loading ? 
                 <Loading/>

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../../styles/chat.module.css';
 import Router from 'next/router';
 
 export default function Chat(props: any) {
-    
+
     return (
         <div className={styles.chatGrid}>
             <div className={styles.navContainer}>

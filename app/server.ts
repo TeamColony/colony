@@ -40,60 +40,7 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
         await app.prepare();
         const server = express();
 
-        /*
-
-        const http = server.listen(5000, () => 
-        console.log("Socket.io endpoint: http://localhost:5000"))
-
-
-        const io = new Server(http, {
-            cors: {
-                origin: "http://localhost:3000",
-                methods: ["GET", "POST"]
-              }
-        })
-
-        io.on('connection', (socket: any) => {
-            console.log('a user connected');
-            
-            socket.on('disconnect', () => {
-                console.log('user disconnected');
-            });
-
-            socket.on('message', ({name, message}: any) => {
-                console.log(message);
-                console.log(name);
-                io.emit('message', {name, message})
-            })
-
-            socket.on('storeClientInfo', function (data: any) {
-                console.log(data);
-                var clientInfo: {[k: string]: any} = {};
-                clientInfo.customId = data.customId;
-                clientInfo.clientId = socket.id;
-                clients.push(clientInfo);
-            });
-
-            socket.on('getPeerID', function (data: any){
-                const peerID = clients.filter(
-                    (item: any) => item.arrayWithvalue.indexOf('4') !== -1);
-
-                socket.emit("peerID", peerID);
-            });
-
-            socket.on('disconnect', function (data: any) {
-
-                for( var i=0, len=clients.length; i<len; ++i ){
-                    var c = clients[i];
-
-                    if(c.clientId == socket.id){
-                        clients.splice(i,1);
-                        break;
-                    }
-                }
-
-            });
-        }) */
+       
 
         //MongoDB, Apollo, GraphQL
 
@@ -120,9 +67,22 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
             return handle(req, res);
         })
 
-        server.listen(port, (err?: any) => {
+        const srv = server.listen(port, (err?: any) => {
             if (err) throw err;
             console.log("Colony started.");
+        })
+
+
+        //ws        
+        const io = new Server(srv, {
+            cors: {
+                origin: "http://localhost:3000",
+                methods: ["GET", "POST"]
+            }
+        })
+
+        io.on('connection', (socket: Socket) => {
+            console.log("connected")
         })
 
     } catch (e: any) {
