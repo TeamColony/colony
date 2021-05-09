@@ -9,5 +9,6 @@ export type User = {
   name: string
   picture: string,
   image?: string,
+  id: String,
   email: string
 }

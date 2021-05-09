@@ -1,0 +1,8 @@
+type users{
+        _id: ID!
+        name: String!,
+        email: String!,
+        image: String!,
+        createdAt: String!
+        updatedAt: String!
+}

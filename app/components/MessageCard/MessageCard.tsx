@@ -1,20 +1,20 @@
 import React from 'react';
 import styles from './messagecard.module.css';
-import {Message} from '../../interfaces/messages'
+import {User} from '../../interfaces/index'
 import Router from 'next/router';
 
 export type Props = {
-    messages: Message
+    user: User
 }
 
 export default function MessageCard(props: any) {
     return (
         <div onClick={() => {Router.push(`/chat/1`)}} 
-         className={`${styles.messageCard} ${props.message.unread === 0 && styles.noMessages} `}>
-            <img className={styles.profilePicture} src="profile_pics/grey.png" />
-            <span>{props.message.name}</span>
+         className={`${styles.messageCard} ${styles.noMessages} `}>
+            <img className={styles.profilePicture} src={props.user[0].image!} />
+            <span>{props.user[0].name}</span>
             <div className={styles.messageEnd}>
-                <span>{props.message.unread}</span>
+                <span>0</span>
                 <span className={`material-icons ${styles.messageIcon}`}>chat</span>
             </div>
         </div>
