@@ -1,0 +1,9 @@
+type messages{
+        _id: ID!
+        owner: ID!
+        messages: [message]!
+}
+
+type message{
+        user: [users]!
+}
