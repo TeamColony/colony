@@ -5,10 +5,16 @@ import {SocketCtx} from '../../context/socket'
 
 export default function Chat(props: any) {
 
+    const bottomRef = useRef<HTMLDivElement>(null);
+
     const messageInput = useRef<HTMLInputElement>(null);
     const Socket = useContext(SocketCtx)
 
     const [messages, appendMessage] = useState<object[]>([])
+
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" })
+    }, [messages])
 
 
     useEffect(() => {
@@ -58,9 +64,7 @@ export default function Chat(props: any) {
                     {messages.map((msg: any, i: number) => (
                         <span key={i} className={msg.user != props.user.id ? styles.otherUser : ''}>{msg.message}</span>
                     ))}
-                    {/* <span>Is everything oki?</span>
-                    <span>I saw that you weren't able to pick up my order yet!</span>
-                    <span className={styles.otherUser}>Sorry mate, running a bit late, should be there soon!</span> */}
+                    <p ref={bottomRef}/>
                 </div>
             </div>
             <div className={styles.inputContainer}>
