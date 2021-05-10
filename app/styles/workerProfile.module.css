@@ -41,6 +41,11 @@
     border-radius: 50%;
 }
 
+.jobImage{
+    height: auto;
+    width: 70px;
+}
+
 .profileName {
     font-size: 1.2rem;
 }

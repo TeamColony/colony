@@ -1,50 +1,93 @@
+//Packages
 import React from 'react';
-
-import styles from '../../styles/workerProfile.module.css';
 import { GetServerSidePropsContext } from 'next';
+
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-
-import ReviewCard from '../../components/ReviewCard/ReviewCard';
+import { useQuery, gql } from '@apollo/client';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+import Router, {useRouter} from 'next/router'
 
-import Router from 'next/router'
+//Styles
+import styles from '../../styles/workerProfile.module.css';
+
+//Components
+import BackButton from '../../components/BackButton/BackButton';
+import ReviewCard from '../../components/ReviewCard/ReviewCard';
 
 export default function WorkerProfile(props: any) {
+    const router = useRouter();
+    const { slug } = router.query
+
+    const getUser = gql`
+    {
+      findUserByID(id: "${String(slug)}"){
+        name,
+        image,
+        rating
+      }
+    }
+ `;
+
+   const findUserJobs = gql`
+   {
+        findUserJobs(id: "${String(slug)}") {
+            name
+            image
+        }
+   }
+   `;
+
+   const queryMultiple = () => {
+      const userData = useQuery(getUser);
+      const jobData = useQuery(findUserJobs);
+      return [userData, jobData];
+   }
+
+    const [
+        { loading: loading1, data: user },
+        { loading: loading2, data: jobs }
+    ] = queryMultiple()
+
+    if (loading1 || loading2) {
+        return <div>loading</div>
+    }
+
     return (
+        console.log(jobs),
         <div className={styles.parent}>
             <div className={styles.headerContent}>
-                <span onClick={() => Router.back()} className="material-icons">arrow_back</span>
-                <div>Worker Profile</div>
+                <BackButton/>
+                <div className="unselectable">Worker Profile</div>
             </div>
 
             <div className={styles.bodyContent}>
                 <div className={styles.profileInfoContainer}>
-                    <img className={styles.profilePicture} src={props.user?.picture || props.user.image} />
+                    <img className={styles.profilePicture} src={user.findUserByID.image} />
                     <div className={styles.profileText}>
-                        <div className={styles.profileName}>{props.user.name}</div>
-                        <div className={styles.workerStatus}>Avaliable</div>
+                        <div className={styles.profileName}>{user.findUserByID.name}</div>
+                        <div className={`${styles.workerStatus} unselectable`}>Avaliable</div>
                         <div className={styles.starContainer}>
                             <img style={{ marginRight: 0 }} src="/star.svg" />
-                            <div className={styles.ratingText}>4.4</div>
+                            <div className={styles.ratingText}>{user.findUserByID.rating}</div>
                         </div>
                     </div>
                 </div>
                 <div className={styles.jobsContainer}>
-                    <div className={styles.jobsHeader}>
+                    <div className={`${styles.jobsHeader} unselectable`}>
                         <span className="material-icons">work_outline</span>
                         <div style={{ fontWeight: 500 }}>Jobs Available</div>
                     </div>
                     <div className={styles.jobScroll}>
-                        {[1, 2, 3, 4, 5, 6, 7, 8].map(() => (
-                            <div className={styles.jobItem}>
-                                <img style={{ height: '75%' }} src="/pizza.svg" />
-                                <div>delivery</div>
+                        {jobs.findUserJobs.map((job: any) => (
+                            <div onClick={() => { Router.push(`/categories/`.concat(job.name)) }} className={styles.jobItem}>
+                                <img className={styles.jobImage} src={job.image} />
+                                <div>{job.name}</div>
                             </div>
                         ))}
                     </div>
                 </div>
                 <div className={styles.reviewsContainer}>
-                    <div className={`${styles.jobsHeader} ${styles.reviewsHeader}`}>
+                    <div className={`${styles.jobsHeader} ${styles.reviewsHeader} unselectable`}>
                         <span className="material-icons">star_border</span>
                         <div style={{ fontWeight: 500 }}>Reviews</div>
                     </div>

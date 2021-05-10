@@ -10,7 +10,7 @@ interface options {
 export default function NavItem({options, activePage} : {options: options, activePage: string}) {
     return (
         <div>
-            <div className={`${styles.middleOption} ${activePage === options.route && styles.selectedOption} noselect`} 
+            <div className={`${styles.middleOption} ${activePage === options.route && styles.selectedOption} noselect unselectable`} 
                     onClick={() => {Router.push(`${options.route}`)}}>
 
                 <span className="material-icons">{options.icon}</span>

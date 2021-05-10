@@ -5,6 +5,7 @@ type users{
         image: String!,
         createdAt: String!
         updatedAt: String!
+        rating: Float!
         messages: [userMessage]
 }
 
