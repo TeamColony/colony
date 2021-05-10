@@ -1,7 +1,8 @@
 import { getSession } from 'next-auth/client'
 import Layout from '../components/Layout'
 
-import {SocketCtx, socket} from '../context/socket'
+import {SocketCtx} from '../context/socket'
+import {io} from 'socket.io-client'
 
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, ApolloLink } from "@apollo/client";
 
@@ -9,6 +10,13 @@ import '../styles/global.css';
 import App from 'next/app'
 
 export default class Colony extends App {
+
+  constructor (props: any) {
+    super(props)
+    this.state = {
+      socketInstance: props.props.session ? io() : null
+    }
+  }
 
   static async getInitialProps({ctx} : {ctx: any}) {
     var s = await getSession(ctx)
@@ -46,14 +54,22 @@ export default class Colony extends App {
         }
     });
     const { Component, router, props } : any = this.props
-    return (
-      <ApolloProvider client={client}>
-          <Layout useNav={standalone.includes(router.pathname) ? false : true} user={props.session}>
-              <SocketCtx.Provider value={socket}> 
-                  <Component router={router} pathname={router.pathname} user={props.session}/>
-              </SocketCtx.Provider>
-          </Layout>
-      </ApolloProvider>
-    )
+    const {socketInstance} : any = this.state
+    if (props.session) {
+      socketInstance.auth = {token: props.session.accessToken}
+       return (
+        <ApolloProvider client={client}>
+            <Layout useNav={standalone.includes(router.pathname) ? false : true} user={props.session}>
+                <SocketCtx.Provider value={socketInstance}> 
+                    <Component router={router} pathname={router.pathname} user={props.session}/>
+                </SocketCtx.Provider>
+            </Layout>
+        </ApolloProvider>
+      )
+    } else {
+      return (
+        <Component/>
+      )
+    }
   }
 }
