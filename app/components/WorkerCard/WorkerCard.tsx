@@ -9,9 +9,9 @@ type Props = {
 export default function WorkerCard(props: Props){
 
     return (
-        <div className={`${styles.iChallenge} ${styles.myChallenge}`} onClick={() => {Router.push(`/workers/1`)}}>
+        <div className={`${styles.iChallenge} ${styles.myChallenge}`} onClick={() => {Router.push(`/workers/`.concat(props.worker!._id))}}>
             <div className={styles.profileInfoContainer}>
-                <img className={styles.profilePicture} src={props.worker?.picture} />
+                <img className={styles.profilePicture} src={props.worker?.image} />
                 <div className={styles.profileText}>
                     <div className={styles.profileName}>{props.worker?.name}</div>
                     
@@ -26,12 +26,12 @@ export default function WorkerCard(props: Props){
             <div className={styles.jobSection}>
                 <div className={styles.jobRow}>
                     <img className={styles.workTypeImage} src="/pizza.svg"/>
-                    <div className={styles.jobDetails}>{props.worker?.jobs[0]}</div>
+                    <div className={styles.jobDetails}>Takeaway</div>
                 </div>
 
                 <div className={styles.jobRow}>
                     <img className={styles.workTypeImage} src="/collection.svg"/>
-                    <div className={styles.jobDetails}>{props.worker?.jobs[1]}</div>
+                    <div className={styles.jobDetails}>Collection</div>
                 </div>
             </div>
 

@@ -20,8 +20,10 @@ export default function Categories() {
         image,
         workers{
           user{
+            _id
             name
             image
+            rating
           }
         }
       }
@@ -60,14 +62,14 @@ export default function Categories() {
                 <div onScroll={linearFade} className={styles.scrollList}>
                     {data.findOneJob.workers.map((worker: any) => (
                         console.log(worker),
-                        <div className={styles.listItem}>
+                        <div className={styles.listItem} onClick={() => {Router.push(`/workers/`.concat(worker!.user[0]._id))}}>
                             <div className={styles.leftSide}>
                                 <img className={styles.pfp} src={worker.user[0].image}/>
                                 <div className={styles.pInfo}>
                                     <div>{worker.user[0].name}</div>
                                     <div className={styles.starContainer}>
                                         <img src="/star.svg"/>
-                                        <div>4.4</div>
+                                        <div>{worker.user[0].rating}</div>
                                     </div>
                                 </div>
                             </div>

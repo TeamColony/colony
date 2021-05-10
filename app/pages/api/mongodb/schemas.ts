@@ -53,6 +53,7 @@ export interface IUsers extends Document {
     email: string,
     image: string,
     messages: Array<Object>,
+    rating: number,
     createdAt: string,
     updatedAt: string
 }
@@ -76,6 +77,10 @@ const userSchema = new Schema({
     },
     messages: {
         type: Array,
+        required: true
+    },
+    rating: {
+        type: Number,
         required: true
     },
     createdAt: {

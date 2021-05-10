@@ -11,7 +11,6 @@ import "leaflet/dist/leaflet.css";
 
 //Components
 import WorkerCard from '../components/WorkerCard/WorkerCard';
-import nearYou from '../interfaces/worker';
 import MessageCard from '../components/MessageCard/MessageCard';
 import { User } from '../interfaces/index';
 
@@ -58,32 +57,46 @@ export default function IndexPage(props: Props) {
     }
   `;
 
+  const nearWorkers = gql`
+      {
+        findNearWorkers{
+            _id
+            name    
+            image
+            rating
+        }
+      }
+  `;
+
   const queryMultiple = () => {
     const jobData = useQuery(jobs);
     const messageData = useQuery(oneMessage);
-    return [jobData, messageData];
+    const workerData = useQuery(nearWorkers);
+    return [jobData, messageData, workerData];
   }
 
   const [
     { loading: loading1, data: popularjobs },
-    { loading: loading2, data: messages }
+    { loading: loading2, data: messages },
+    { loading: loading3, data: workers }
   ] = queryMultiple()
 
-  if (loading1 || loading2) {
+  if (loading1 || loading2 || loading3) {
     return <Loading/>
   }
 
-  if (popularjobs && messages) {
+  if (popularjobs && messages && workers) {
 
-    console.log(messages);
+    console.log(workers);
 
     return (
       <div className={styles.indexBody}>
         <div className={styles.mapParent}>
           <div className={styles.popular}>
             <div className={styles.jobHeader}>
-              <span className={styles.popularTitle}>Popular Jobs</span>
-              <span className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
+              <span className={`${styles.popularTitle} unselectable`}>Popular Jobs</span>
+              <span onClick={() => { Router.push(`/explorer`)}}
+              className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
             </div>
             <div className={styles.jobList}>
               {popularjobs.findAllJobs.map((job: job) => (
@@ -126,7 +139,7 @@ export default function IndexPage(props: Props) {
             fixedWidth: "285px",
           }}>
 
-          {nearYou.map((worker, i) => (
+          {workers.findNearWorkers.map((worker: any, i: number) => (
             <SplideSlide className={`${i == 1 && styles.firstSplide}`}>
               <WorkerCard worker={worker}></WorkerCard>
             </SplideSlide>

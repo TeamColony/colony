@@ -1,4 +1,6 @@
+import { workers } from 'cluster'
 import {Jobs, Users} from '../../mongodb/schemas'
+import {Types} from 'mongoose'
 
 export default {
     Query: {
@@ -10,7 +12,10 @@ export default {
         },
         findOneJob(_: any, {name}: any) {
             return Jobs.findOne({name: name}).then(data => data)
-        }
+        },
+        findUserJobs(_: any, {id}: any) {
+            return Jobs.find({workers:{$in:[Types.ObjectId(id)]}}).then(data => data);
+        },
     },
 
     jobs:{
