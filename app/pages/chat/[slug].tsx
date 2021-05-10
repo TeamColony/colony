@@ -55,8 +55,8 @@ export default function Chat(props: any) {
             </div>
             <div className={styles.messageContainer}>
                 <div id="messageContainer" className={styles.messages}>
-                    {messages.map((msg: any) => (
-                        <span className={msg.user != props.user.id ? styles.otherUser : ''}>{msg.message}</span>
+                    {messages.map((msg: any, i: number) => (
+                        <span key={i} className={msg.user != props.user.id ? styles.otherUser : ''}>{msg.message}</span>
                     ))}
                     {/* <span>Is everything oki?</span>
                     <span>I saw that you weren't able to pick up my order yet!</span>

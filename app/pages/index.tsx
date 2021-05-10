@@ -102,7 +102,7 @@ export default function IndexPage(props: Props) {
           <span onClick={() => { Router.push(`/messages`) }}
             className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
         </div>
-        {messages && messages.findAllMessagesForUser.map((msg) => {
+        {messages && messages.findAllMessagesForUser.map((msg: any) => {
           <MessageCard user={msg.user.user[0]}></MessageCard>
         })}
 
