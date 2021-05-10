@@ -12,23 +12,15 @@ export default NextAuth({
     jwt : {
     	signingKey: process.env.G_JWT_SK
     },
+    secret: 'placeholder',
     database: "mongodb://127.0.0.1:27017/colony",
     callbacks: {
         async signIn(user, account) {
-            user.accessToken = account.accessToken
-            user.refreshToken = account.refreshToken
             return true
         },
-        async session(session, user) {
-            user.accessToken = session.accessToken
-            return user
-        },
-        async jwt(token, user) {
-            if (user) {
-                token.accessToken = user.accessToken
-                token.refreshToken = user.refreshToken
-            }
-            return token;
+        async session(session, token) {
+            token.accessToken = session.accessToken
+            return token
         }
     }
 })

@@ -20,7 +20,6 @@ export default class Colony extends App {
 
   static async getInitialProps({ctx} : {ctx: any}) {
     var s = await getSession(ctx)
-
     if (typeof window === "undefined" && ctx.res.writeHead) {
       if (!s && ctx.pathname !== '/login') {
           ctx.res.writeHead(302, {location: '/login'})

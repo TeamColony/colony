@@ -1,12 +1,13 @@
 import express, { Request, Response } from "express";
 import next from "next";
 import {ApolloServer, gql} from 'apollo-server';
-import { connect } from 'mongoose';
+import { connect, Types } from 'mongoose';
 import {merge} from 'lodash';
 import path from 'path';
 import {readFileSync } from 'fs'
 import { Server, Socket } from "socket.io";
 import {connections} from './sockets/connections'
+import {authentication} from './sockets/auth'
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -83,9 +84,31 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
             }
         })
 
-        io.on('connection', (socket: Socket) => {
-            console.log(socket.handshake.auth)
+        interface whoami {
+            _id: Types.ObjectId,
+            name: string,
+            email: string,
+            image: string,
+            createdAt: string,
+            updatedAt: string,
+            messages: Array<Object>
+        }
+
+        type userExtention = Socket & {whoami?: whoami}
+
+        io.on('connection', (socket: userExtention) => {
             connections(socket)
+        })
+
+        io.use((socket: userExtention, next) => {
+            if (socket.handshake.auth.token) {
+                authentication(socket.handshake.auth.token, next).then((whoami) => {
+                    socket.whoami = (whoami as whoami);
+                    next()
+                })
+            } else {
+                next(new Error('Not Authorized.')) 
+            }
         })
 
     } catch (e) {

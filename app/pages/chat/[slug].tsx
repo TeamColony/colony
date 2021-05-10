@@ -18,10 +18,16 @@ export default function Chat(props: any) {
 
 
     useEffect(() => {
-        Socket.emit('joinRoom', {chat: props.router.query.slug, user: props.user.id})
+        Socket.emit('joinRoom', {chat: props.router.query.slug})
 
-        Socket.on('joined', (data) => {
-            console.log(data)
+        Socket.on('joined', (status) => {
+            if (!status.success) {
+                Router.back();
+            }
+        })
+
+        Socket.on('failure', (error) => {
+            console.log(error)
         })
 
         Socket.on('message', (data) => {
@@ -37,7 +43,7 @@ export default function Chat(props: any) {
 
     const HandleSend = () => {
         if (messageInput.current) {
-            Socket.emit('send', {roomName: props.router.query.slug, text: messageInput.current.value, user: props.user.id})
+            Socket.emit('send', {roomName: props.router.query.slug, text: messageInput.current.value})
             appendMessage(msg => {
                 let curMsg = messageInput.current?.value
                 messageInput.current!.value = '';
@@ -81,7 +87,7 @@ export default function Chat(props: any) {
                     </div>
                 </div>
 
-                <span onClick={HandleSend} className={`material-icons`}>send</span>
+                <span onClick={HandleSend} className={`material-icons ${styles.sendIcon}`}>send</span>
             </div>
         </div>
     )

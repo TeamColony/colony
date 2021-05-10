@@ -1,5 +1,41 @@
 import { Document, Model, model, models, Types, Schema } from "mongoose"
 
+export interface ISessions extends Document {
+    userId: Types.ObjectId,
+    expires: Date,
+    sessionToken: string,
+    accessToken: string,
+    createdAt: Date,
+    updatedAt: Date
+}
+
+const sessionSchema = new Schema({
+    userId: {
+        type: Types.ObjectId,
+        required: true
+    },
+    expires: {
+        type: Date,
+        required: true
+    },
+    sessionToken: {
+        type: String,
+        required: true
+    },
+    accessToken: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        required: true
+    },
+    updatedAt: {
+        type: Date,
+        required: true
+    }
+})
+
 export interface IJobs extends Document {
     id: Types.ObjectId,
     image: string,
@@ -91,6 +127,6 @@ const userSchema = new Schema({
 export const Jobs: Model<IJobs> = models['jobs'] || model('jobs', jobSchema);
 export const Messages: Model<IMessages> = models['messages'] || model('messages', messageSchema);
 export const Users: Model<IUsers> = models['users'] || model('users', userSchema);
-
+export const Sessions: Model<ISessions> = models['sessions'] || model('sessions', sessionSchema)
 
 
