@@ -37,9 +37,12 @@ export default function Chat(props: any) {
 
     const HandleSend = () => {
         if (messageInput.current) {
-            console.log("sending")
             Socket.emit('send', {roomName: props.router.query.slug, text: messageInput.current.value, user: props.user.id})
-            appendMessage(msg => [...msg, {user: props.user.id, message: messageInput.current?.value}])
+            appendMessage(msg => {
+                let curMsg = messageInput.current?.value
+                messageInput.current!.value = '';
+                return [...msg, {user: props.user.id, message: curMsg}]
+            })
         }
     }
 
@@ -71,7 +74,7 @@ export default function Chat(props: any) {
             <div className={`${styles.chatBox} ${styles.flexBox}`}>
                 <div className={styles.boxLeft}>
                         <span className={`material-icons`}>chat_bubble_outline</span>
-                        <input ref={messageInput} id="message" type="text" placeholder="Send a message..." required />
+                        <input onKeyDown={(e) => e.key === 'Enter' && HandleSend()} ref={messageInput} id="message" type="text" placeholder="Send a message..." required />
                     </div>
                     <div className={styles.boxRight}>
                         <div className={`${styles.addButton} material-icons`}>add</div>
