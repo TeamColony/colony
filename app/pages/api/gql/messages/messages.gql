@@ -9,6 +9,6 @@ type message{
 }
 
 type userMessage{
-        _id: ID!,
-        user: message!
+        message: String!,
+        user: ID!
 }

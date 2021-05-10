@@ -3,14 +3,33 @@ import styles from '../../styles/chat.module.css';
 import Router from 'next/router';
 import {SocketCtx} from '../../context/socket'
 
-export default function Chat(props: any) {
+import {useLazyQuery, gql} from '@apollo/client'
 
+export default function Chat(props: any) {
     const bottomRef = useRef<HTMLDivElement>(null);
 
     const messageInput = useRef<HTMLInputElement>(null);
     const Socket = useContext(SocketCtx)
 
     const [messages, appendMessage] = useState<object[]>([])
+
+    const msgQuery = gql`
+    {
+        findAllChatMessages(id: "${props.router.query.slug}") {
+            user
+            message
+        }
+    }
+    `
+
+    const [getHistory, {loading, data}] = useLazyQuery(msgQuery)
+
+    useEffect(() => {
+        if (data) {
+            appendMessage(data.findAllChatMessages)
+        }
+    }, [data])
+
 
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -23,6 +42,8 @@ export default function Chat(props: any) {
         Socket.on('joined', (status) => {
             if (!status.success) {
                 Router.back();
+            } else {
+                getHistory()
             }
         })
 

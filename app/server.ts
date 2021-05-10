@@ -23,7 +23,7 @@ const Query = gql`
         findOneMessage(id: String): messages,
         findUserByID(id: String): users,
         user(id: String): messages,
-        findAllMessagesForUser(id: String): [userMessage]
+        findAllChatMessages(id: String): [userMessage]
     },
 `
 

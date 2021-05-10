@@ -16,8 +16,10 @@ export default {
             })
         },
 
-        findAllMessagesForUser(_: any, {id} : {id: string}) {
-            return Users.findOne({_id: id}).then((data) => data!.messages)
+        findAllChatMessages(_: any, {id}: any) {
+            return Messages.findOne({_id: id}, {messages: 1, _id: 0}).then(data => {
+                return data!.messages
+            })
         }
     },
 

@@ -40,39 +40,21 @@ export default function IndexPage(props: Props) {
      }
   `;
 
-  const oneMessage = gql`
-    {
-      findAllMessagesForUser(id: "609115bfef8edaab341c4cc9") {
-        _id
-        user {
-          user {
-            name
-            image
-          }
-        }
-      }
-    }
-  `;
 
   const queryMultiple = () => {
     const jobData = useQuery(jobs);
-    const messageData = useQuery(oneMessage);
-    return [jobData, messageData];
+    return [jobData];
   }
 
   const [
-    { loading: loading1, data: popularjobs },
-    { loading: loading2, data: messages }
+    { loading: loading1, data: popularjobs }
   ] = queryMultiple()
 
-  if (loading1 || loading2) {
+  if (loading1) {
     return (<>Loading</>)
   }
 
-  if (popularjobs && messages) {
-
-    console.log(messages);
-
+  if (popularjobs) {
     return (
       <div className={styles.indexBody}>
         <div className={styles.mapParent}>
@@ -102,9 +84,9 @@ export default function IndexPage(props: Props) {
           <span onClick={() => { Router.push(`/messages`) }}
             className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
         </div>
-        {messages && messages.findAllMessagesForUser.map((msg: any) => {
+        {/* {messages.findAllMessagesForUser.map((msg: any) => {
           <MessageCard user={msg.user.user[0]}></MessageCard>
-        })}
+        })} */}
 
         <div className={styles.nearHeader}>
           <div className={styles.headerLeft}>
