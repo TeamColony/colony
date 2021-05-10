@@ -33,7 +33,7 @@ export default function Chat(props: any) {
         if (messageInput.current) {
             console.log("sending")
             Socket.emit('send', {roomName: props.router.query.slug, text: messageInput.current.value, user: props.user.id})
-            // appendMessage(msg => [...msg, {user: props.user.id, message: messageInput.current?.value}])
+            appendMessage(msg => [...msg, {user: props.user.id, message: messageInput.current?.value}])
         }
     }
 
@@ -78,17 +78,4 @@ export default function Chat(props: any) {
             </div>
         </div>
     )
-
-    // return (
-    //     <div className={styles.chatBody}>
-
-
-
-
-    //         <div className={`${styles.chatBottom} ${styles.flexBox}`}>
-
-    //         </div>
-
-    //     </div>
-    // )
 };

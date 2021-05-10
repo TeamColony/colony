@@ -1,22 +1,31 @@
-import { useSession } from 'next-auth/client'
-import Loading from '../components/Loading'
+import { getSession } from 'next-auth/client'
 import Layout from '../components/Layout'
-import Login from '../components/Login'
 
 import {SocketCtx, socket} from '../context/socket'
-
-import {useEffect} from 'react'
 
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, ApolloLink } from "@apollo/client";
 
 import '../styles/global.css';
+import App from 'next/app'
 
-export default function App(props: any) {
-    const {Component, router} = props;
-    const standalone = ['/workers/[slug]']
-    const [session, loading] = useSession(); //todo: change to static export funciton to prevent re-rendering and other jazz!
+export default class Colony extends App {
 
+  static async getInitialProps({ctx} : {ctx: any}) {
+    var s = await getSession(ctx)
+    if (!s && ctx.pathname !== '/login') {
+        ctx.res.writeHead(302, {location: '/login'})
+        ctx.res.end()
+    }
 
+    return {
+      props : {
+        session : s
+      }
+    }
+  }
+
+  render () {
+    const standalone = ['/workers/[slug]', '/login']
     const client = new ApolloClient({
         link: ApolloLink.from([
           new HttpLink({
@@ -36,20 +45,15 @@ export default function App(props: any) {
           }
         }
     });
-
+    const { Component, router, props } : any = this.props
     return (
-        <ApolloProvider client={client}>
-            {session?
-                <Layout useNav={standalone.includes(router.pathname) ? false : true} user={session}>
-                    <SocketCtx.Provider value={socket}> 
-                        <Component router={router} pathname={router.pathname} user={session}/>
-                    </SocketCtx.Provider>
-                </Layout>
-            : loading ? 
-                <Loading/>
-            :
-                <Login/>
-            }
-        </ApolloProvider>
+      <ApolloProvider client={client}>
+          <Layout useNav={standalone.includes(router.pathname) ? false : true} user={props.session}>
+              <SocketCtx.Provider value={socket}> 
+                  <Component router={router} pathname={router.pathname} user={props.session}/>
+              </SocketCtx.Provider>
+          </Layout>
+      </ApolloProvider>
     )
+  }
 }

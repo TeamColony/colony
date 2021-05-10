@@ -84,11 +84,10 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
         })
 
         io.on('connection', (socket: Socket) => {
-            console.log(socket.handshake.auth) //todo: ensure auth is passed down properly
             connections(socket)
         })
 
-    } catch (e: any) {
+    } catch (e) {
         console.error(e);
         process.exit(1);
     }

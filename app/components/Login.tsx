@@ -8,7 +8,7 @@ export default function Login() {
             <div className={styles.bottomContainer}>
                 <img className={styles.googleIcon} src="/googleIcon.svg"/>
                 <div className={styles.optionsContainer}>
-                    <button onClick={() => signIn('google')} className={styles.loginBtn}>LOG IN</button>
+                    <button onClick={() => signIn('google', {callbackUrl: '/'})} className={styles.loginBtn}>LOG IN</button>
                     <button onClick={() => signIn('google')} className={styles.registerBtn}>REGISTER</button>
                 </div>
             </div>
