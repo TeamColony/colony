@@ -41,7 +41,7 @@ function navbar(props: Props) {
 
                 </div>
 
-                <div onClick={() => Router.push(`/profiles/${props.user?.name.replace(" ", "_")}`)} className={`${styles.rightNavContainer}`}>
+                <div onClick={() => Router.push(`/profiles`)} className={`${styles.rightNavContainer}`}>
                     <img className={styles.navProfilePic} src={props.user?.picture || props.user.image} />
                     <span className={styles.navUserNameText}>{props.user?.name}</span>
                 </div>

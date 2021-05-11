@@ -1,0 +1,125 @@
+.parent{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 40px;
+    margin-right: 40px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.bodyContent{
+    width: 100%;
+    padding-bottom: 100px;
+}
+
+.profileInfoContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+}
+
+.jobImage{
+    height: auto;
+    width: 70px;
+}
+
+.profileInfoContainer span{
+
+    font-size: 80px;
+    color: #B1B1B1;
+    font-weight: 200;
+    margin-bottom: 8px;
+}
+
+.profileLeft{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.profileText{
+    margin-left: 30px;
+}
+
+.profilePicture {
+    height: 5rem;
+    border-radius: 50%;
+}
+
+.profileName {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.profileEmail{
+    margin-top: 7px;
+    font-size: 0.9rem;
+    color: #646464;
+}
+
+.container{
+    margin-top: 60px;
+}
+
+.container span{
+    font-size: 22px;
+    color: #424242;
+}
+
+
+.jobsContainer {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+    height: auto;
+}
+
+.jobsHeader {
+    padding: 2rem;
+    padding-bottom: 0;
+    padding-top: 10px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #5E5E5E;
+}
+
+.jobsHeader span {
+    margin-right: 1rem;
+}
+
+.jobScroll {
+    padding-left: 1.5rem;
+    padding-top: 10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: auto;
+}
+
+.jobScroll div {
+    border-radius: 50%;
+    margin-bottom: 10px;
+    flex: 0 0 auto;
+}
+
+.jobItem {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 5rem;
+    align-items: center;
+    margin-right: 0.8rem;
+}
+
+.jobItem div {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
