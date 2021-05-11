@@ -12,15 +12,16 @@ import { useEffect } from 'react'
 
 export default function App(props: any) {
     const {Component, router} = props;
-    const standalone = ['/workers/[slug]']
-    const [session, loading] = useSession(); //todo: change to static export funciton to prevent re-rendering and other jazz!
+  
+    const standalone = ['/workers/[slug]', '/categories/[slug]', '/messages']
+    const [session, loading] = useSession();
     const [socketInstance, setSocketInstance]: any = useState(false);
 
     useEffect(() => {
         if(!socketInstance && session){
           setSocketInstance(io({auth: {token: session.accessToken}},{transports: ['websocket']}));
         }
-    }, [session])
+    }, [session]);
 
     const client = new ApolloClient({
         link: ApolloLink.from([

@@ -57,14 +57,14 @@ const jobSchema = new Schema({
         required: true
     },
     workers: {
-        type: Types.ObjectId,
+        type: Array,
         required: true
     },
 })
 
 export interface IMessages extends Document {
     id: Types.ObjectId,
-    owner: Types.ObjectId,
+    users: Array<Types.ObjectId>,
     messages: Array<Object>,
 }
 
@@ -88,6 +88,8 @@ export interface IUsers extends Document {
     name: string,
     email: string,
     image: string,
+    messages: Array<Object>,
+    rating: number,
     createdAt: string,
     updatedAt: string,
     messages: Array<Object>
@@ -108,6 +110,14 @@ const userSchema = new Schema({
     },
     image: {
         type: String,
+        required: true
+    },
+    messages: {
+        type: Array,
+        required: true
+    },
+    rating: {
+        type: Number,
         required: true
     },
     createdAt: {

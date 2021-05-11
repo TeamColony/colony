@@ -11,15 +11,16 @@ import "leaflet/dist/leaflet.css";
 
 //Components
 import WorkerCard from '../components/WorkerCard/WorkerCard';
-import nearYou from '../interfaces/worker';
 import MessageCard from '../components/MessageCard/MessageCard';
-import userMessages from '../interfaces/messages';
 import { User } from '../interfaces/index';
+
+import Loading from '../components/Loading';
 
 import { useQuery, gql } from '@apollo/client';
 const LeafletMap = dynamic(() => import("../components/Map"), { ssr: false });
 
 export type job = {
+  _id: string,
   name: string,
   image: string
 }
@@ -34,38 +35,71 @@ export default function IndexPage(props: Props) {
   const jobs = gql`
      {
        findAllJobs{
+         _id
          name
          image
        }
      }
   `;
 
+  const oneMessage = gql`
+    {
+        findOneMessage(id: "${String(props.user.id)}") {
+          messages{
+            _id
+            user{
+               name
+               image
+            }
+          }
+            
+      }
+    }
+  `;
+  
+  const nearWorkers = gql`
+      {
+        findNearWorkers{
+            _id
+            name    
+            image
+            rating
+        }
+      }
+  `;
 
   const queryMultiple = () => {
     const jobData = useQuery(jobs);
-    return [jobData];
+    const messageData = useQuery(oneMessage);
+    const workerData = useQuery(nearWorkers);
+    return [jobData, messageData, workerData];
   }
 
   const [
-    { loading: loading1, data: popularjobs }
+    { loading: loading1, data: popularjobs },
+    { loading: loading2, data: messages },
+    { loading: loading3, data: workers }
   ] = queryMultiple()
 
-  if (loading1) {
-    return (<>Loading</>)
+  if (loading1 || loading2 || loading3) {
+    return <Loading/>
   }
 
-  if (popularjobs) {
+  if (popularjobs && messages && workers) {
+
+    console.log(workers);
     return (
       <div className={styles.indexBody}>
         <div className={styles.mapParent}>
           <div className={styles.popular}>
             <div className={styles.jobHeader}>
-              <span className={styles.popularTitle}>Popular Jobs</span>
-              <span className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
+              <span className={`${styles.popularTitle} unselectable`}>Popular Jobs</span>
+              <span onClick={() => { Router.push(`/explorer`)}}
+              className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
             </div>
             <div className={styles.jobList}>
               {popularjobs.findAllJobs.map((job: job) => (
-                <div onClick={() => { Router.push(`/categories/1`) }} className={styles.popularJob}>
+                <div onClick={() => { Router.push(`/categories/`.concat(job.name)) }} className={styles.popularJob}>
                   <img className={styles.popularPicture} src={job.image} />
                   <span>{job.name}</span>
                 </div>
@@ -87,6 +121,8 @@ export default function IndexPage(props: Props) {
         {/* {messages.findAllMessagesForUser.map((msg: any) => {
           <MessageCard user={msg.user.user[0]}></MessageCard>
         })} */}
+        
+        <MessageCard user={messages.findOneMessage.messages[0].user}></MessageCard>
 
         <div className={styles.nearHeader}>
           <div className={styles.headerLeft}>
@@ -105,7 +141,7 @@ export default function IndexPage(props: Props) {
             fixedWidth: "285px",
           }}>
 
-          {nearYou.map((worker, i) => (
+          {workers.findNearWorkers.map((worker: any, i: number) => (
             <SplideSlide className={`${i == 1 && styles.firstSplide}`}>
               <WorkerCard worker={worker}></WorkerCard>
             </SplideSlide>

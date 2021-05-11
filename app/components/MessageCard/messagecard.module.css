@@ -43,6 +43,7 @@
     margin-left: -5px;
     margin-bottom: 5px;
     margin-top: 5px;
+    border-radius: 50%;
 }
 
 @media only screen and (max-width: 500px) {

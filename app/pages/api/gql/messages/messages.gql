@@ -1,10 +1,11 @@
 type messages{
         _id: ID!
-        owner: ID!
+        users: [ID]!
         messages: [message]!
 }
 
 type message{
+        messages: String!
         user: [users]!
 }
 

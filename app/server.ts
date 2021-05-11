@@ -18,13 +18,17 @@ const port = 3000;
 const Query = gql`
     type Query {
         findAllJobs: [jobs],
-        findJobByID(id: String): jobs
+        findJobByID(id: String): jobs,
         findAllMessages: [messages],
         findMessagesByUser(id: String): messages,
-        findOneMessage(id: String): messages,
+        findOneMessage(id: String): users,
+        findUserMessages(id: String): users,
         findUserByID(id: String): users,
         user(id: String): messages,
-        findAllChatMessages(id: String): [userMessage]
+        findAllChatMessages(id: String): [userMessage],
+        findOneJob(name: String): jobs,
+        findNearWorkers: [users],
+        findUserJobs(id: String): [jobs]
     },
 `
 
