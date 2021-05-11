@@ -56,7 +56,7 @@ export default function IndexPage(props: Props) {
       }
     }
   `;
-
+  
   const nearWorkers = gql`
       {
         findNearWorkers{
@@ -88,7 +88,6 @@ export default function IndexPage(props: Props) {
   if (popularjobs && messages && workers) {
 
     console.log(workers);
-
     return (
       <div className={styles.indexBody}>
         <div className={styles.mapParent}>
@@ -119,7 +118,10 @@ export default function IndexPage(props: Props) {
           <span onClick={() => { Router.push(`/messages`) }}
             className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
         </div>
-
+        {/* {messages.findAllMessagesForUser.map((msg: any) => {
+          <MessageCard user={msg.user.user[0]}></MessageCard>
+        })} */}
+        
         <MessageCard user={messages.findOneMessage.messages[0].user}></MessageCard>
 
         <div className={styles.nearHeader}>

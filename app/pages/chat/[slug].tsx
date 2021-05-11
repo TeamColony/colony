@@ -1,9 +1,78 @@
-import React from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import styles from '../../styles/chat.module.css';
 import Router from 'next/router';
+import {SocketCtx} from '../../context/socket'
+
+import {useLazyQuery, gql} from '@apollo/client'
 
 export default function Chat(props: any) {
-    
+    const bottomRef = useRef<HTMLDivElement>(null);
+
+    const messageInput = useRef<HTMLInputElement>(null);
+    const Socket = useContext(SocketCtx)
+
+    const [messages, appendMessage] = useState<object[]>([])
+
+    const msgQuery = gql`
+    {
+        findAllChatMessages(id: "${props.router.query.slug}") {
+            user
+            message
+        }
+    }
+    `
+
+    const [getHistory, {loading, data}] = useLazyQuery(msgQuery)
+
+    useEffect(() => {
+        if (data) {
+            appendMessage(data.findAllChatMessages)
+        }
+    }, [data])
+
+
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" })
+    }, [messages])
+
+
+    useEffect(() => {
+        Socket.emit('joinRoom', {chat: props.router.query.slug})
+
+        Socket.on('joined', (status) => {
+            if (!status.success) {
+                Router.back();
+            } else {
+                getHistory()
+            }
+        })
+
+        Socket.on('failure', (error) => {
+            console.log(error)
+        })
+
+        Socket.on('message', (data) => {
+            console.log(data)
+            appendMessage(msg => [...msg, data])
+        })
+
+        return () => {
+            Socket.emit('leaveChat')
+        }
+    }, [])
+
+
+    const HandleSend = () => {
+        if (messageInput.current) {
+            Socket.emit('send', {roomName: props.router.query.slug, text: messageInput.current.value})
+            appendMessage(msg => {
+                let curMsg = messageInput.current?.value
+                messageInput.current!.value = '';
+                return [...msg, {user: props.user.id, message: curMsg}]
+            })
+        }
+    }
+
     return (
         <div className={styles.chatGrid}>
             <div className={styles.navContainer}>
@@ -21,38 +90,26 @@ export default function Chat(props: any) {
                 </div>
             </div>
             <div className={styles.messageContainer}>
-                <div className={styles.messages}>
-                    <span>Is everything oki?</span>
-                    <span>I saw that you weren't able to pick up my order yet!</span>
-                    <span className={styles.otherUser}>Sorry mate, running a bit late, should be there soon!</span>
+                <div id="messageContainer" className={styles.messages}>
+                    {messages.map((msg: any, i: number) => (
+                        <span key={i} className={msg.user != props.user.id ? styles.otherUser : ''}>{msg.message}</span>
+                    ))}
+                    <p ref={bottomRef}/>
                 </div>
             </div>
             <div className={styles.inputContainer}>
             <div className={`${styles.chatBox} ${styles.flexBox}`}>
                 <div className={styles.boxLeft}>
                         <span className={`material-icons`}>chat_bubble_outline</span>
-                        <input id="message" type="text" placeholder="Send a message..." required />
+                        <input onKeyDown={(e) => e.key === 'Enter' && HandleSend()} ref={messageInput} id="message" type="text" placeholder="Send a message..." required />
                     </div>
                     <div className={styles.boxRight}>
                         <div className={`${styles.addButton} material-icons`}>add</div>
                     </div>
                 </div>
 
-                <span className={`material-icons`}>send</span>
+                <span onClick={HandleSend} className={`material-icons ${styles.sendIcon}`}>send</span>
             </div>
         </div>
     )
-
-    // return (
-    //     <div className={styles.chatBody}>
-
-
-
-
-    //         <div className={`${styles.chatBottom} ${styles.flexBox}`}>
-
-    //         </div>
-
-    //     </div>
-    // )
 };

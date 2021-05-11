@@ -8,3 +8,8 @@ type message{
         messages: String!
         user: [users]!
 }
+
+type userMessage{
+        message: String!,
+        user: ID!
+}

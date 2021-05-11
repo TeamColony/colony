@@ -1,11 +1,14 @@
 import express, { Request, Response } from "express";
 import next from "next";
 import {ApolloServer, gql} from 'apollo-server';
-import { connect } from 'mongoose';
+import { connect, Types } from 'mongoose';
 import {merge} from 'lodash';
 import path from 'path';
 import {readFileSync } from 'fs'
 import { Server, Socket } from "socket.io";
+import {connections} from './sockets/connections'
+import {authentication} from './sockets/auth'
+import { createHttpLink } from "@apollo/client";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -15,12 +18,14 @@ const port = 3000;
 const Query = gql`
     type Query {
         findAllJobs: [jobs],
-        findJobByID(id: String): jobs
+        findJobByID(id: String): jobs,
         findAllMessages: [messages],
         findMessagesByUser(id: String): messages,
         findOneMessage(id: String): users,
         findUserMessages(id: String): users,
         findUserByID(id: String): users,
+        user(id: String): messages,
+        findAllChatMessages(id: String): [userMessage],
         findOneJob(name: String): jobs,
         findNearWorkers: [users],
         findUserJobs(id: String): [jobs]
@@ -42,61 +47,6 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
     try {
         await app.prepare();
         const server = express();
-
-        /*
-
-        const http = server.listen(5000, () => 
-        console.log("Socket.io endpoint: http://localhost:5000"))
-
-
-        const io = new Server(http, {
-            cors: {
-                origin: "http://localhost:3000",
-                methods: ["GET", "POST"]
-              }
-        })
-
-        io.on('connection', (socket: any) => {
-            console.log('a user connected');
-            
-            socket.on('disconnect', () => {
-                console.log('user disconnected');
-            });
-
-            socket.on('message', ({name, message}: any) => {
-                console.log(message);
-                console.log(name);
-                io.emit('message', {name, message})
-            })
-
-            socket.on('storeClientInfo', function (data: any) {
-                console.log(data);
-                var clientInfo: {[k: string]: any} = {};
-                clientInfo.customId = data.customId;
-                clientInfo.clientId = socket.id;
-                clients.push(clientInfo);
-            });
-
-            socket.on('getPeerID', function (data: any){
-                const peerID = clients.filter(
-                    (item: any) => item.arrayWithvalue.indexOf('4') !== -1);
-
-                socket.emit("peerID", peerID);
-            });
-
-            socket.on('disconnect', function (data: any) {
-
-                for( var i=0, len=clients.length; i<len; ++i ){
-                    var c = clients[i];
-
-                    if(c.clientId == socket.id){
-                        clients.splice(i,1);
-                        break;
-                    }
-                }
-
-            });
-        }) */
 
         //MongoDB, Apollo, GraphQL
 
@@ -123,12 +73,48 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
             return handle(req, res);
         })
 
-        server.listen(port, (err?: any) => {
+        const srv = server.listen(port, (err?: any) => {
             if (err) throw err;
             console.log("Colony started.");
         })
 
-    } catch (e: any) {
+
+        //ws        
+        const io = new Server(srv, {
+            cors: {
+                origin: "https://www.colonyapp.co.uk:3000",
+                methods: ["GET", "POST"]
+            }
+        })
+
+        interface whoami {
+            _id: Types.ObjectId,
+            name: string,
+            email: string,
+            image: string,
+            createdAt: string,
+            updatedAt: string,
+            messages: Array<Object>
+        }
+
+        type userExtention = Socket & {whoami?: whoami}
+
+        io.on('connection', (socket: userExtention) => {
+            connections(socket)
+        })
+
+        io.use((socket: userExtention, next) => {
+            if (socket.handshake.auth.token) {
+                authentication(socket.handshake.auth.token, next).then((whoami) => {
+                    socket.whoami = (whoami as whoami);
+                    next()
+                })
+            } else {
+                next(new Error('Not Authorized.')) 
+            }
+        })
+
+    } catch (e) {
         console.error(e);
         process.exit(1);
     }

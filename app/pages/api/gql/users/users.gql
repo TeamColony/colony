@@ -3,14 +3,8 @@ type users{
         name: String!,
         email: String!,
         image: String!,
-        createdAt: String!
-        updatedAt: String!
-        rating: Float!
-        messages: [userMessage]
+        createdAt: String!,
+        updatedAt: String!,
+        rating: Float!,
+        messages: userMessage
 }
-
-type userMessage{
-        _id: ID!
-        user: [users]!
-}
-

@@ -8,6 +8,19 @@ export default {
         findMessagesByUser(_: any, {id}: any){
             return Messages.findOne({"owner": id}).then(data => data)
         },
+
+        findOneMessage(_: any, {id}: any){
+            return Messages.findOne({"owner": id}).then(data => {
+                data!.messages.length = 1;
+                return data;
+            })
+        },
+
+        findAllChatMessages(_: any, {id}: any) {
+            return Messages.findOne({_id: id}, {messages: 1, _id: 0}).then(data => {
+                return data!.messages
+            })
+        }
     },
 
     messages: {
