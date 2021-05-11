@@ -64,7 +64,7 @@ const jobSchema = new Schema({
 
 export interface IMessages extends Document {
     id: Types.ObjectId,
-    users: Array<Types.ObjectId>,
+    owner: Types.ObjectId,
     messages: Array<Object>,
 }
 
@@ -92,7 +92,6 @@ export interface IUsers extends Document {
     rating: number,
     createdAt: string,
     updatedAt: string,
-    messages: Array<Object>
 }
 
 const userSchema = new Schema({
@@ -113,7 +112,7 @@ const userSchema = new Schema({
         required: true
     },
     messages: {
-        type: Array,
+        type: Object,
         required: true
     },
     rating: {
@@ -128,10 +127,6 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    messages: {
-        type: Object,
-        required: false
-    }
 })
 
 export const Jobs: Model<IJobs> = models['jobs'] || model('jobs', jobSchema);
