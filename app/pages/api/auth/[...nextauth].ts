@@ -12,7 +12,6 @@ export default NextAuth({
     jwt : {
     	signingKey: process.env.G_JWT_SK
     },
-    secret: 'placeholder',
     database: "mongodb://127.0.0.1:27017/colony",
     callbacks: {
         async signIn(user, account) {

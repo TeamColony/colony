@@ -8,6 +8,7 @@ import {readFileSync } from 'fs'
 import { Server, Socket } from "socket.io";
 import {connections} from './sockets/connections'
 import {authentication} from './sockets/auth'
+import { createHttpLink } from "@apollo/client";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -43,8 +44,6 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
         await app.prepare();
         const server = express();
 
-       
-
         //MongoDB, Apollo, GraphQL
 
         connect('mongodb://localhost:27017/', {
@@ -79,7 +78,7 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
         //ws        
         const io = new Server(srv, {
             cors: {
-                origin: "http://localhost:3000",
+                origin: "https://www.colonyapp.co.uk:3000",
                 methods: ["GET", "POST"]
             }
         })

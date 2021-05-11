@@ -1,45 +1,31 @@
-import { getSession } from 'next-auth/client'
+import { useSession } from 'next-auth/client'
+import Loading from '../components/Loading'
 import Layout from '../components/Layout'
-
-import {SocketCtx} from '../context/socket'
-import {io} from 'socket.io-client'
-
+import Login from '../components/Login'
+import {useState} from 'react';
+import { SocketCtx } from '../context/socket'
+import {io} from 'socket.io-client';
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, ApolloLink } from "@apollo/client";
 
 import '../styles/global.css';
-import App from 'next/app'
+import { useEffect } from 'react'
 
-export default class Colony extends App {
+export default function App(props: any) {
+    const {Component, router} = props;
+    const standalone = ['/workers/[slug]']
+    const [session, loading] = useSession(); //todo: change to static export funciton to prevent re-rendering and other jazz!
+    const [socketInstance, setSocketInstance]: any = useState(false);
 
-  constructor (props: any) {
-    super(props)
-    this.state = {
-      socketInstance: props.props.session ? io() : null
-    }
-  }
+    useEffect(() => {
+        if(!socketInstance && session){
+          setSocketInstance(io({auth: {token: session.accessToken}},{transports: ['websocket']}));
+        }
+    }, [session])
 
-  static async getInitialProps({ctx} : {ctx: any}) {
-    var s = await getSession(ctx)
-    if (typeof window === "undefined" && ctx.res.writeHead) {
-      if (!s && ctx.pathname !== '/login') {
-          ctx.res.writeHead(302, {location: '/login'})
-          ctx.res.end()
-      }
-    }
-    return {
-      props : {
-        session : s,
-      },
-      pageProps: {}
-    }
-  }
-
-  render () {
-    const standalone = ['/workers/[slug]', '/login']
     const client = new ApolloClient({
         link: ApolloLink.from([
           new HttpLink({
-            uri: 'http://localhost:4000/graphql',
+            uri: 'https://www.colonyapp.co.uk/graphql',
             credentials: 'same-origin'
           })
         ]),
@@ -55,23 +41,20 @@ export default class Colony extends App {
           }
         }
     });
-    const { Component, router, props } : any = this.props
-    const {socketInstance} : any = this.state
-    if (props.session) {
-      socketInstance.auth = {token: props.session.accessToken}
-       return (
+
+    return (
         <ApolloProvider client={client}>
-            <Layout useNav={standalone.includes(router.pathname) ? false : true} user={props.session}>
-                <SocketCtx.Provider value={socketInstance}> 
-                    <Component router={router} pathname={router.pathname} user={props.session}/>
-                </SocketCtx.Provider>
-            </Layout>
+            {session && socketInstance?
+                <Layout useNav={standalone.includes(router.pathname) ? false : true} user={session}>
+                    <SocketCtx.Provider value={socketInstance}> 
+                        <Component router={router} pathname={router.pathname} user={session}/>
+                    </SocketCtx.Provider>
+                </Layout>
+            : loading ? 
+                <Loading/>
+            :
+                <Login/>
+            }
         </ApolloProvider>
-      )
-    } else {
-      return (
-        <Component/>
-      )
-    }
-  }
+    )
 }
