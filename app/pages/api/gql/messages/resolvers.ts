@@ -26,8 +26,16 @@ export default {
         },
 
         findAllChatMessages(_: any, {id}: any) {
-            return Messages.findOne({_id: id}, {messages: 1, _id: 0}).then(data => {
-                return data!.messages
+            return Messages.findOne({_id: id}).then(data => {
+                if (data) {
+                    // return [
+                    //     {
+                    //         message: "test",
+                    //         user: Types.ObjectId("609115bfef8edaab341c4cc9").toString()
+                    //     }
+                    // ]
+                    return data.messages
+                }
             })
         }
     },

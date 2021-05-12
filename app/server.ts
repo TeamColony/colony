@@ -24,7 +24,7 @@ const Query = gql`
         findUserMessages(id: String): users,
         findUserByID(id: String): users,
         user(id: String): messages,
-        findAllChatMessages(id: String): [userMessage],
+        findAllChatMessages(id: String): [imsg],
         findOneJob(name: String): jobs,
         findNearWorkers: [users],
         findUserJobs(id: String): [jobs]

@@ -64,9 +64,20 @@ const jobSchema = new Schema({
 
 export interface IMessages extends Document {
     id: Types.ObjectId,
-    users: Array<any>,
-    messages: Array<Object>,
+    owner: Types.ObjectId,
+    messages: Array<any>,
 }
+
+const individualMessage = new Schema({
+    message: {
+        type: String,
+        required: true
+    },
+    user: {
+        type: Types.ObjectId,
+        required: true
+    }
+})
 
 const messageSchema = new Schema({
     id: {
@@ -78,7 +89,7 @@ const messageSchema = new Schema({
         required: true
     },
     messages: {
-        type: Array,
+        type: [individualMessage],
         required: true
     }
 })
