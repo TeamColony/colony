@@ -8,9 +8,8 @@ import {readFileSync } from 'fs'
 import { Server, Socket } from "socket.io";
 import {connections} from './sockets/connections'
 import {authentication} from './sockets/auth'
-import { createHttpLink } from "@apollo/client";
 
-const dev = process.env.NODE_ENV !== "production";
+const dev = true;
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const port = 3000;
@@ -29,6 +28,7 @@ const Query = gql`
         findOneJob(name: String): jobs,
         findNearWorkers: [users],
         findUserJobs(id: String): [jobs]
+        findFirstMessage(id: String): [messages]
     },
 `
 
@@ -63,9 +63,7 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
             playground: true,
           });
 
-        apolloServer.listen().then(({ url }: any) => {
-            console.log(`GraphQL endpoint: ${url}graphql`);
-        });
+        apolloServer.listen();
 
         //Everything else
           
@@ -75,14 +73,13 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
 
         const srv = server.listen(port, (err?: any) => {
             if (err) throw err;
-            console.log("Colony started.");
         })
 
 
         //ws        
         const io = new Server(srv, {
             cors: {
-                origin: "https://www.colonyapp.co.uk:3000",
+                origin: "http://localhost:3000",
                 methods: ["GET", "POST"]
             }
         })

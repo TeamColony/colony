@@ -1,6 +1,6 @@
 type messages{
         _id: ID!
-        users: [ID]!
+        users: [users]!
         messages: [message]!
 }
 

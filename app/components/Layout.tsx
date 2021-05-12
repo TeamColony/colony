@@ -25,7 +25,7 @@ const Layout = (props: any) => {
     </Head>
     <header>
       {props.useNav && 
-        <NavBar activePage={props.children.props.pathname} user={props.user}/>
+        <NavBar activePage={props.pathname} user={props.user}/>
       }
     </header>
       {props.children}

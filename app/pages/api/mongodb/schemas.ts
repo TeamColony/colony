@@ -123,7 +123,7 @@ const userSchema = new Schema({
         required: true
     },
     messages: {
-        type: Object,
+        type: Array,
         required: true
     },
     rating: {
