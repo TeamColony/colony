@@ -5,19 +5,32 @@ import {SocketCtx} from '../../context/socket'
 
 import {useLazyQuery, gql} from '@apollo/client'
 
+interface userData {
+    name: string,
+    image: string,
+}
+
 export default function Chat(props: any) {
     const bottomRef = useRef<HTMLDivElement>(null);
 
     const messageInput = useRef<HTMLInputElement>(null);
     const Socket = useContext(SocketCtx)
 
-    const [messages, appendMessage] = useState<object[]>([])
+    const [messages, appendMessage] = useState<object[]>([]);
+    const [userData, setUserData] = useState<Array<userData>>(Object);
 
     const msgQuery = gql`
     {
-        findAllChatMessages(id: "${props.router.query.slug}") {
-            user
-            message
+        findChatInfo(id: "${props.router.query.slug}") {
+            users{
+                _id
+                name
+                image
+            }
+            messages{
+                user
+                message
+            }
         }
     }
     `
@@ -26,7 +39,8 @@ export default function Chat(props: any) {
 
     useEffect(() => {
         if (data) {
-            appendMessage(data.findAllChatMessages)
+            appendMessage(data.findChatInfo.messages);
+            setUserData(data!.findChatInfo.users.filter((item:any) => props.user.id !== item._id));
         }
     }, [data])
 
@@ -79,8 +93,16 @@ export default function Chat(props: any) {
                 <div className={styles.chatNav}>
                     <div className={styles.leftNav}>
                         <span onClick={() => Router.back()} className={`${styles.unselectable} material-icons`}>arrow_back_ios_new</span>
-                        <img className={styles.popularPicture} src='/profile_pics/grey.png' />
-                        <span>James McDaniel</span>
+                        
+                        {userData[0] != null ? (
+                            <div className={styles.userInfo}>
+                              <img className={styles.popularPicture} src={userData[0].image} />
+                              <span>{userData[0].name}</span>
+                            </div>
+                        ) : (
+                            <div></div>
+                        )}
+                      
 
                     </div>
                     <div className={styles.rightNav}>

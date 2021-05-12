@@ -20,11 +20,11 @@ const Query = gql`
         findUserMessages(id: String): users,
         findUserByID(id: String): users,
         user(id: String): messages,
-        findAllChatMessages(id: String): [imsg],
         findOneJob(name: String): jobs,
         findNearWorkers: [users],
         findUserJobs(id: String): [jobs],
-        findFirstMessage(id: String): [messages]
+        findFirstMessage(id: String): messages
+        findChatInfo(id: String): messages
     },
 `
 

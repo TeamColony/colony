@@ -1,12 +1,7 @@
 type messages{
         _id: ID!
         users: [users]!
-        messages: [message]!
-}
-
-type message{
-        messages: String!
-        user: [users]!
+        messages: [imsg]!
 }
 
 type imsg {
