@@ -9,11 +9,6 @@ type message{
         user: [users]!
 }
 
-type userMessage{
-        message: String!,
-        user: String!
-}
-
 type imsg {
         message: String!,
         user: String!

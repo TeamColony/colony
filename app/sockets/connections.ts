@@ -14,8 +14,8 @@ interface whoami {
 
 type userExtention = Socket & {whoami?: whoami}
 
-const canJoin = (msgID: string, userID: Types.ObjectId) => {
-    return Messages.countDocuments({_id: msgID, users: {$all: userID}}).then((data) => {
+const canJoin = (msgID: Types.ObjectId, userID: Types.ObjectId) => {
+    return Messages.countDocuments({_id: msgID, users: userID}).then((data) => {
         return data == 1 ? true : false
     }).catch(() => false)
 }

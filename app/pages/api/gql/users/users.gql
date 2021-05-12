@@ -6,5 +6,4 @@ type users{
         createdAt: String!,
         updatedAt: String!,
         rating: Float!,
-        messages: userMessage
 }

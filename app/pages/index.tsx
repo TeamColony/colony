@@ -55,7 +55,7 @@ export default function IndexPage(props: Props) {
       }
     }
   `;
-  
+
   const nearWorkers = gql`
       {
         findNearWorkers{
@@ -81,7 +81,7 @@ export default function IndexPage(props: Props) {
   ] = queryMultiple()
 
   if (loading1 || loading2 || loading3) {
-    return <Loading/>
+    return <Loading />
   }
 
   if (popularjobs && messages && workers) {
@@ -93,8 +93,8 @@ export default function IndexPage(props: Props) {
           <div className={styles.popular}>
             <div className={styles.jobHeader}>
               <span className={`${styles.popularTitle} unselectable`}>Popular Jobs</span>
-              <span onClick={() => { Router.push(`/explorer`)}}
-              className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
+              <span onClick={() => { Router.push(`/explorer`) }}
+                className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
             </div>
             <div className={styles.jobList}>
               {popularjobs.findAllJobs.map((job: job, i: number) => (
@@ -105,9 +105,10 @@ export default function IndexPage(props: Props) {
               ))}
             </div>
           </div>
-          <LeafletMap/>
+          <LeafletMap />
 
         </div>
+
 
         <div className={styles.messageHeader}>
           <div className={styles.headerLeft}>
@@ -118,8 +119,17 @@ export default function IndexPage(props: Props) {
           <span onClick={() => { Router.push(`/messages`) }}
             className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
         </div>
-        
-        <MessageCard data={messages.findFirstMessage[0]}></MessageCard>
+
+
+
+        {messages.findFirstMessage != null ? (
+          <MessageCard data={messages.findFirstMessage[0]}></MessageCard>
+
+        ) : (
+          <div className={styles.noMessages}>
+            <span>No new messages!</span>
+          </div>
+          )}
 
         <div className={styles.nearHeader}>
           <div className={styles.headerLeft}>
@@ -139,7 +149,7 @@ export default function IndexPage(props: Props) {
           }}>
 
           {workers.findNearWorkers.map((worker: any, i: number) => (
-            <SplideSlide  key={i} className={`${i == 1 && styles.firstSplide}`}>
+            <SplideSlide key={i} className={`${i == 1 && styles.firstSplide}`}>
               <WorkerCard worker={worker}></WorkerCard>
             </SplideSlide>
           ))}

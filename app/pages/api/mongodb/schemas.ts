@@ -64,7 +64,7 @@ const jobSchema = new Schema({
 
 export interface IMessages extends Document {
     id: Types.ObjectId,
-    owner: Types.ObjectId,
+    users: Array<Types.ObjectId>,
     messages: Array<any>,
 }
 
