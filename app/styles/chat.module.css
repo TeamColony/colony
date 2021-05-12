@@ -14,6 +14,15 @@
     margin-top: 20px;
 }
 
+.userInfo{
+    display: flex;
+    align-items: center;
+}
+
+.userInfo img{
+    border-radius: 50%;
+}
+
 .chatNav{
     width: 100%;
     display: flex;

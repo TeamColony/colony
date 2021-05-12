@@ -85,8 +85,6 @@ export default function IndexPage(props: Props) {
   }
 
   if (popularjobs && messages && workers) {
-    console.log(messages);
-
     return (
       <div className={styles.indexBody}>
         <div className={styles.mapParent}>
@@ -123,7 +121,7 @@ export default function IndexPage(props: Props) {
 
 
         {messages.findFirstMessage != null ? (
-          <MessageCard data={messages.findFirstMessage[0]}></MessageCard>
+          <MessageCard data={messages.findFirstMessage}></MessageCard>
 
         ) : (
           <div className={styles.noMessages}>

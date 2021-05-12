@@ -8,7 +8,7 @@ interface options {
 }
 
 export default function NavItem({options, activePage} : {options: options, activePage: string}) {
-    console.log(activePage);
+
     return (
         <div>
             <div className={`${styles.middleOption} ${activePage === options.route && styles.selectedOption} noselect unselectable`} 

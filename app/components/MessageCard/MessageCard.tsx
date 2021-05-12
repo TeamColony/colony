@@ -9,8 +9,6 @@ export type Props = {
 
 export default function MessageCard(props: any) {
 
-    console.log(props.data._id);
-
     return (
         <div onClick={() => {Router.push(`/chat/`.concat(props.data._id))}} 
          className={`${styles.messageCard} ${styles.noMessages} `}>
