@@ -1,4 +1,3 @@
-import { workers } from 'cluster'
 import {Jobs, Users} from '../../mongodb/schemas'
 import {Types} from 'mongoose'
 
@@ -6,9 +5,6 @@ export default {
     Query: {
         findAllJobs() {
             return Jobs.find({}).then(data => data)
-        },
-        findJobByID(_: any, {id}: any) {
-            return Jobs.findOne({_id: id}).then(data => data)
         },
         findOneJob(_: any, {name}: any) {
             return Jobs.findOne({name: name}).then(data => data)
@@ -20,6 +16,8 @@ export default {
 
     jobs:{
         workers(parent: any){
+
+            //todo: re-write this:
             var ids = parent.workers.map(function(i:any) {
                 return i;
               });
