@@ -1,8 +1,8 @@
 //Packages
 import React from 'react';
-import dynamic from "next/dynamic";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Router from 'next/router';
+import dynamic from 'next/dynamic'
 
 //Styling
 import styles from '../styles/index.module.css'
@@ -32,6 +32,7 @@ type Props = {
 }
 
 export default function IndexPage(props: Props) {
+
   const jobs = gql`
      {
        findAllJobs{
@@ -44,13 +45,11 @@ export default function IndexPage(props: Props) {
 
   const oneMessage = gql`
     {
-        findOneMessage(id: "${String(props.user.id)}") {
-          messages{
-            _id
-            user{
-               name
-               image
-            }
+        findFirstMessage(id: "${String(props.user.id)}") {
+          _id,
+          users{
+            name
+            image
           }
             
       }
@@ -86,8 +85,8 @@ export default function IndexPage(props: Props) {
   }
 
   if (popularjobs && messages && workers) {
+    console.log(messages);
 
-    console.log(workers);
     return (
       <div className={styles.indexBody}>
         <div className={styles.mapParent}>
@@ -98,15 +97,16 @@ export default function IndexPage(props: Props) {
               className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
             </div>
             <div className={styles.jobList}>
-              {popularjobs.findAllJobs.map((job: job) => (
-                <div onClick={() => { Router.push(`/categories/`.concat(job.name)) }} className={styles.popularJob}>
+              {popularjobs.findAllJobs.map((job: job, i: number) => (
+                <div key={i} onClick={() => { Router.push(`/categories/`.concat(job.name)) }} className={styles.popularJob}>
                   <img className={styles.popularPicture} src={job.image} />
                   <span>{job.name}</span>
                 </div>
               ))}
             </div>
           </div>
-          <LeafletMap />
+          <LeafletMap/>
+
         </div>
 
         <div className={styles.messageHeader}>
@@ -118,11 +118,8 @@ export default function IndexPage(props: Props) {
           <span onClick={() => { Router.push(`/messages`) }}
             className={`${styles.popularAll} ${styles.unselectable}`}>View all</span>
         </div>
-        {/* {messages.findAllMessagesForUser.map((msg: any) => {
-          <MessageCard user={msg.user.user[0]}></MessageCard>
-        })} */}
         
-        <MessageCard user={messages.findOneMessage.messages[0].user}></MessageCard>
+        <MessageCard data={messages.findFirstMessage[0]}></MessageCard>
 
         <div className={styles.nearHeader}>
           <div className={styles.headerLeft}>
@@ -142,7 +139,7 @@ export default function IndexPage(props: Props) {
           }}>
 
           {workers.findNearWorkers.map((worker: any, i: number) => (
-            <SplideSlide className={`${i == 1 && styles.firstSplide}`}>
+            <SplideSlide  key={i} className={`${i == 1 && styles.firstSplide}`}>
               <WorkerCard worker={worker}></WorkerCard>
             </SplideSlide>
           ))}

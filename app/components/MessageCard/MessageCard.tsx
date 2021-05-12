@@ -4,15 +4,18 @@ import {User} from '../../interfaces/index'
 import Router from 'next/router';
 
 export type Props = {
-    user: User
+    data: User
 }
 
 export default function MessageCard(props: any) {
+
+    console.log(props.data._id);
+
     return (
-        <div onClick={() => {Router.push(`/chat/${props.id}`)}} 
+        <div onClick={() => {Router.push(`/chat/`.concat(props.data._id))}} 
          className={`${styles.messageCard} ${styles.noMessages} `}>
-            <img className={styles.profilePicture} src={props.user[0].image!} />
-            <span>{props.user[0].name}</span>
+            <img className={styles.profilePicture} src={props.data.users[0].image!} />
+            <span>{props.data.users[0].name}</span>
             <div className={styles.messageEnd}>
                 <span>0</span>
                 <span className={`material-icons ${styles.messageIcon}`}>chat</span>

@@ -19,14 +19,14 @@ export default function App(props: any) {
 
     useEffect(() => {
         if(!socketInstance && session){
-          setSocketInstance(io({auth: {token: session.accessToken}},{transports: ['websocket']}));
+          setSocketInstance(io({auth: {token: session.accessToken}}));
         }
     }, [session]);
 
     const client = new ApolloClient({
         link: ApolloLink.from([
           new HttpLink({
-            uri: 'https://www.colonyapp.co.uk/graphql',
+            uri: 'http://localhost:4000/graphql',
             credentials: 'same-origin'
           })
         ]),
@@ -46,9 +46,9 @@ export default function App(props: any) {
     return (
         <ApolloProvider client={client}>
             {session && socketInstance?
-                <Layout useNav={standalone.includes(router.pathname) ? false : true} user={session}>
+                <Layout pathname={router.pathname} useNav={standalone.includes(router.pathname) ? false : true} user={session}>
                     <SocketCtx.Provider value={socketInstance}> 
-                        <Component router={router} pathname={router.pathname} user={session}/>
+                        <Component router={router} user={session}/>
                     </SocketCtx.Provider>
                 </Layout>
             : loading ? 

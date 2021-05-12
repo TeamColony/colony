@@ -1,4 +1,5 @@
 import {Messages, Users} from '../../mongodb/schemas'
+import {Types} from 'mongoose'
 
 export default {
     Query: {
@@ -8,6 +9,14 @@ export default {
         findMessagesByUser(_: any, {id}: any){
             return Messages.findOne({"owner": id}).then(data => data)
         },
+
+        findFirstMessage(_: any, {id}: any) {
+            return Messages.find({users:{$in:[Types.ObjectId(id)]}}).then(data => {
+                data!.length = 1;
+                data[0].users = data[0].users.filter((item:any) => id != item);
+                return data;
+            });
+        }, 
 
         findOneMessage(_: any, {id}: any){
             return Messages.findOne({"owner": id}).then(data => {
@@ -31,6 +40,14 @@ export default {
 
             return ids;
         },
+        users(parent: any){
+
+            var ids = parent.users.map(function(i:any) {
+                return i;
+              });
+              
+            return Users.find({_id: ids}).then(data => data);
+        }
     },
 
     message: {
