@@ -85,6 +85,7 @@ export default function IndexPage(props: Props) {
   }
 
   if (popularjobs && messages && workers) {
+    console.log(messages);
     return (
       <div className={styles.indexBody}>
         <div className={styles.mapParent}>

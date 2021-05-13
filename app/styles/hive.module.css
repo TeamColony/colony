@@ -1,22 +1,24 @@
 .parent{
     display: flex;
     justify-content: flex-start;
-    margin-left: 40px;
-    margin-right: 40px;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .bodyContent{
-    width: 100%;
-    padding-bottom: 100px;
+    display: grid;
+    grid-template-rows: auto auto auto 1fr;
 }
 
 .profileInfoContainer{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-left: 20px;
     height: 90px;
+    margin-bottom: 10px;
 }
 
 .jobImage{
@@ -25,7 +27,6 @@
 }
 
 .profileInfoContainer span{
-
     font-size: 80px;
     color: #B1B1B1;
     font-weight: 200;
@@ -67,18 +68,20 @@
     color: #424242;
 }
 
-
 .jobsContainer {
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding-top: 1.5rem;
+    padding-top: 0.10rem;
     height: auto;
 }
 
+.jobsHeader{
+    margin-left: 23px;
+}
+
 .jobsHeader {
-    padding: 2rem;
     padding-bottom: 0;
     padding-top: 10px;
     height: fit-content;
@@ -93,15 +96,15 @@
 }
 
 .jobScroll {
-    padding-left: 1.5rem;
+    padding-left: 20px;
     padding-top: 10px;
     left: 0;
     width: 100%;
     display: flex;
-    flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
     height: auto;
+    width: 100%;
 }
 
 .jobScroll div {
@@ -122,4 +125,14 @@
 .jobItem div {
     font-size: 0.8rem;
     margin-top: 0.5rem;
+}
+
+@media only screen and (max-width: 560px) {
+    .jobScroll {
+        -ms-overflow-style: none;
+        scrollbar-width: none; 
+    }
+    .jobScroll::-webkit-scrollbar { 
+        display: none;  /* Safari and Chrome */
+    }
 }

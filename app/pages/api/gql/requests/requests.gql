@@ -1,0 +1,10 @@
+type requests{
+        _id: ID!,
+        worker: users!,
+        job: jobs!,
+        user: users!,
+        request: String!,
+        postcode: String!,
+        time: String!,
+        status: Int!
+}
