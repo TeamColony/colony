@@ -28,6 +28,8 @@ const Query = gql`
     },
     type Mutation {
         clearMessageHistory(id: String): Boolean
+        leaveChat(id: String, chatid: String): Boolean
+        joinChat(users: [String]): Boolean
     }
 `
 

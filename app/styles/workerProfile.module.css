@@ -7,8 +7,7 @@
 
 .headerContent {
     font-size: 1.2rem;
-    padding-left: 40px;
-    padding-top: 30px;
+    margin: 1rem;
     display: flex;
     align-items: center;
     color: #5E5E5E;
@@ -157,6 +156,23 @@
 .reviewsContainer {
     margin-top: 0;
     padding-top: 10px;
+}
+
+.sendMsgContainer {
+    background: #8D86C9;
+    color: white;
+    width: 2.5rem;
+    border-radius: 1.5rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.sendMsgContainer span {
+    font-size: 1.6rem;
+    margin-right: 0 !important;
 }
 
 @media only screen and (max-width: 560px) {

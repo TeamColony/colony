@@ -3,7 +3,7 @@ import React from 'react';
 import { GetServerSidePropsContext } from 'next';
 
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql, useMutation } from '@apollo/client';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 import Router, {useRouter} from 'next/router'
 
@@ -37,6 +37,14 @@ export default function WorkerProfile(props: any) {
    }
    `;
 
+   const messageUserMutation = gql`
+    mutation {
+        joinChat(users: ["${props.user.id}", "${String(slug)}"])
+    }
+   `
+
+    const [startMessage, startMessageResponse] = useMutation(messageUserMutation)
+
    const queryMultiple = () => {
       const userData = useQuery(getUser);
       const jobData = useQuery(findUserJobs);
@@ -52,12 +60,19 @@ export default function WorkerProfile(props: any) {
         return <div>loading</div>
     }
 
+    const messageUser = () => {
+        startMessage()
+    }
+
     return (
         console.log(jobs),
         <div className={styles.parent}>
             <div className={styles.headerContent}>
                 <BackButton/>
                 <div className="unselectable">Worker Profile</div>
+                <div onClick={messageUser} className={styles.sendMsgContainer}>
+                    <span className="material-icons">send</span>
+                </div>
             </div>
 
             <div className={styles.bodyContent}>

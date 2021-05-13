@@ -44,9 +44,17 @@ export default function Chat(props: any) {
         }
     `
 
+    const leaveChatMutation = gql`
+        mutation {
+            leaveChat(id: "${props.user.id}", chatid: "${props.router.query.slug}")
+        }
+    `
+
     const [getHistory, {loading, data}] = useLazyQuery(msgQuery)
 
     const  [clearHistory, clearResponse] = useMutation(clearMsg)
+
+    const [leaveChat, leaveResponse] = useMutation(leaveChatMutation)
 
     useEffect(() => {
         if (data) {
@@ -104,7 +112,8 @@ export default function Chat(props: any) {
     }
 
     const handleLeave = () => {
-
+        leaveChat()
+        Router.push('/')
     }
 
     const handleClear = () => {
@@ -160,7 +169,7 @@ export default function Chat(props: any) {
                 <BottomModal options={{display: displayModal}}>
                     <div className={styles.buttonList}>
                         <button onClick={handleClear} className={styles.clearBtn}>Clear Chat</button>
-                        <button className={styles.leaveBtn}>Leave Chat</button>
+                        <button onClick={handleLeave} className={styles.leaveBtn}>Leave Chat</button>
                     </div>
                 </BottomModal>
         </div>
