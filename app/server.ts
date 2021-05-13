@@ -23,8 +23,9 @@ const Query = gql`
         findOneJob(name: String): jobs,
         findNearWorkers: [users],
         findUserJobs(id: String): [jobs],
-        findFirstMessage(id: String): messages
-        findChatInfo(id: String): messages
+        findFirstMessage(id: String): messages,
+        findChatInfo(id: String): messages,
+        findUserRequests(id: String): [requests]
     },
 `
 
@@ -36,6 +37,9 @@ const messageResolvers = require("./pages/api/gql/messages/resolvers.ts").defaul
 
 const userTypeDef = gql(readFileSync(path.resolve('pages/api/gql/users/users.gql'), 'utf8'))
 const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
+
+const requestTypeDef = gql(readFileSync(path.resolve('pages/api/gql/requests/requests.gql'), 'utf8'))
+const requestResolvers = require("./pages/api/gql/requests/resolvers.ts").default;
 
 // var clients: {[k: string]: any} = [];
 
@@ -53,8 +57,8 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
         });
 
         const apolloServer = new ApolloServer({
-            typeDefs: [Query, jobTypeDef, messageTypeDef, userTypeDef], 
-            resolvers: merge(jobResolvers, messageResolvers, userResolvers),
+            typeDefs: [Query, jobTypeDef, messageTypeDef, userTypeDef, requestTypeDef], 
+            resolvers: merge(jobResolvers, messageResolvers, userResolvers, requestResolvers),
             introspection: true,
             playground: true,
           });

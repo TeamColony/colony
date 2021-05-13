@@ -1,8 +1,15 @@
 import React from 'react';
-import styles from '../styles/profile.module.css';
+
+//Packages
 import { GetServerSidePropsContext } from 'next';
 import { useQuery, gql } from '@apollo/client';
 import Router from 'next/router'
+
+//Styles
+import styles from '../styles/hive.module.css';
+
+//Components
+import RequestCard from '../components/RequestCard/RequestCard';
 
 export default function Settings(props: any) {
 
@@ -14,21 +21,41 @@ export default function Settings(props: any) {
          }
     }
     `;
- 
-    const queryMultiple = () => {
-       const jobData = useQuery(findUserJobs);
-       return [jobData];
-    }
- 
-     const [
-         { loading: loading1, data: jobs },
-     ] = queryMultiple()
- 
-     if (loading1) {
-         return <div>loading</div>
-     }
 
-     
+    const findUserRequests = gql `
+    {
+
+        findUserRequests(id: "6093aea3206e8613759b2bd9") {
+            user{
+                name,
+                image
+            },
+            job{
+                name,
+                image
+            },
+            postcode,
+            request
+                    
+        }
+    }
+    `
+
+    const queryMultiple = () => {
+        const jobData = useQuery(findUserJobs);
+        const requestData = useQuery(findUserRequests);
+        return [jobData, requestData];
+    }
+
+    const [
+        { loading: loading1, data: jobs },
+        { loading: loading2, data: requests}
+    ] = queryMultiple()
+
+    if (loading1 || loading2) {
+        return <div>loading</div>
+    }
+
     return (
         <div className={styles.parent}>
 
@@ -48,8 +75,9 @@ export default function Settings(props: any) {
                 <div className={styles.jobsContainer}>
                     <div className={`${styles.jobsHeader} unselectable`}>
                         <span className="material-icons">work_outline</span>
-                        <div style={{ fontWeight: 500 }}>Jobs Available</div>
+                        <div style={{ fontWeight: 500 }}>Your Jobs</div>
                     </div>
+                      
                     <div className={styles.jobScroll}>
                         {jobs.findUserJobs.map((job: any) => (
                             <div onClick={() => { Router.push(`/categories/`.concat(job.name)) }} className={styles.jobItem}>
@@ -59,6 +87,19 @@ export default function Settings(props: any) {
                         ))}
                     </div>
                 </div>
+              
+
+                <div className={styles.jobsContainer}>
+                    <div className={`${styles.jobsHeader} unselectable`}>
+                        <span className="material-icons">waving_hand</span>
+                        <div style={{ fontWeight: 500 }}>Requests</div>
+                    </div>
+
+                </div>
+
+                {requests.findUserRequests.map((request: any) => ( 
+                    <RequestCard request={request}/>
+                ))}
 
             </div>
         </div>

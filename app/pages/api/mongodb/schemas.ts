@@ -62,6 +62,52 @@ const jobSchema = new Schema({
     },
 })
 
+export interface IRequests extends Document {
+    id: Types.ObjectId,
+    worker: Types.ObjectId,
+    user: Types.ObjectId,
+    job: Types.ObjectId,
+    request: String,
+    postcode: String,
+    time: String,
+    status: number
+}
+
+const requestSchema = new Schema({
+    id: {
+        type: Types.ObjectId,
+        required: true
+    },
+    worker: {
+        type: Types.ObjectId,
+        required: true
+    },
+    job: {
+        type: Types.ObjectId,
+        required: true
+    },
+    user: {
+        type: Types.ObjectId,
+        required: true
+    },
+    request: {
+        type: String,
+        required: true
+    },
+    postcode: {
+        type: String,
+        required: true
+    },
+    time: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: Number,
+        required: true
+    },
+})
+
 export interface IMessages extends Document {
     id: Types.ObjectId,
     users: Array<Types.ObjectId>,
@@ -143,6 +189,7 @@ const userSchema = new Schema({
 export const Jobs: Model<IJobs> = models['jobs'] || model('jobs', jobSchema);
 export const Messages: Model<IMessages> = models['messages'] || model('messages', messageSchema);
 export const Users: Model<IUsers> = models['users'] || model('users', userSchema);
-export const Sessions: Model<ISessions> = models['sessions'] || model('sessions', sessionSchema)
+export const Sessions: Model<ISessions> = models['sessions'] || model('sessions', sessionSchema);
+export const Requests: Model<IRequests> = models['requests'] || model('requests', requestSchema);
 
 
