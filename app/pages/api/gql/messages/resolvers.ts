@@ -22,11 +22,22 @@ export default {
             return Messages.updateOne({_id: id}, {$set: {messages: []}}).then((status) => status.nModified == 1 ? true : false)
         },
         leaveChat(_: any, {id, chatid}: any) {
-            return Messages.updateOne({_id: chatid}, 
-                {$pull: {users: {$in: [Types.ObjectId(id)]}}}
-            ).then((status) => {
-                return status.nModified == 1 ? true : false
+            Messages.findOne({_id: chatid}).then((data) => {
+                if (data) {
+                    if (data.users.length - 1 == 1) {
+                        return Messages.deleteOne({_id: chatid}).then((status) => { 
+                            console.log(status)
+                            return status.deletedCount == 1 ? true : false})
+                    } else {
+                        return Messages.updateOne({_id: chatid}, 
+                            {$pull: {users: {$in: [Types.ObjectId(id)]}}}
+                        ).then((status) => {
+                            return status.nModified == 1 ? true : false
+                        })
+                    }
+                }
             })
+
         },
         joinChat(_: any, {users}: any) {
             return Messages.create({
