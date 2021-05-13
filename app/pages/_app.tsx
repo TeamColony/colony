@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 export default function App(props: any) {
     const {Component, router} = props;
   
-    const standalone = ['/workers/[slug]', '/categories/[slug]', '/messages']
+    const standalone = ['/workers/[slug]', '/categories/[slug]', '/messages', '/chat/[slug]']
     const [session, loading] = useSession();
     const [socketInstance, setSocketInstance]: any = useState(false);
 

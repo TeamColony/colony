@@ -1,0 +1,10 @@
+.parent {
+    transition: 0.2s ease height;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 2px 11px 35px rgba(0, 0, 0, 0.25);
+    border-radius: 2rem 2rem 0 0;
+}

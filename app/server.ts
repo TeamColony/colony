@@ -26,6 +26,9 @@ const Query = gql`
         findFirstMessage(id: String): messages
         findChatInfo(id: String): messages
     },
+    type Mutation {
+        clearMessageHistory(id: String): Boolean
+    }
 `
 
 const jobTypeDef = gql(readFileSync(path.resolve('pages/api/gql/jobs/jobs.gql'), 'utf8'))

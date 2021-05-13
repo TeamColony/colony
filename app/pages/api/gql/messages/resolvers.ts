@@ -17,6 +17,11 @@ export default {
         },
     },
 
+    Mutation: {
+        clearMessageHistory(_: any, {id}: any) {
+            return Messages.updateOne({_id: id}, {$set: {messages: []}}).then((status) => status.nModified == 1 ? true : false)
+        }
+    },
 
     messages: {
         users(parent: any){

@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import styles from '../../styles/chat.module.css';
 import Router from 'next/router';
 import {SocketCtx} from '../../context/socket'
+import BottomModal from '../../components/BottomModal/BottomModal'
 
-import {useLazyQuery, gql} from '@apollo/client'
+import {useLazyQuery, gql, useMutation} from '@apollo/client'
 
 interface userData {
     name: string,
@@ -18,6 +19,8 @@ export default function Chat(props: any) {
 
     const [messages, appendMessage] = useState<object[]>([]);
     const [userData, setUserData] = useState<Array<userData>>(Object);
+
+    const [displayModal, setDisplayModal] = useState(false);
 
     const msgQuery = gql`
     {
@@ -35,7 +38,15 @@ export default function Chat(props: any) {
     }
     `
 
+    const clearMsg = gql`
+        mutation {
+            clearMessageHistory(id:"${props.router.query.slug}")
+        }
+    `
+
     const [getHistory, {loading, data}] = useLazyQuery(msgQuery)
+
+    const  [clearHistory, clearResponse] = useMutation(clearMsg)
 
     useEffect(() => {
         if (data) {
@@ -70,6 +81,7 @@ export default function Chat(props: any) {
             appendMessage(msg => [...msg, data])
         })
 
+
         return () => {
             Socket.emit('leaveChat')
         }
@@ -77,7 +89,7 @@ export default function Chat(props: any) {
 
 
     const HandleSend = () => {
-        if (messageInput.current) {
+        if (messageInput.current && messageInput.current.value != '') {
             Socket.emit('send', {roomName: props.router.query.slug, text: messageInput.current.value})
             appendMessage(msg => {
                 let curMsg = messageInput.current?.value
@@ -85,6 +97,19 @@ export default function Chat(props: any) {
                 return [...msg, {user: props.user.id, message: curMsg}]
             })
         }
+    }
+
+    const toggleModal = () => {
+        setDisplayModal(dt => dt ? false : true)
+    }
+
+    const handleLeave = () => {
+
+    }
+
+    const handleClear = () => {
+        clearHistory()
+        getHistory()
     }
 
     return (
@@ -107,7 +132,7 @@ export default function Chat(props: any) {
                     </div>
                     <div className={styles.rightNav}>
 
-                        <span className={`material-icons`}>more_horiz</span>
+                        <span onClick={toggleModal} className={`unselectable material-icons`}>more_horiz</span>
                     </div>
                 </div>
             </div>
@@ -116,14 +141,14 @@ export default function Chat(props: any) {
                     {messages.map((msg: any, i: number) => (
                         <span key={i} className={msg.user != props.user.id ? styles.otherUser : ''}>{msg.message}</span>
                     ))}
-                    <p ref={bottomRef}/>
+                    <p className={styles.scrollTag} ref={bottomRef}/>
                 </div>
             </div>
             <div className={styles.inputContainer}>
             <div className={`${styles.chatBox} ${styles.flexBox}`}>
                 <div className={styles.boxLeft}>
                         <span className={`material-icons`}>chat_bubble_outline</span>
-                        <input onKeyDown={(e) => e.key === 'Enter' && HandleSend()} ref={messageInput} id="message" type="text" placeholder="Send a message..." required />
+                        <input autoComplete="off" type="text" onKeyDown={(e) => e.key === 'Enter' && HandleSend()} ref={messageInput} id="message" placeholder="Send a message..." required />
                     </div>
                     <div className={styles.boxRight}>
                         <div className={`${styles.addButton} material-icons`}>add</div>
@@ -131,7 +156,13 @@ export default function Chat(props: any) {
                 </div>
 
                 <span onClick={HandleSend} className={`material-icons ${styles.sendIcon}`}>send</span>
-            </div>
+            </div>          
+                <BottomModal options={{display: displayModal}}>
+                    <div className={styles.buttonList}>
+                        <button onClick={handleClear} className={styles.clearBtn}>Clear Chat</button>
+                        <button className={styles.leaveBtn}>Leave Chat</button>
+                    </div>
+                </BottomModal>
         </div>
     )
 };
