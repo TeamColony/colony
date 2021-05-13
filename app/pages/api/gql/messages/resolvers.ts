@@ -20,6 +20,21 @@ export default {
     Mutation: {
         clearMessageHistory(_: any, {id}: any) {
             return Messages.updateOne({_id: id}, {$set: {messages: []}}).then((status) => status.nModified == 1 ? true : false)
+        },
+        leaveChat(_: any, {id, chatid}: any) {
+            return Messages.updateOne({_id: chatid}, 
+                {$pull: {users: {$in: [Types.ObjectId(id)]}}}
+            ).then((status) => {
+                return status.nModified == 1 ? true : false
+            })
+        },
+        joinChat(_: any, {users}: any) {
+            return Messages.create({
+                users: users,
+                messages: []
+            }).then((data) => {
+                return data ? true : false
+            })
         }
     },
 

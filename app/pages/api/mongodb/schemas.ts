@@ -82,10 +82,10 @@ const individualMessage = new Schema({
 const messageSchema = new Schema({
     id: {
         type: Types.ObjectId,
-        required: true
+        required: false
     },
     users: {
-        type: Array,
+        type: [Types.ObjectId],
         required: true
     },
     messages: {
