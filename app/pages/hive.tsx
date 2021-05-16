@@ -22,7 +22,7 @@ export default function Settings(props: any) {
     }
     `;
 
-    const findUserRequests = gql `
+    const findUserRequests = gql`
     {
 
         findUserRequests(id: "${String(props.user.id)}") {
@@ -49,7 +49,7 @@ export default function Settings(props: any) {
 
     const [
         { loading: loading1, data: jobs },
-        { loading: loading2, data: requests}
+        { loading: loading2, data: requests }
     ] = queryMultiple()
 
     if (loading1 || loading2) {
@@ -57,6 +57,8 @@ export default function Settings(props: any) {
     }
 
     return (
+
+        console.log(jobs),
         <div className={styles.parent}>
 
             <div className={styles.bodyContent}>
@@ -74,43 +76,65 @@ export default function Settings(props: any) {
 
                 <div className={styles.jobsContainer}>
                     <div className={`${styles.jobsHeader} unselectable`}>
-                        <span className="material-icons">work_outline</span>
-                        <div style={{ fontWeight: 500 }}>Your Jobs</div>
+                        <div className={styles.leftJob}>
+                            <span className="material-icons">work_outline</span>
+                            <div style={{ fontWeight: 500 }}>Your Jobs</div>
+                        </div>
+
+                        <div className={styles.rightJob}>
+                             <span className={`material-icons ${styles.addButton}`}>add</span>
+                        </div>
                     </div>
-                      
-                    <div className={styles.jobScroll}>
-                        {jobs.findUserJobs.map((job: any) => (
-                            <div onClick={() => { Router.push(`/categories/`.concat(job.name)) }} className={styles.jobItem}>
-                                <img className={styles.jobImage} src={job.image} />
-                                <div>{job.name}</div>
+
+                    {jobs.findUserJobs.length != 0 ? (
+
+                        <div className={styles.jobScroll}>
+                            {jobs.findUserJobs.map((job: any) => (
+                                <div onClick={() => { Router.push(`/categories/`.concat(job.name)) }} className={styles.jobItem}>
+                                    <img className={styles.jobImage} src={job.image} />
+                                    <div>{job.name}</div>
+                                </div>
+                            ))}
+                        </div>
+
+                    ) : (
+                            <div className={styles.noJobs}>
+                                <span className="material-icons">info</span>
+                                <div>Oops... no jobs yet!</div>
                             </div>
-                        ))}
-                    </div>
+                        )}
+
+
                 </div>
-              
+
 
                 <div className={styles.jobsContainer}>
                     <div className={`${styles.jobsHeader} unselectable`}>
-                        <span className="material-icons">waving_hand</span>
-                        <div style={{ fontWeight: 500 }}>Requests</div>
+                        <div className={styles.leftJob}>
+                            <span className="material-icons">waving_hand</span>
+                            <div style={{ fontWeight: 500 }}>Requests</div>
+                        </div>
                     </div>
 
                 </div>
 
-                {requests.findUserRequests.map((request: any) => ( 
-                    <RequestCard request={request}/>
-                ))}
+                {requests.findUserRequests.length != 0 ? (
 
+                    <div >
+                        {requests.findUserRequests.map((request: any) => (
+                            <RequestCard request={request} />
+                        ))}
+                    </div>
+
+                ) : (
+                        <div className={styles.noRequests}>
+                            <span className="material-icons">info</span>
+                            <div>No requests received!</div>
+                        </div>
+                    )}
+
+                
             </div>
         </div>
     )
-}
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-    let userID = context.query.slug
-    return {
-        props: {
-
-        }
-    }
 }
