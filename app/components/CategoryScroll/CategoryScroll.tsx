@@ -30,8 +30,8 @@ export default function CategoryScroll() {
 
     return (
         <div className={styles.jobScroll}>
-            {data.findAllJobs.map((item: any) => (
-                <div onClick={() => { Router.push(`/categories/`.concat(item.name)) }} 
+            {data.findAllJobs.map((item: any, i:number) => (
+                <div key={i} onClick={() => { Router.push(`/categories/`.concat(item.name)) }} 
                    className={styles.jobItem}>
                     <img style={{ height: '75%' }} src={item.image} />
                     <div>{item.name}</div>

@@ -7,4 +7,6 @@ type jobs{
 
 type jobUser{
         user: [users]!
+        price: Float!
+        type: Int!
 }

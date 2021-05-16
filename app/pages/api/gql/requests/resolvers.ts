@@ -9,10 +9,22 @@ export default {
         },
     },
 
+    Mutation: {
+        createRequest(_: any, {input}: any) {
+            return Requests.create({
+                worker: input.worker,
+                job: input.job,
+                user: input.user,
+                request: input.request,
+                address: input.address,
+                time: input.time,
+                status: input.status
+            }).then((data) => data)
+        }
+    },
 
     requests: {
         worker(parent: any){
-            console.log(parent.worker);
             return Users.findOne({_id: parent.worker}).then(data => data);
         },
         job(parent: any){
@@ -20,7 +32,6 @@ export default {
         },
         user(parent: any){
             return Users.findOne({_id: parent.user}).then(data => data);
-        }
-        
+        }  
     },
 }

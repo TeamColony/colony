@@ -1,4 +1,5 @@
 import {Users} from '../../mongodb/schemas'
+import {Types} from 'mongoose'
 
 export default {
     Query: {
@@ -6,8 +7,8 @@ export default {
             return Users.findOne({"_id": id}).then(data => data);
         },
 
-        findNearWorkers() {
-            return Users.find({}).then(data => data)
+        findNearWorkers(_: any, {id}: any) {
+            return Users.aggregate([{ $match: { "_id": { $ne: Types.ObjectId(id) } }}]).then(data => data)
         },
 
         findUserMessages(_: any, {id}: any){

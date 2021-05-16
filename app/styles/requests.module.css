@@ -1,0 +1,279 @@
+.requestBody{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.requestTop{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.requestHeader{
+    display: flex;
+    margin-left: 30px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.requestWorker{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 40px;
+}
+
+.workerLeft{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.available{
+    display: flex;
+    align-items: center;
+    background-color: #65be57;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+}
+
+.workerMessage{
+    display: flex;
+    margin-top: 10px;
+    background-color:#8d86c9;
+    color: white;
+    padding: 12px 20px 10px 20px;
+    border-radius: 20px;
+}
+
+.workerMessage span:last-of-type{
+    margin-left: 10px;
+}
+
+.workerRight{
+    margin-top: 7px;
+    margin-left: 20px;
+}
+
+.requestBottom{
+    z-index: 1 !important;
+    background-color: #f9f9f9;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 35px 20px 35px;
+    border-radius: 2rem 2rem 0 0;
+}
+
+.requestDetails{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detailsLeft{
+    display: flex;
+    align-items: center;
+}
+
+.detailsLeft span{
+    margin-left: 20px;
+}
+
+.detailsRight{
+    font-weight: 700;
+    color: #777777;
+}
+
+.pfp{
+    height: auto;
+    width: 90px;
+    border-radius: 50%;
+}
+
+.datePicker input{
+    color: #5E5E5E;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    width: 100%;
+    font-size: 15px;
+}
+
+.datePicker input:focus{
+    border: none !important;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+}
+
+.datePicker div{
+    padding-top: 0px !important;
+    bottom: 36px !important;
+    left: -58px;
+
+    padding-right: 7px;
+}
+
+.timePicker input{
+    color: #5E5E5E;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    width: 100%;
+    font-size: 15px;
+}
+
+.timePicker input:focus{
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+}
+
+.timePicker div{
+    padding-top: 0px !important;
+    bottom: 36px !important;
+    right: -13px;
+    margin-left: 10px;
+
+    border-radius: 30px;
+}
+
+.timePicker td{
+    padding-right: 40px;
+}
+
+.timePicker span{
+    margin-right: -10px;
+}
+
+.jobPicture{
+    height: auto;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.requestBox{
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+
+    background-color: transparent;
+    
+    padding: 10px;
+    border: solid #B8B8B8;
+    
+    font-size: 15px;
+    font-family: inherit;
+    border-radius: 20px;
+}
+
+.inputBox{
+    display: flex;
+    border: solid #B8B8B8;
+    color: #5E5E5E;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.requestBox:focus-within{
+    border: solid #8d86c9;
+}
+
+.inputBox:focus-within{
+
+    border: solid #8d86c9;
+}
+
+.infoInput{
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    color: #5E5E5E;
+    margin-left: 10px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.infoInput:focus{
+    outline: none;
+}
+
+.requestBox textarea{
+    width: 100%;
+    display: flex;
+    background-color: transparent;
+    
+    padding: 15px;
+    border: none;
+    
+    font-size: 15px;
+    font-family: inherit;
+    border-radius: 20px;
+    resize: none;
+}
+
+.requestBox textarea:focus{
+    outline: none;
+}
+
+.requestTime{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.requestTime div:last-of-type{
+    margin-left: 10px;
+}
+
+.timeLeft{
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.timeLeft div:last-of-type{
+    margin-left: 10px;
+}
+
+.timeRight{
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.requestButton{
+    display: flex;
+    justify-content: center;
+    background-color: #a4a4a4;
+    align-items: center;
+    padding: 10px;
+}
+
+.requestButton span{
+    color: white;
+}
+
+.requestButton span:last-of-type{
+    margin-left: 15px;
+}

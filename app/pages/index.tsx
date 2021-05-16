@@ -13,7 +13,6 @@ import "leaflet/dist/leaflet.css";
 import WorkerCard from '../components/WorkerCard/WorkerCard';
 import MessageCard from '../components/MessageCard/MessageCard';
 import { User } from '../interfaces/index';
-
 import Loading from '../components/Loading';
 
 import { useQuery, gql } from '@apollo/client';
@@ -32,7 +31,6 @@ type Props = {
 }
 
 export default function IndexPage(props: Props) {
-
   const jobs = gql`
      {
        findAllJobs{
@@ -58,7 +56,7 @@ export default function IndexPage(props: Props) {
 
   const nearWorkers = gql`
       {
-        findNearWorkers{
+        findNearWorkers(id: "${String(props.user.id)}") {
             _id
             name    
             image
@@ -85,7 +83,7 @@ export default function IndexPage(props: Props) {
   }
 
   if (popularjobs && messages && workers) {
-    console.log(messages);
+    console.log(workers);
     return (
       <div className={styles.indexBody}>
         <div className={styles.mapParent}>

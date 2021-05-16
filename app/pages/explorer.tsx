@@ -1,3 +1,4 @@
+import React, { useState, useRef, useEffect } from 'react';
 import styles from '../styles/explorer.module.css';
 import CategoryScroll from '../components/CategoryScroll/CategoryScroll';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
@@ -5,36 +6,100 @@ import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 import QuickJobsCard from '../components/QjobsCard/quickJobs';
 import WorkerCard from '../components/WorkerCard/WorkerCard';
 import { useQuery, gql } from '@apollo/client';
+import RequestModal from '../components/RequestModal/RequestModal';
 
-export default function Explorer() {
+export default function Explorer(props: any) {
 
+    const node = React.createRef<HTMLInputElement>();
+
+    const [displayModal, setDisplayModal] = useState(false);
+    const [modalData, setModalData] = useState(false);
+
+    const toggleModal = (job: any) => {
+        setModalData(job);
+        setDisplayModal(dt => dt ? false : true)
+    }
+
+    const closeModal = () => {
+        setDisplayModal(dt => dt ? false : true)
+    }
+
+    const handleClickOutside = (e: any) => {
+        if (node?.current?.contains(e.target)) {
+            return;
+        }
+
+        setDisplayModal(false);
+    };
+
+    useEffect(() => {
+        if (displayModal) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [displayModal]);
 
     const nearWorkers = gql`
     {
-        findNearWorkers{
+        findNearWorkers(id: "${String(props.user.id)}") {
             _id
             name    
             image
             rating
         }
+      }
+    `;
+
+
+    const quickJobs = gql`
+    {
+            findQuickJobs(id: "${String(props.user.id)}") {
+            _id
+            image
+            name
+            workers{
+                price
+                user{
+                _id,
+                image,
+                rating
+                }
+            }
+                
+        }
     }
     `;
 
-    const {error, loading, data} = useQuery(nearWorkers);
+    const queryMultiple = () => {
+        const nearData = useQuery(nearWorkers);
+        const jobData = useQuery(quickJobs);
+        return [nearData, jobData];
+    }
 
-    if(error){return <div>{error}</div>}
-    if(loading){return <div>{loading}</div>}
+    const [
+        { loading: loading1, data: near },
+        { loading: loading2, data: quick }
+    ] = queryMultiple()
+
+    if (loading1 || loading2) {
+        return <div>loading</div>
+    }
 
     return (
         <div className={styles.parent}>
             <div className={styles.searchRow}>
                 <div className={styles.search}>
                     <span className="material-icons">search</span>
-                    <input placeholder="Search..." className={styles.searchInput}/>
+                    <input placeholder="Search..." className={styles.searchInput} />
                 </div>
             </div>
             <div className={styles.categoryRow}>
-                <CategoryScroll/>
+                <CategoryScroll />
             </div>
             <div className={styles.jobsRow}>
                 <div className={styles.sectionHeader}>
@@ -50,17 +115,13 @@ export default function Explorer() {
                         fixedWidth: "180px"
                     }}>
 
-                    <SplideSlide>
-                        <QuickJobsCard/>
-                    </SplideSlide>
-
-                    <SplideSlide>
-                        <QuickJobsCard/>
-                    </SplideSlide>
-
-                    <SplideSlide>
-                        <QuickJobsCard/>
-                    </SplideSlide>
+                    {quick.findQuickJobs.map((job: any, i: number) => (
+                        <SplideSlide key={i} className={`${i == 1 && styles.firstSplide}`}>
+                            <div onClick={() => toggleModal(job)}>
+                                <QuickJobsCard global={props} job={job} />
+                            </div>
+                        </SplideSlide>
+                    ))}
 
                 </Splide>
             </div>
@@ -69,9 +130,9 @@ export default function Explorer() {
                     <span className="material-icons">location_pin</span>
                     <h2>Near you</h2>
                 </div>
-                
 
-                    <Splide className={styles.splideComponent}
+
+                <Splide className={styles.splideComponent}
                     options={{
                         rewind: true,
                         gap: '2rem',
@@ -81,14 +142,20 @@ export default function Explorer() {
                         fixedWidth: "285px",
                     }}>
 
-                    {data.findNearWorkers.map((worker: any, i: number) => (
-                        <SplideSlide className={`${i == 1 && styles.firstSplide}`}>
-                        <WorkerCard worker={worker}></WorkerCard>
+                    {near.findNearWorkers.map((worker: any, i: number) => (
+                        <SplideSlide key={i} className={`${i == 1 && styles.firstSplide}`}>
+                            <WorkerCard worker={worker}></WorkerCard>
                         </SplideSlide>
                     ))}
-                    </Splide>
+                </Splide>
 
             </div>
+
+            <div ref={node}>
+                <RequestModal handler={closeModal} global={props} job={modalData}
+                    options={{ display: displayModal }} />
+            </div>
+
         </div>
     )
 }
