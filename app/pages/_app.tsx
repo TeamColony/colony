@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 export default function App(props: any) {
     const {Component, router} = props;
   
-    const standalone = ['/workers/[slug]', '/categories/[slug]', '/messages', '/chat/[slug]']
+    const standalone = ['/workers/[slug]', '/categories/[slug]', '/messages', '/chat/[slug]', '/request/[slug]']
     const [session, loading] = useSession();
     const [socketInstance, setSocketInstance]: any = useState(false);
 
@@ -43,12 +43,17 @@ export default function App(props: any) {
         }
     });
 
+    var formatter = new Intl.NumberFormat('en-GB', {
+        style: 'currency',
+        currency: 'GBP',
+    });
+
     return (
         <ApolloProvider client={client}>
             {session && socketInstance?
                 <Layout pathname={router.pathname} useNav={standalone.includes(router.pathname) ? false : true} user={session}>
                     <SocketCtx.Provider value={socketInstance}> 
-                        <Component router={router} user={session}/>
+                        <Component formatter={formatter} router={router} user={session}/>
                     </SocketCtx.Provider>
                 </Layout>
             : loading ? 

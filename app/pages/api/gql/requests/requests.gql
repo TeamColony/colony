@@ -4,7 +4,17 @@ type requests{
         job: jobs!,
         user: users!,
         request: String!,
-        postcode: String!,
+        address: String!,
+        time: String!,
+        status: Int!
+}
+
+input requestInput {
+        worker: ID!,
+        job: ID!,
+        user: ID!,
+        request: String!,
+        address: String!,
         time: String!,
         status: Int!
 }

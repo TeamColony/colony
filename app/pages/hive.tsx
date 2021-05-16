@@ -25,7 +25,7 @@ export default function Settings(props: any) {
     const findUserRequests = gql `
     {
 
-        findUserRequests(id: "6093aea3206e8613759b2bd9") {
+        findUserRequests(id: "${String(props.user.id)}") {
             user{
                 name,
                 image
@@ -34,7 +34,7 @@ export default function Settings(props: any) {
                 name,
                 image
             },
-            postcode,
+            address,
             request
                     
         }

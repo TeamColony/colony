@@ -32,40 +32,24 @@
 
 .userPfpList {
     display: flex;
-    position: relative;
+    align-content: center;
+    align-items: center;
     height: 2rem;
     padding-bottom: 1rem;
 }
 
 .userPfpList div {
-    position: absolute;
+    margin-left: 10px;
     left: 0;
 }
 
-.userPfpList div:nth-child(1) {
-    z-index: 100;
-}
-
-.userPfpList div:nth-child(2) {
-    left: 2rem;
-    z-index: 99;
-}
-
-.userPfpList div:nth-child(3) {
-    left: 4rem;
-    z-index: 98;
-}
-
-.userPfpList div:nth-child(3)::after {
-    height: 100%;
-    width: 2.5rem;
-    color: #958DD4;
-    margin-left: 0.5rem;
-    position: absolute;
-    top: 25%;
-    content: '+5';
+.star{
+    margin-left: 15px;
 }
 
 .pfp {
-    height: 2.5rem;
+    height: auto;
+    width: 2.5rem;
+    border-radius: 50%;
+    
 }

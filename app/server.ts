@@ -21,16 +21,19 @@ const Query = gql`
         findUserByID(id: String): users,
         user(id: String): messages,
         findOneJob(name: String): jobs,
-        findNearWorkers: [users],
+        findNearWorkers(id: String): [users],
         findUserJobs(id: String): [jobs],
         findFirstMessage(id: String): messages,
         findChatInfo(id: String): messages,
-        findUserRequests(id: String): [requests]
+        findUserRequests(id: String): [requests],
+        findQuickJobs(id: String): [jobs]
     },
+    
     type Mutation {
         clearMessageHistory(id: String): Boolean
         leaveChat(id: String, chatid: String): Boolean
         joinChat(users: [String]): Boolean
+        createRequest(input: requestInput!): requests
     }
 `
 

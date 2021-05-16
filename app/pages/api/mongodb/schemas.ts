@@ -40,8 +40,20 @@ export interface IJobs extends Document {
     id: Types.ObjectId,
     image: string,
     name: string,
-    workers: Array<Types.ObjectId>,
+    workers: Array<Object>,
 }
+
+/*
+const jobWorkers = new Schema({
+    message: {
+        type: String,
+        required: true
+    },
+    user: {
+        type: Types.ObjectId,
+        required: true
+    }
+})*/
 
 const jobSchema = new Schema({
     id: {
@@ -57,7 +69,7 @@ const jobSchema = new Schema({
         required: true
     },
     workers: {
-        type: Array,
+        type: Object,
         required: true
     },
 })
@@ -76,7 +88,7 @@ export interface IRequests extends Document {
 const requestSchema = new Schema({
     id: {
         type: Types.ObjectId,
-        required: true
+        required: false
     },
     worker: {
         type: Types.ObjectId,
@@ -94,7 +106,7 @@ const requestSchema = new Schema({
         type: String,
         required: true
     },
-    postcode: {
+    address: {
         type: String,
         required: true
     },

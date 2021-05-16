@@ -23,7 +23,7 @@ export default function RequestCard(props: any){
 
             <div className={styles.distance}>
                 <span className="material-icons">location_pin</span>
-                <span>{props.request.postcode}</span>
+                <span>{props.request.address}</span>
             </div>
 
             <div className={styles.requestBottom}>

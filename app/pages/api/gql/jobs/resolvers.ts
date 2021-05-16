@@ -6,29 +6,24 @@ export default {
         findAllJobs() {
             return Jobs.find({}).then(data => data)
         },
+
         findOneJob(_: any, {name}: any) {
             return Jobs.findOne({name: name}).then(data => data)
         },
+
         findUserJobs(_: any, {id}: any) {
-            return Jobs.find({workers:{$in:[Types.ObjectId(id)]}}).then(data => data);
+            return Jobs.find({workers: {$elemMatch: {user:Types.ObjectId(id)}}})
         },
-    },
 
-    jobs:{
-        workers(parent: any){
-
-            //todo: re-write this:
-            var ids = parent.workers.map(function(i:any) {
-                return i;
-              });
-
-            return ids;
-        }
+        findQuickJobs(_: any, {id}: any) {
+            return Jobs.aggregate([{ $match: { "workers": { $ne: {"user" : Types.ObjectId(id)} } }},
+             { $project:{ image: 1, name:1, workers: { $slice: ["$workers", 1] }}}]).then(data => data);
+        },
     },
 
     jobUser:{
         user(parent: any){
-                return Users.find({_id: parent}).then(data => data);
+                return Users.find({_id: parent.user}).then(data => data);
         }
     }
 }

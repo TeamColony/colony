@@ -1,21 +1,20 @@
 import styles from './quickjobs.module.css';
 
-export default function QuickJobsCard() {
+export default function QuickJobsCard(props: any) {
     return (
         <div className={styles.cardBody}>
             <div className={styles.header}>
-                <img src="/pizza.svg"/>
-                <div>Collection</div>
+                <img src={props.job.image} />
+                <div>{props.job.name}</div>
             </div>
             <div className={styles.priceContainer}>
-                <h2>£4.50 p/h</h2>
+                <h2>{props.global.formatter.format(props.job.workers[0].price)} p/h</h2>
             </div>
             <div className={styles.userPfpList}>
-                {[1,2,3].map((i, k) => (
-                    <div>
-                        <img key={k} className={styles.pfp} src="/profile_pics/stark.png"/>
-                    </div>
-                ))}
+                <img className={styles.pfp} src={props.job.workers[0].user[0].image} />
+                <img className={styles.star} src="/star.svg" />
+                <div className={styles.ratingText}>{props.job.workers[0].user[0].rating}</div>
+
             </div>
         </div>
     )
