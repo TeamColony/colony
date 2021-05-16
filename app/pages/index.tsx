@@ -123,9 +123,10 @@ export default function IndexPage(props: Props) {
           <MessageCard data={messages.findFirstMessage}></MessageCard>
 
         ) : (
-          <div className={styles.noMessages}>
-            <span>No new messages!</span>
-          </div>
+            <div className={styles.noMessages}>
+              <span className="material-icons">info</span>
+              <div>Uh oh... no new messages!</div>
+            </div>
           )}
 
         <div className={styles.nearHeader}>

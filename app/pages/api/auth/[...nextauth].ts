@@ -1,5 +1,7 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
+import Adapters, { TypeORMAccountModel, TypeORMSessionModel }  from "next-auth/adapters";
+import Models from "../../../models";
 
 export default NextAuth({
     providers: [
@@ -12,7 +14,14 @@ export default NextAuth({
     jwt : {
     	signingKey: process.env.G_JWT_SK
     },
-    database: "mongodb://127.0.0.1:27017/colony",
+    adapter: Adapters.TypeORM.Adapter(
+      "mongodb://127.0.0.1:27017/colony",
+       {
+        models: <any>{
+            User: Models.User,
+        },
+      }
+   ),
     callbacks: {
         async signIn(user, account) {
             return true
