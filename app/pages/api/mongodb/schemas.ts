@@ -41,6 +41,8 @@ export interface IJobs extends Document {
     image: string,
     name: string,
     workers: Array<Object>,
+    average: number,
+    colour: string
 }
 
 /*
@@ -70,6 +72,14 @@ const jobSchema = new Schema({
     },
     workers: {
         type: Object,
+        required: true
+    },
+    average: {
+        type: Number,
+        required: true
+    },
+    colour: {
+        type: String,
         required: true
     },
 })

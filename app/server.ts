@@ -26,7 +26,8 @@ const Query = gql`
         findFirstMessage(id: String): messages,
         findChatInfo(id: String): messages,
         findUserRequests(id: String): [requests],
-        findQuickJobs(id: String): [jobs]
+        findQuickJobs(id: String): [jobs],
+        findNewJobs(id: String): [jobs],
         findAllMessages(id: String): [messages]
     },
     
@@ -35,6 +36,7 @@ const Query = gql`
         leaveChat(id: String, chatid: String): Boolean
         joinChat(users: [String]): Boolean
         createRequest(input: requestInput!): requests
+        addJob(input: userInput!): Boolean
     }
 `
 
