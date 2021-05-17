@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from '../styles/messages.module.css';
 import messages from '../components/MessageCard/messagecard.module.css';
 import chat from '../styles/chat.module.css';
-import { io, Socket } from "socket.io-client";
 
 import { User } from '../interfaces/index';
 import { useQuery, gql } from '@apollo/client';
@@ -41,42 +40,6 @@ const variants = {
 
 
 function ChatScreen(props: any) {
-
-    /*
-
-    const [globalSocket, setGlobalSocket] = useState<Socket>();
-    const [message, setMessage] = useState('')
-    const [peerID, setPeerID] = useState('')
-
-    useEffect(() => {
-        const socket = io('http://localhost:5000')
-
-        setGlobalSocket(socket);
-
-
-        socket.on('connect', function () {
-            socket.emit('storeClientInfo', { customId:props.global.user.id });
-        });
-
-
-        socket.on("connect_error", (err) => {
-            alert(err.message)
-        });
-
-        socket.on("peerID", (peer) => {
-            setPeerID(peer);
-        });
-
-        socket.on('peerID', function () {
-            socket.emit('storeClientInfo', { customId:props.global.user.id });
-        });
-
-    }, [])
-
-    const sendMessage = () => {
-            console.log("meep");
-            globalSocket!.emit(message);
-    } */
 
     return (
         <div className={chat.chatGrid}>
@@ -121,30 +84,24 @@ function ChatScreen(props: any) {
 function MessageList(props: any) {
     const jobs = gql`
         {
-            findUserMessages(id: "${String(props.global.user.id)}") {
+            findAllMessages(id: "${props.global.user.id}") {
                 _id
-                messages{
-                    user{
-                        _id,
-                        name,
-                        image,
-                    }
+                users {
+                _id
+                name
+                image
                 }
-                
             }
         }
     `;
 
     const { loading, error, data } = useQuery(jobs);
-
     if(loading){
         return (<>Loading</>)
     }
 
-    console.log(props);
 
     return (
-        console.log(data),
         <div className={styles.messageBody}>
             <div className={styles.messageHeader}>
                 <div className={styles.leftHeader}>
@@ -158,18 +115,19 @@ function MessageList(props: any) {
                 </div>
             </div>
 
-            {data.findUserMessages.messages.map((message: any) => (
-                
-                <div onClick={() => props.func(1, message.user[0])} 
+            {data.findAllMessages.map((message: any) => {
+                return message.users.map((user: any) =>(
+                    <div onClick={() => props.global.router.push(`/chat/${message._id}`)} 
                     className={`${messages.messageCard} ${messages.noMessages} `}>
-                        <img className={messages.profilePicture} src={message.user[0].image!} />
-                        <span>{message.user[0].name}</span>
+                        <img className={messages.profilePicture} src={user.image} />
+                        <span>{user.name}</span>
                         <div className={messages.messageEnd}>
                             <span>0</span>
                             <span className={`material-icons ${messages.messageIcon}`}>chat</span>
                         </div>
                     </div>
-            ))}
+                ))
+            })}
         </div>
     )
 }
