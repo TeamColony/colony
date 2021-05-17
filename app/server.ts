@@ -28,7 +28,7 @@ const Query = gql`
         findUserRequests(id: String): [requests],
         findQuickJobs(id: String): [jobs]
         findAllMessages(id: String): [messages]
-        findAllPosMessages(id: String): Boolean
+        findAllPosMessages(id: String): [posMsg]
     },
     
     type Mutation {

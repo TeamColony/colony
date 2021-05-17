@@ -40,13 +40,19 @@ export default {
                 },
                 {
                     $project: {
-                        msgId: "$msg._id",
+                        id: '$_id',
                         name: "$name",
-                        num: {$size:"$msg"},
+                        image: "$image",
+                        num: {$size:"$msg"}
+                    }
+                },
+                {
+                    $match: {
+                        num: { $lt: 1 }
                     }
                 }
             ]).then((data) => {
-                console.log(data)
+                return data
             })
         },
 

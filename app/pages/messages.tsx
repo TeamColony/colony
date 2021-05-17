@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../styles/messages.module.css';
 import messages from '../components/MessageCard/messagecard.module.css';
 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql, useLazyQuery, useMutation } from '@apollo/client';
 
 export default function MessageList(props: any) {
     const jobs = gql`
@@ -19,7 +19,45 @@ export default function MessageList(props: any) {
         }
     `;
 
+    const messagesPos = gql`
+        {
+            findAllPosMessages(id: "${props.user.id}") {
+                _id
+                name
+                image
+            }
+        }
+    `
+
+    const messageUserMutation = gql`
+        mutation JoinChat($user: String) {
+            joinChat(users: ["${props.user.id}", $user]) {
+                _id
+            }
+        }
+    `
+
+
+    const [startMessage, startMessageResponse] = useMutation(messageUserMutation)
+
     const { loading, error, data } = useQuery(jobs);
+
+    const [getPosMsg, getPosMsgData] = useLazyQuery(messagesPos);
+
+    const startMsg = (id: String) => {
+        startMessage({variables: {user: id}})
+    }
+
+    useEffect(() => {
+        if (startMessageResponse.data) {
+            props.router.push(`/chat/${startMessageResponse.data.joinChat._id}`)
+        }
+    }, [startMessageResponse])
+
+    useEffect(() => {
+        console.log("rendering")
+        getPosMsg();
+    }, [])
 
     const [showNewUsers, setNewUsers] = useState(false)
 
@@ -27,9 +65,7 @@ export default function MessageList(props: any) {
         return (<>Loading</>)
     }
 
-    const staticUsers = [{image: "/back.svg", name: "test"}]
-
-    if (showNewUsers) {
+    if (showNewUsers && getPosMsgData.data) {
         return (
             <div className={styles.newParent}>
                 <div className={styles.newHeader}>
@@ -37,8 +73,8 @@ export default function MessageList(props: any) {
                     <span>New Message</span>
                 </div>
                 <div className={styles.list}>
-                    {staticUsers.map((user: any) => (
-                        <div onClick={() => props.global.router.push(`/chat/123`)} className={`${messages.messageCard} ${messages.noMessages} `}>
+                    {(getPosMsgData as any).data.findAllPosMessages.map((user: any) => (
+                        <div onClick={() => startMsg(user._id)} className={`${messages.messageCard} ${messages.noMessages} `}>
                                 <img className={messages.profilePicture} src={user.image} />
                                 <span>{user.name}</span>
                                 <div className={messages.messageEnd}>
@@ -62,14 +98,17 @@ export default function MessageList(props: any) {
                     <span className={styles.navTitle}>Messages</span>
                 </div>
                 <div className={styles.rightHeader}>
-                    <span onClick={() => setNewUsers(v => v ? false : true)} className={`material-icons 
+                    <span onClick={() => setNewUsers(v => {
+                        getPosMsg();
+                        return v ? false : true
+                    })} className={`material-icons 
                         ${styles.navIcon}`}>add</span>
                 </div>
             </div>
 
             {data.findAllMessages.map((message: any) => {
                 return message.users.map((user: any) =>(
-                    <div onClick={() => props.global.router.push(`/chat/${message._id}`)} 
+                    <div onClick={() => props.router.push(`/chat/${message._id}`)} 
                     className={`${messages.messageCard} ${messages.noMessages} `}>
                         <img className={messages.profilePicture} src={user.image} />
                         <span>{user.name}</span>
