@@ -20,6 +20,36 @@ export default {
             })
         },
 
+        findAllPosMessages(_:any, {id}: any) {
+            return Users.aggregate([
+                {
+                    $match: {
+                        "_id" : {$ne: Types.ObjectId(id)}
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'messages',
+                        let: {userId: "$_id"},
+                        pipeline: [
+                            {$match : { "$expr" : { $in: ["$$userId", "$users"]} }},
+                            {$match : { "$expr" : { $in: [Types.ObjectId(id), "$users"]} }}
+                        ],
+                        as: "msg"
+                    }
+                },
+                {
+                    $project: {
+                        msgId: "$msg._id",
+                        name: "$name",
+                        num: {$size:"$msg"},
+                    }
+                }
+            ]).then((data) => {
+                console.log(data)
+            })
+        },
+
         findChatInfo(_: any, {id}: any){
             return Messages.findOne({_id: id}).then(data => {
                 return data!;
@@ -51,7 +81,7 @@ export default {
         },
         async joinChat(_: any, {users}: any) {
             //note: index 1 - other user
-            let existing = await Messages.find({users: {$eq: users}})
+            let existing = await Messages.find({users: {$all: users}})
             if (existing.length > 0) {
                 return existing[0]
             } else {

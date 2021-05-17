@@ -49,7 +49,6 @@ export default function WorkerProfile(props: any) {
     const [startMessage, startMessageResponse] = useMutation(messageUserMutation)
 
     useEffect(() => {
-        console.log(startMessageResponse)
         if (startMessageResponse.data) {
             Router.push(`/chat/${startMessageResponse.data.joinChat._id}`)
         }
