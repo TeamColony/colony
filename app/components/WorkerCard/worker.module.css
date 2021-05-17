@@ -87,6 +87,8 @@
 }
 
 .profilePicture {
+    object-fit: cover;
+    width: 60px;
     height: 60px;
     margin-top: 5px;
     border-radius: 50%;

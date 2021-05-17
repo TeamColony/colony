@@ -16,9 +16,44 @@ export default {
         },
 
         findQuickJobs(_: any, {id}: any) {
-            return Jobs.aggregate([{ $match: { "workers": { $ne: {"user" : Types.ObjectId(id)} } }},
-             { $project:{ image: 1, name:1, workers: { $slice: ["$workers", 1] }}}]).then(data => data);
+             return Jobs.aggregate([{ $project: {
+                    image: 1,
+                    name: 1,
+                    workers: {$filter: {
+                        input: '$workers',
+                        as: 'item',
+                        cond: {$not: {$eq: ['$$item.user', Types.ObjectId(id)]}}
+                    }}
+                }}
+            ])
         },
+
+        findNewJobs(_: any, {id}: any) {    
+            return Jobs.find({"workers" : { "$not" : {"$elemMatch" : {"user" : Types.ObjectId(id)}}}});
+        },
+    },
+
+    Mutation: {
+        addJob(_: any, {input}: any) {
+            console.log(input);
+
+            return Jobs.updateOne(
+                { _id: Types.ObjectId(input.id) },
+                { $push: {
+                    workers: {
+                        user: Types.ObjectId(input.user),
+                        price: input.price,
+                        type: 0
+                    }
+                } 
+            }).then((data) => {
+                if(data.nModified = 1){
+                    return true;
+                } else{
+                    return false;
+                }
+            });
+        }
     },
 
     jobUser:{

@@ -5,7 +5,7 @@ import { GetServerSidePropsContext } from 'next';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useQuery, gql, useMutation } from '@apollo/client';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
-import Router, {useRouter} from 'next/router'
+import Router, { useRouter } from 'next/router'
 
 //Styles
 import styles from '../../styles/workerProfile.module.css';
@@ -28,7 +28,7 @@ export default function WorkerProfile(props: any) {
     }
  `;
 
-   const findUserJobs = gql`
+    const findUserJobs = gql`
    {
         findUserJobs(id: "${String(slug)}") {
             name
@@ -37,7 +37,7 @@ export default function WorkerProfile(props: any) {
    }
    `;
 
-   const messageUserMutation = gql`
+    const messageUserMutation = gql`
     mutation {
         joinChat(users: ["${props.user.id}", "${String(slug)}"]) {
             _id
@@ -77,7 +77,7 @@ export default function WorkerProfile(props: any) {
         console.log(jobs),
         <div className={styles.parent}>
             <div className={styles.headerContent}>
-                <BackButton/>
+                <BackButton />
                 <div className="unselectable">Worker Profile</div>
                 <div onClick={messageUser} className={styles.sendMsgContainer}>
                     <span className="material-icons">send</span>
@@ -101,14 +101,25 @@ export default function WorkerProfile(props: any) {
                         <span className="material-icons">work_outline</span>
                         <div style={{ fontWeight: 500 }}>Jobs Available</div>
                     </div>
-                    <div className={styles.jobScroll}>
-                        {jobs.findUserJobs.map((job: any) => (
-                            <div onClick={() => { Router.push(`/categories/`.concat(job.name)) }} className={styles.jobItem}>
-                                <img className={styles.jobImage} src={job.image} />
-                                <div>{job.name}</div>
+
+                    {jobs.findUserJobs.length != 0 ? (
+                        <div className={styles.jobScroll}>
+                            {jobs.findUserJobs.map((job: any) => (
+                                <div onClick={() => { Router.push(`/categories/`.concat(job.name)) }} className={styles.jobItem}>
+                                    <img className={styles.jobImage} src={job.image} />
+                                    <div>{job.name}</div>
+                                </div>
+                            ))}
+                        </div>
+
+                    ) : (
+                            <div className={styles.noJobs}>
+                                <span className="material-icons">info</span>
+                                <div>Oops... no jobs yet!</div>
                             </div>
-                        ))}
-                    </div>
+                        )}
+
+
                 </div>
                 <div className={styles.reviewsContainer}>
                     <div className={`${styles.jobsHeader} ${styles.reviewsHeader} unselectable`}>

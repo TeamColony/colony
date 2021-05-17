@@ -1,0 +1,112 @@
+.parent {
+    transition: 0.2s ease height;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 2px 11px 35px rgba(0, 0, 0, 0.25);
+    border-radius: 2rem 2rem 0 0;
+}
+
+
+.map{
+    display: flex;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.map > div{
+    z-index: 0;
+    height: 10rem;
+}
+
+.inputSection{
+    display: flex;
+}
+
+.inputSection div:first-of-type{
+    margin-right: 10px;
+}
+
+.jobPicture{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.requestBody{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+.requestBottom{
+    z-index: 1 !important;
+    background-color: #f9f9f9;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 29px 35px 20px 35px;
+    border-radius: 2rem 2rem 0 0;
+}
+
+.requestDetails{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detailsLeft{
+    display: flex;
+    align-items: center;
+}
+
+.detailsLeft span{
+    margin-left: 20px;
+}
+
+
+.inputBox{
+    display: flex;
+    color: #5E5E5E;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.inputBox:focus-within{
+
+    border: solid #8d86c9;
+}
+
+.infoInput{
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    color: #5E5E5E;
+    margin-left: 10px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.infoInput:focus{
+    outline: none;
+}
+
+.requestButton{
+    display: flex;
+    justify-content: center;
+    background-color: #a4a4a4;
+    align-items: center;
+    padding: 10px;
+}
+
+.requestButton span{
+    color: white;
+}
+
+.requestButton span:last-of-type{
+    margin-left: 15px;
+}
