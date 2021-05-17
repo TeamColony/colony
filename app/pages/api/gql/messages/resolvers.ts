@@ -1,4 +1,4 @@
-import {Messages, Users} from '../../mongodb/schemas'
+import {IMessages, IUsers, Messages, Users} from '../../mongodb/schemas'
 import {Types} from 'mongoose'
 
 export default {
@@ -9,6 +9,16 @@ export default {
                 return data;
             });
         }, 
+
+        findAllMessages(_: any, {id}: any) {
+            return Messages.find({users: {$in: [Types.ObjectId(id)]}}).then(data => {
+                data = data.filter((item: IMessages) => {
+                    item.users.splice(item.users.indexOf(id), 1)
+                    return item
+                })
+                return data
+            })
+        },
 
         findChatInfo(_: any, {id}: any){
             return Messages.findOne({_id: id}).then(data => {

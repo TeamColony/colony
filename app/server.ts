@@ -9,7 +9,7 @@ import { Server, Socket } from "socket.io";
 import {connections} from './sockets/connections'
 import {authentication} from './sockets/auth'
 
-const dev = true;
+const dev = false;
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const port = 3000;
@@ -27,7 +27,8 @@ const Query = gql`
         findChatInfo(id: String): messages,
         findUserRequests(id: String): [requests],
         findQuickJobs(id: String): [jobs],
-        findNewJobs(id: String): [jobs]
+        findNewJobs(id: String): [jobs],
+        findAllMessages(id: String): [messages]
     },
     
     type Mutation {
