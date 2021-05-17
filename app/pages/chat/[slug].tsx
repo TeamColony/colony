@@ -65,7 +65,8 @@ export default function Chat(props: any) {
 
 
     useEffect(() => {
-        bottomRef.current?.scrollIntoView({ behavior: "smooth" })
+        const scroll = bottomRef.current!.scrollHeight - bottomRef.current!.clientHeight;
+        bottomRef.current!.scrollTo({top: scroll, behavior: 'smooth'});
     }, [messages])
 
 
@@ -145,12 +146,11 @@ export default function Chat(props: any) {
                     </div>
                 </div>
             </div>
-            <div className={styles.messageContainer}>
+            <div ref={bottomRef} className={styles.messageContainer}>
                 <div id="messageContainer" className={styles.messages}>
                     {messages.map((msg: any, i: number) => (
                         <span key={i} className={msg.user != props.user.id ? styles.otherUser : ''}>{msg.message}</span>
                     ))}
-                    <p className={styles.scrollTag} ref={bottomRef}/>
                 </div>
             </div>
             <div className={styles.inputContainer}>
