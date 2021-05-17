@@ -58,7 +58,7 @@ export default function Explorer(props: any) {
 
     const quickJobs = gql`
     {
-            findQuickJobs(id: "${String(props.user.id)}") {
+        findQuickJobs(id: "${String(props.user.id)}") {
             _id
             image
             name

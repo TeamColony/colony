@@ -1,9 +1,8 @@
 import React from 'react';
 
 //Packages
-import { GetServerSidePropsContext } from 'next';
+import Router from 'next/router';
 import { useQuery, gql } from '@apollo/client';
-import Router from 'next/router'
 
 //Styles
 import styles from '../styles/hive.module.css';
@@ -81,7 +80,7 @@ export default function Settings(props: any) {
                             <div style={{ fontWeight: 500 }}>Your Jobs</div>
                         </div>
 
-                        <div className={styles.rightJob}>
+                        <div onClick={() => { Router.push(`/newjob`) }} className={styles.rightJob}>
                              <span className={`material-icons ${styles.addButton}`}>add</span>
                         </div>
                     </div>

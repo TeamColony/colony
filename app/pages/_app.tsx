@@ -13,7 +13,9 @@ import { useEffect } from 'react'
 export default function App(props: any) {
     const {Component, router} = props;
   
-    const standalone = ['/workers/[slug]', '/categories/[slug]', '/messages', '/chat/[slug]', '/request/[slug]']
+    const standalone = ['/workers/[slug]', '/categories/[slug]', '/messages',
+               '/chat/[slug]', '/request/[slug]', '/newjob']
+               
     const [session, loading] = useSession();
     const [socketInstance, setSocketInstance]: any = useState(false);
 
