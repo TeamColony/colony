@@ -1,5 +1,5 @@
 //Packages
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GetServerSidePropsContext } from 'next';
 
 import { Splide, SplideSlide } from '@splidejs/react-splide';
@@ -39,17 +39,26 @@ export default function WorkerProfile(props: any) {
 
     const messageUserMutation = gql`
     mutation {
-        joinChat(users: ["${props.user.id}", "${String(slug)}"])
+        joinChat(users: ["${props.user.id}", "${String(slug)}"]) {
+            _id
+        }
     }
    `
 
+
     const [startMessage, startMessageResponse] = useMutation(messageUserMutation)
 
-    const queryMultiple = () => {
-        const userData = useQuery(getUser);
-        const jobData = useQuery(findUserJobs);
-        return [userData, jobData];
-    }
+    useEffect(() => {
+        if (startMessageResponse.data) {
+            Router.push(`/chat/${startMessageResponse.data.joinChat._id}`)
+        }
+    }, [startMessageResponse])
+
+   const queryMultiple = () => {
+      const userData = useQuery(getUser);
+      const jobData = useQuery(findUserJobs);
+      return [userData, jobData];
+   }
 
     const [
         { loading: loading1, data: user },

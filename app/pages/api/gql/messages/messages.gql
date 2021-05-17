@@ -8,3 +8,10 @@ type imsg {
         message: String!,
         user: String!
 }
+
+type posMsg {
+        _id: ID!
+        name: String!,
+        image: String!,
+        num: Int!
+}

@@ -9,7 +9,7 @@ import { Server, Socket } from "socket.io";
 import {connections} from './sockets/connections'
 import {authentication} from './sockets/auth'
 
-const dev = false;
+const dev = true;
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const port = 3000;
@@ -29,12 +29,13 @@ const Query = gql`
         findQuickJobs(id: String): [jobs],
         findNewJobs(id: String): [jobs],
         findAllMessages(id: String): [messages]
+        findAllPosMessages(id: String): [posMsg]
     },
     
     type Mutation {
         clearMessageHistory(id: String): Boolean
         leaveChat(id: String, chatid: String): Boolean
-        joinChat(users: [String]): Boolean
+        joinChat(users: [String]): messages
         createRequest(input: requestInput!): requests
         addJob(input: userInput!): Boolean
     }
