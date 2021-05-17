@@ -54,7 +54,7 @@ export default {
                 users: users,
                 messages: []
             }).then((data) => {
-                return data ? true : false
+                return data ? data : false
             })
         }
     },
