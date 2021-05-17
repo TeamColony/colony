@@ -18,7 +18,7 @@ export default NextAuth({
       "mongodb://127.0.0.1:27017/colony",
        {
         models: <any>{
-            User: Models.User,
+            User: Models.users,
         },
       }
    ),
