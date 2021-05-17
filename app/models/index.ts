@@ -1,8 +1,8 @@
-import User, { UserSchema } from "./User"
+import u, { UserSchema } from "./User"
 
 export default {
-  User: {
-    model: User,
+  users: {
+    model: u,
     schema: UserSchema,
   },
 }
