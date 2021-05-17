@@ -49,13 +49,19 @@ export default {
             })
 
         },
-        joinChat(_: any, {users}: any) {
-            return Messages.create({
-                users: users,
-                messages: []
-            }).then((data) => {
-                return data ? data : false
-            })
+        async joinChat(_: any, {users}: any) {
+            //note: index 1 - other user
+            let existing = await Messages.find({users: {$eq: users}})
+            if (existing.length > 0) {
+                return existing[0]
+            } else {
+                return Messages.create({
+                    users: users,
+                    messages: []
+                }).then((data) => {
+                    return data ? data : false
+                })
+            }
         }
     },
 
