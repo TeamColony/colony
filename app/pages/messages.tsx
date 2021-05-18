@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/messages.module.css';
-import messages from '../components/MessageCard/messagecard.module.css';
+
+import MessageCard from '../components/MessageCard/MessageCard'
 
 import { useQuery, gql, useLazyQuery, useMutation } from '@apollo/client';
 
@@ -92,14 +93,13 @@ export default function MessageList(props: any) {
                 </div>
                 <div className={styles.list}>
                     {(getPosMsgData as any).data.findAllPosMessages.map((user: any) => (
-                        <div onClick={() => startMsg(user._id)} className={`${messages.messageCard} ${messages.noMessages} `}>
-                            <img className={messages.profilePicture} src={user.image} />
-                            <span>{user.name}</span>
-                            <div className={messages.messageEnd}>
-                                <span>0</span>
-                                <span className={`material-icons ${messages.messageIcon}`}>chat</span>
-                            </div>
-                        </div>
+                        <MessageCard options={{
+                            data: user,
+                            callBack: {
+                                arg: user._id,
+                                function: startMsg
+                            }
+                        }}/>
                     ))}
                 </div>
             </div>
@@ -126,15 +126,12 @@ export default function MessageList(props: any) {
 
             {data.findAllMessages.length > 0 ? data.findAllMessages.map((message: any) => {
                 return message.users.map((user: any) =>(
-                    <div onClick={() => props.router.push(`/chat/${message._id}`)} 
-                    className={`${messages.messageCard} ${messages.noMessages} `}>
-                        <img className={messages.profilePicture} src={user.image} />
-                        <span>{user.name}</span>
-                        <div className={messages.messageEnd}>
-                            <span>0</span>
-                            <span className={`material-icons ${messages.messageIcon}`}>chat</span>
-                        </div>
-                    </div>
+                    <MessageCard options={{
+                        data: user,
+                        navigation: {
+                            to: message._id
+                        }
+                    }}/>
                 ))
             }) : (
                 <div className={styles.noMessages}>

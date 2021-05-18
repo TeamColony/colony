@@ -123,7 +123,12 @@ export default function IndexPage(props: Props) {
 
 
         {messages.findFirstMessage != null ? (
-          <MessageCard data={messages.findFirstMessage}></MessageCard>
+          <MessageCard options={{
+            data: messages.findFirstMessage.users[0],
+            navigation: {
+              to: messages.findFirstMessage._id
+            }
+          }}/>
 
         ) : (
             <div className={styles.noMessages}>
