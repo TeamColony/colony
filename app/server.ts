@@ -29,12 +29,13 @@ const Query = gql`
         findQuickJobs(id: String): [jobs],
         findNewJobs(id: String): [jobs],
         findAllMessages(id: String): [messages]
+        findAllPosMessages(id: String): [posMsg]
     },
     
     type Mutation {
         clearMessageHistory(id: String): Boolean
         leaveChat(id: String, chatid: String): Boolean
-        joinChat(users: [String]): Boolean
+        joinChat(users: [String]): messages
         createRequest(input: requestInput!): requests
         addJob(input: userInput!): Boolean
     }

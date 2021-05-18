@@ -13,6 +13,7 @@ interface userData {
 
 export default function Chat(props: any) {
     const bottomRef = useRef<HTMLDivElement>(null);
+    const toggleRef = useRef<HTMLSpanElement>(null);
 
     const messageInput = useRef<HTMLInputElement>(null);
     const Socket = useContext(SocketCtx)
@@ -90,10 +91,10 @@ export default function Chat(props: any) {
             appendMessage(msg => [...msg, data])
         })
 
-
         return () => {
             Socket.emit('leaveChat')
         }
+
     }, [])
 
 
@@ -107,6 +108,8 @@ export default function Chat(props: any) {
             })
         }
     }
+
+
 
     const toggleModal = () => {
         setDisplayModal(dt => dt ? false : true)
@@ -142,7 +145,7 @@ export default function Chat(props: any) {
                     </div>
                     <div className={styles.rightNav}>
 
-                        <span onClick={toggleModal} className={`unselectable material-icons`}>more_horiz</span>
+                        <span ref={toggleRef} onClick={toggleModal} className={`unselectable material-icons`}>more_horiz</span>
                     </div>
                 </div>
             </div>
@@ -166,7 +169,7 @@ export default function Chat(props: any) {
 
                 <span onClick={HandleSend} className={`material-icons ${styles.sendIcon}`}>send</span>
             </div>          
-                <BottomModal options={{display: displayModal}}>
+                <BottomModal options={{initialDisplay: displayModal, toggle: setDisplayModal, toggles: [toggleRef]}}>
                     <div className={styles.buttonList}>
                         <button onClick={handleClear} className={styles.clearBtn}>Clear Chat</button>
                         <button onClick={handleLeave} className={styles.leaveBtn}>Leave Chat</button>
