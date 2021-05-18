@@ -8,15 +8,19 @@ type jobs{
 }
 
 type jobUser{
-        user: [users]!
-        price: Float!
+        user: [users]!,
+        price: Float!,
+        type: Int!,
+}
+
+input userInput {
+        id: ID!,
+        user: ID!,
+        price: Float!,
         type: Int!
 }
 
-
-input userInput {
-        id: ID!
+input jobInput {
+        id: ID!,
         user: ID!
-        price: Float!
-        type: Int!
 }
