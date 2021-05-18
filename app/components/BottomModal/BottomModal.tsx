@@ -6,11 +6,12 @@ export default function bottomModal(props: any) {
     const modalRef = React.useRef<HTMLDivElement>(null);
 
     const listener = (e: MouseEvent) => {
+        const path = (e as any).path || (e.composedPath && e.composedPath())
         props.options.toggle((prev: boolean) => {
             if (props.options.toggles.filter((el: any) => el.current == e.target).length > 0) {
                 return true
             }
-            if ((e as any).path.includes(modalRef.current)) {
+            if (path.includes(modalRef.current)) {
                 return true
             } else {
                 return false

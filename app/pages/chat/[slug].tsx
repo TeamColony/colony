@@ -58,6 +58,12 @@ export default function Chat(props: any) {
     const [leaveChat, leaveResponse] = useMutation(leaveChatMutation)
 
     useEffect(() => {
+        if (leaveResponse.data && leaveResponse.data.leaveChat) {
+            Router.push('/')
+        }
+    }, [leaveResponse])
+
+    useEffect(() => {
         if (data) {
             appendMessage(data.findChatInfo.messages);
             setUserData(data!.findChatInfo.users.filter((item:any) => props.user.id !== item._id));
@@ -117,7 +123,6 @@ export default function Chat(props: any) {
 
     const handleLeave = () => {
         leaveChat()
-        Router.push('/')
     }
 
     const handleClear = () => {
