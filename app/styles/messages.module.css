@@ -56,6 +56,7 @@
 }
 
 .newParent {
+    overflow: hidden;
     height: 100%;
     width: 100%;
     display: flex;
@@ -91,4 +92,21 @@
 
 .messageBody {
     height: 100%;
+}
+
+.searchContainer {
+    padding: 1rem;
+}
+
+.searchField {
+    box-sizing: border-box;
+    padding-left: 1rem;
+    width: 100%;
+    border-radius: 0.4rem;
+    height: 2.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.346);
+}
+
+.list {
+    overflow-y: scroll;
 }

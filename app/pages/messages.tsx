@@ -5,7 +5,22 @@ import messages from '../components/MessageCard/messagecard.module.css';
 
 import { useQuery, gql, useLazyQuery, useMutation } from '@apollo/client';
 
+interface user {
+    _id: string,
+    name: string,
+    image: string
+}
+
+
 export default function MessageList(props: any) {
+    const searchAble = (data: Array<user>, query: string) => {
+        const inputRegex = RegExp(query.split('').join('.*'))
+        var results = data.filter((key) => {
+            return inputRegex.exec(key.name.toLowerCase())
+        })
+        console.log(results)
+        // setResults(results)
+    }
     const jobs = gql`
         {
             findAllMessages(id: "${props.user.id}") {
@@ -42,10 +57,6 @@ export default function MessageList(props: any) {
 
     const { loading, error, data } = useQuery(jobs);
 
-    useEffect(() => {
-        console.log(data)
-    }, [data])
-
     const [getPosMsg, getPosMsgData] = useLazyQuery(messagesPos);
 
     const startMsg = (id: String) => {
@@ -62,6 +73,7 @@ export default function MessageList(props: any) {
         getPosMsg();
     }, [])
 
+
     const [showNewUsers, setNewUsers] = useState(false)
 
     if(loading){
@@ -75,15 +87,18 @@ export default function MessageList(props: any) {
                     <span onClick={() => setNewUsers(false)} className={`${styles.backBtnNew} material-icons`}>arrow_back_ios_new</span>
                     <span>New Message</span>
                 </div>
+                <div className={styles.searchContainer}>
+                    <input onChange={(e) => searchAble((getPosMsgData as any).data.findAllPosMessages, e.target.value.toLowerCase()) } className={styles.searchField} placeholder="search"/>
+                </div>
                 <div className={styles.list}>
                     {(getPosMsgData as any).data.findAllPosMessages.map((user: any) => (
                         <div onClick={() => startMsg(user._id)} className={`${messages.messageCard} ${messages.noMessages} `}>
-                                <img className={messages.profilePicture} src={user.image} />
-                                <span>{user.name}</span>
-                                <div className={messages.messageEnd}>
-                                    <span>0</span>
-                                    <span className={`material-icons ${messages.messageIcon}`}>chat</span>
-                                </div>
+                            <img className={messages.profilePicture} src={user.image} />
+                            <span>{user.name}</span>
+                            <div className={messages.messageEnd}>
+                                <span>0</span>
+                                <span className={`material-icons ${messages.messageIcon}`}>chat</span>
+                            </div>
                         </div>
                     ))}
                 </div>
