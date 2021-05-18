@@ -42,6 +42,10 @@ export default function MessageList(props: any) {
 
     const { loading, error, data } = useQuery(jobs);
 
+    useEffect(() => {
+        console.log(data)
+    }, [data])
+
     const [getPosMsg, getPosMsgData] = useLazyQuery(messagesPos);
 
     const startMsg = (id: String) => {
@@ -55,7 +59,6 @@ export default function MessageList(props: any) {
     }, [startMessageResponse])
 
     useEffect(() => {
-        console.log("rendering")
         getPosMsg();
     }, [])
 
@@ -106,7 +109,7 @@ export default function MessageList(props: any) {
                 </div>
             </div>
 
-            {data.findAllMessages.map((message: any) => {
+            {data.findAllMessages.length > 0 ? data.findAllMessages.map((message: any) => {
                 return message.users.map((user: any) =>(
                     <div onClick={() => props.router.push(`/chat/${message._id}`)} 
                     className={`${messages.messageCard} ${messages.noMessages} `}>
@@ -118,7 +121,11 @@ export default function MessageList(props: any) {
                         </div>
                     </div>
                 ))
-            })}
+            }) : (
+                <div className={styles.noMessages}>
+                    <img src="/noMsg.svg"/>
+                </div>
+            )}
         </div>
     )
 }
