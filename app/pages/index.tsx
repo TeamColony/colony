@@ -1,5 +1,5 @@
 //Packages
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Router from 'next/router';
 import dynamic from 'next/dynamic'
@@ -15,7 +15,7 @@ import MessageCard from '../components/MessageCard/MessageCard';
 import { User } from '../interfaces/index';
 import Loading from '../components/Loading';
 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql, useLazyQuery } from '@apollo/client';
 const LeafletMap = dynamic(() => import("../components/Map"), { ssr: false });
 
 export type job = {
@@ -71,18 +71,22 @@ export default function IndexPage(props: Props) {
 
   const queryMultiple = () => {
     const jobData = useQuery(jobs);
-    const messageData = useQuery(oneMessage);
     const workerData = useQuery(nearWorkers);
-    return [jobData, messageData, workerData];
+    return [jobData, workerData];
   }
+
+  const [getMessage, messages] = useLazyQuery(oneMessage)
+
+  useEffect(() => {
+    getMessage()
+  }, [])
 
   const [
     { loading: loading1, data: popularjobs },
-    { loading: loading2, data: messages },
     { loading: loading3, data: workers }
   ] = queryMultiple()
 
-  if (loading1 || loading2 || loading3) {
+  if (loading1 || loading3) {
     return <Loading />
   }
 
@@ -122,15 +126,14 @@ export default function IndexPage(props: Props) {
 
 
 
-        {messages.findFirstMessage != null ? (
-          <MessageCard options={{
-            data: messages.findFirstMessage.users[0],
-            navigation: {
-              to: messages.findFirstMessage._id
-            }
-          }}/>
-
-        ) : (
+        {messages.data && messages.data.findFirstMessage ? (
+            <MessageCard options={{
+              data: messages.data.findFirstMessage.users[0],
+              navigation: {
+                to: messages.data.findFirstMessage._id
+              }
+            }}/>
+          ) : (
             <div className={styles.noMessages}>
               <span className="material-icons">info</span>
               <div>Uh oh... no new messages!</div>
