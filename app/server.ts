@@ -9,7 +9,7 @@ import { Server, Socket } from "socket.io";
 import {connections} from './sockets/connections'
 import {authentication} from './sockets/auth'
 
-const dev = false;
+const dev = true;
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const port = 3000;
@@ -21,7 +21,7 @@ const Query = gql`
         findUserByID(id: String): users,
         user(id: String): messages,
         findOneJob(name: String): jobs,
-        findNearWorkers(id: String): [users],
+        findNearWorkers(id: String): [nearWorkers],
         findUserJobs(id: String): [jobs],
         findFirstMessage(id: String): messages,
         findChatInfo(id: String): messages,

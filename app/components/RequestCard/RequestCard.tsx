@@ -2,6 +2,10 @@ import React from 'react';
 import styles from './request.module.css';
 
 export default function RequestCard(props: any){
+    if(props.request == null){
+        return (<></>)
+    }
+
     return(
         <div className={styles.requestCard}>
             <div className={styles.requestHeader}>

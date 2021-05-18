@@ -7,6 +7,7 @@ import QuickJobsCard from '../components/QjobsCard/quickJobs';
 import WorkerCard from '../components/WorkerCard/WorkerCard';
 import { useQuery, gql } from '@apollo/client';
 import RequestModal from '../components/RequestModal/RequestModal';
+import Loading from '../components/Loading';
 
 export default function Explorer(props: any) {
 
@@ -47,14 +48,17 @@ export default function Explorer(props: any) {
     const nearWorkers = gql`
     {
         findNearWorkers(id: "${String(props.user.id)}") {
-            _id
-            name    
-            image
-            rating
+            _id,
+            name,    
+            image,
+            rating,
+            jobs{
+                name,
+                image
+            }
         }
       }
     `;
-
 
     const quickJobs = gql`
     {
@@ -87,10 +91,11 @@ export default function Explorer(props: any) {
     ] = queryMultiple()
 
     if (loading1 || loading2) {
-        return <div>loading</div>
+        return <Loading/>
     }
 
     return (
+        console.log(near),
         <div className={styles.parent}>
             <div className={styles.searchRow}>
                 <div className={styles.search}>

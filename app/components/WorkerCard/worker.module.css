@@ -2,6 +2,7 @@
     align-self: center;
     min-height: auto; 
     padding: 1rem 1.5rem 1rem 1.5rem;
+    height: 160px;
 }
 
 .myChallenge {
@@ -26,6 +27,17 @@
 
 .jobSection{
     margin-bottom: 8px;
+}
+
+.noJobs{
+    display: flex;
+    margin-top: 30px;
+    align-items: center;
+    color: #5E5E5E;
+}
+
+.noJobs div{
+    margin-left: 10px;
 }
 
 .publisher {

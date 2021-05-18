@@ -7,3 +7,16 @@ type users{
         updatedAt: String!,
         rating: Float!,
 }
+
+type nearWorkers{
+        _id: ID!,
+        name: String!,    
+        image: String!,
+        rating: String!,
+        jobs: [workerJobs]!
+}
+
+type workerJobs{
+        name: String!
+        image: String!
+}

@@ -40,9 +40,12 @@
 
 .profilePicture{
     height: 60px;
+    width: 60px;
     margin-left: -5px;
     margin-bottom: 5px;
     margin-top: 5px;
+
+    object-fit: cover;
     border-radius: 50%;
 }
 

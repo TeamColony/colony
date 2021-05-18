@@ -9,8 +9,9 @@ import styles from '../styles/hive.module.css';
 
 //Components
 import RequestCard from '../components/RequestCard/RequestCard';
+import Loading from '../components/Loading';
 
-export default function Settings(props: any) {
+export default function Hive(props: any) {
 
     const findUserJobs = gql`
     {
@@ -52,13 +53,15 @@ export default function Settings(props: any) {
     ] = queryMultiple()
 
     if (loading1 || loading2) {
-        return <div>loading</div>
+        return <Loading />
     }
 
     return (
-
-        console.log(jobs),
+        console.log("meep"),
+        console.log(props),
+        console.log("hello" + jobs),
         <div className={styles.parent}>
+            
 
             <div className={styles.bodyContent}>
                 <div className={styles.profileInfoContainer}>

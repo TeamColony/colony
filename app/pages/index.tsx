@@ -57,10 +57,14 @@ export default function IndexPage(props: Props) {
   const nearWorkers = gql`
       {
         findNearWorkers(id: "${String(props.user.id)}") {
-            _id
-            name    
-            image
-            rating
+            _id,
+            name,    
+            image,
+            rating,
+            jobs{
+                name,
+                image
+            }
         }
       }
   `;
