@@ -45,8 +45,6 @@ export default function JobModal(props: any) {
         if (priceInput.current != null &&
             priceInput.current.value != ""){
 
-
-
             add({
                 variables: {
                     "input": {

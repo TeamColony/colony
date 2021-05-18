@@ -96,7 +96,6 @@
 
 .jobScroll {
     padding-left: 20px;
-    padding-top: 10px;
     left: 0;
     width: 100%;
     display: flex;
@@ -107,8 +106,8 @@
 }
 
 .jobScroll div {
-    border-radius: 50%;
-    margin-bottom: 10px;
+    border-radius: 20px;
+    margin-bottom: 5px;
     flex: 0 0 auto;
 }
 
@@ -116,6 +115,7 @@
     display: flex;
     flex-direction: column;
     height: auto;
+    padding: 10px 5px 5px 5px;
     width: 5rem;
     align-items: center;
     margin-right: 0.8rem;
@@ -199,6 +199,96 @@
     font-size: 17px;
     line-height: 24px;
     color: #838383;
+}
+
+
+.inputBox{
+    display: flex;
+    color: #5E5E5E;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.inputBox:focus-within{
+
+    border: solid #8d86c9;
+}
+
+.infoInput{
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    color: #5E5E5E;
+    margin-left: 10px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.infoInput:focus{
+    outline: none;
+}
+
+.inputSection{
+    display: flex;
+}
+
+.inputSection div:last-of-type{
+    margin-left: 10px;
+}
+
+.jobDetails{
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 30px;
+    border: solid #8d86c9;
+}
+
+.detailsHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.headerLeft{
+    display: flex;
+    align-items: center;
+}
+
+.headerLeft img{
+    width: 50px;
+    height: 50px;
+}
+
+.headerLeft span{
+    margin-left: 15px;
+    font-size: 16px;
+    color: #5E5E5E;
+}
+
+.headerRight{
+    display: flex;
+    align-items: center;
+    background-color: #ef8080;
+    padding: 10px 14px 10px 14px;
+    color: white;
+    border-radius: 10px;
+}
+
+.headerRight div{
+    margin-left: 10px;
+}
+
+.headerRight div{
+    font-size: 15px;
+}
+
+.selectedJob{
+    background-color: #dfdfdf;
+    color: #7b7b7b;
 }
 
 @media only screen and (max-width: 560px) {

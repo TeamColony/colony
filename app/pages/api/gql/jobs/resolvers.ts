@@ -53,6 +53,19 @@ export default {
                     return false;
                 }
             });
+        },
+        removeJob(_: any, {input}: any){
+            return Jobs.updateOne(
+                { '_id': Types.ObjectId(input.id) }, 
+                { $pull: { workers: { user: input.user } } },
+                { multi: true }
+            ).then((data) => {
+                if(data.nModified = 1){
+                    return true;
+                } else{
+                    return false;
+                }
+            });
         }
     },
 

@@ -38,6 +38,7 @@ const Query = gql`
         joinChat(users: [String]): messages
         createRequest(input: requestInput!): requests
         addJob(input: userInput!): Boolean
+        removeJob(input: jobInput!): Boolean
     }
 `
 

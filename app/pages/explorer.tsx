@@ -91,7 +91,7 @@ export default function Explorer(props: any) {
     ] = queryMultiple()
 
     if (loading1 || loading2) {
-        return <Loading/>
+        return <Loading />
     }
 
     return (
@@ -111,6 +111,7 @@ export default function Explorer(props: any) {
                     <span className="material-icons">timelapse</span>
                     <h2>Quick Jobs</h2>
                 </div>
+
                 <Splide className={styles.splideComponent}
                     options={{
                         rewind: true,
@@ -121,11 +122,18 @@ export default function Explorer(props: any) {
                     }}>
 
                     {quick.findQuickJobs.map((job: any, i: number) => (
-                        <SplideSlide key={i} className={`${i == 1 && styles.firstSplide}`}>
-                            <div onClick={() => toggleModal(job)}>
-                                <QuickJobsCard global={props} job={job} />
-                            </div>
-                        </SplideSlide>
+                        <>
+                            {job.workers[0] != null ?
+                                (
+                                    <SplideSlide key={i} className={`${i == 1 && styles.firstSplide}`}>
+                                        <div onClick={() => toggleModal(job)}>
+                                            <QuickJobsCard global={props} job={job} />
+                                        </div>
+                                    </SplideSlide>
+                                ) : (null)
+                            }
+                        </>
+
                     ))}
 
                 </Splide>
@@ -148,6 +156,7 @@ export default function Explorer(props: any) {
                     }}>
 
                     {near.findNearWorkers.map((worker: any, i: number) => (
+
                         <SplideSlide key={i} className={`${i == 1 && styles.firstSplide}`}>
                             <WorkerCard worker={worker}></WorkerCard>
                         </SplideSlide>

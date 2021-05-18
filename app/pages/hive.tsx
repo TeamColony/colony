@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
 //Packages
 import Router from 'next/router';
@@ -41,10 +41,42 @@ export default function Hive(props: any) {
     }
     `
 
+    const priceInput = useRef<HTMLInputElement>(null);
+    const [colour, setColour] = useState("#B8B8B8");
+    const [item, setItem] = useState(null);
+
+
+    const changeType = (event: any) => {
+        //todo: Do something
+    }
+
+    const onChange = (e: any) => {
+        const re = /^[0-9\b.]+$/;
+        console.log(e.target.value.length);
+        if (e.target.value.length < 6) { }
+
+        if (e.target.value === '' || re.test(e.target.value)
+            && e.target.value.length < 6) {
+            setColour("#B8B8B8")
+        } else {
+            setColour("#FF8888")
+        }
+    }
+
+
     const queryMultiple = () => {
         const jobData = useQuery(findUserJobs);
         const requestData = useQuery(findUserRequests);
         return [jobData, requestData];
+    }
+
+    const selectJob = (key: any) => {
+        console.log(key);
+        setItem(key);
+    }
+
+    const deleteJob = () => {
+        
     }
 
     const [
@@ -57,11 +89,8 @@ export default function Hive(props: any) {
     }
 
     return (
-        console.log("meep"),
-        console.log(props),
-        console.log("hello" + jobs),
         <div className={styles.parent}>
-            
+
 
             <div className={styles.bodyContent}>
                 <div className={styles.profileInfoContainer}>
@@ -84,18 +113,18 @@ export default function Hive(props: any) {
                         </div>
 
                         <div onClick={() => { Router.push(`/newjob`) }} className={styles.rightJob}>
-                             <span className={`material-icons ${styles.addButton}`}>add</span>
+                            <span className={`material-icons ${styles.addButton}`}>add</span>
                         </div>
                     </div>
 
                     {jobs.findUserJobs.length != 0 ? (
 
                         <div className={styles.jobScroll}>
-                            {jobs.findUserJobs.map((job: any) => (
-                                <div onClick={() => { Router.push(`/categories/`.concat(job.name)) }} className={styles.jobItem}>
-                                    <img className={styles.jobImage} src={job.image} />
-                                    <div>{job.name}</div>
-                                </div>
+                            {jobs.findUserJobs.map((job: any, i: number) => (
+                                    <div onClick={() => selectJob(i)} className={`${styles.jobItem}  ${item === i && styles.selectedJob}`}>
+                                        <img className={styles.jobImage} src={job.image} />
+                                        <div>{job.name}</div>
+                                    </div>
                             ))}
                         </div>
 
@@ -106,6 +135,37 @@ export default function Hive(props: any) {
                             </div>
                         )}
 
+
+                    {item != null ? (
+
+                        <div className={styles.jobDetails}>
+                            <div className={styles.detailsHeader}>
+                                <div className={styles.headerLeft}>
+                                    <img src={jobs.findUserJobs[item!].image}></img>
+                                    <span>{jobs.findUserJobs[item!].name}</span>
+                                </div>
+                                <div className={styles.headerRight}>
+
+                                    <span className={`material-icons`}>delete</span>
+                                    <div>Delete</div>
+                                </div>
+                            </div>
+
+                            <div className={styles.inputSection}>
+                                <div className={styles.inputBox} style={{ border: `solid ${colour}` }}>
+                                    <span className={`${styles.unselectable} material-icons`}>payments</span>
+                                    <input ref={priceInput} autoComplete="off" id="price" onChange={onChange} className={styles.infoInput} prefix="£" placeholder="Price..."></input>
+                                </div>
+
+                                <div className={styles.inputBox} style={{ border: `solid #B8B8B8` }}>
+                                    <span className={`${styles.unselectable} material-icons`}>category</span>
+                                    <input autoComplete="on" id="address" className={styles.infoInput} placeholder="Type"></input>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                            <></>
+                        )}
 
                 </div>
 
@@ -135,7 +195,7 @@ export default function Hive(props: any) {
                         </div>
                     )}
 
-                
+
             </div>
         </div>
     )
