@@ -38,6 +38,35 @@
     font-size: 25px !important;
 }
 
+
+.noMessages2{
+    padding: 15px;
+    display: flex;
+
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 13px;
+
+    justify-content: center;
+
+    background: rgba(172, 172, 172, 0.17);
+    border: 1px solid rgba(0, 0, 0, 0.28);
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+
+.noMessages2 span{
+    color: #969696;
+    margin-right: 10px;
+}
+
+.noMessages2 div{
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 24px;
+    color: #838383;
+}
+
 .profilePicture{
     height: 60px;
     width: 60px;

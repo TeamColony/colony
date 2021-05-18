@@ -87,6 +87,7 @@ export default function IndexPage(props: Props) {
   }
 
   if (popularjobs && messages && workers) {
+    console.log(messages.findFirstMessage);
      return (
       <div className={styles.indexBody}>
         <div className={styles.mapParent}>
@@ -139,22 +140,36 @@ export default function IndexPage(props: Props) {
           </div>
         </div>
 
-        <Splide className={styles.splideComponent}
-          options={{
-            rewind: true,
-            gap: '2rem',
-            pagination: false,
-            autoHeight: true,
-            padding: "60px",
-            fixedWidth: "285px",
-          }}>
+        {workers.findNearWorkers != null ? (
+                <div>
+                   <Splide className={styles.splideComponent}
+                      options={{
+                        rewind: true,
+                        gap: '2rem',
+                        pagination: false,
+                        autoHeight: true,
+                        padding: "60px",
+                        fixedWidth: "285px",
+                      }}>
 
-          {workers.findNearWorkers.map((worker: any, i: number) => (
-            <SplideSlide key={i} className={`${i == 1 && styles.firstSplide}`}>
-              <WorkerCard worker={worker}></WorkerCard>
-            </SplideSlide>
-          ))}
-        </Splide>
+                      {workers.findNearWorkers.map((worker: any, i: number) => (
+                        <SplideSlide key={i} className={`${i == 1 && styles.firstSplide}`}>
+                          <WorkerCard worker={worker}></WorkerCard>
+                        </SplideSlide>
+                      ))}
+                    </Splide>
+                </div>
+
+              ) :
+                (
+                  <div className={styles.noMessages}>
+                    <span className="material-icons">info</span>
+                    <div>No jobs available right now!</div>
+                  </div>
+              )
+          }
+
+      
       </div>
     )
   }
