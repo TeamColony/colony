@@ -91,7 +91,6 @@ export default function IndexPage(props: Props) {
   }
 
   if (popularjobs && messages && workers) {
-    console.log(messages.findFirstMessage);
      return (
       <div className={styles.indexBody}>
         <div className={styles.mapParent}>
@@ -111,9 +110,7 @@ export default function IndexPage(props: Props) {
             </div>
           </div>
           <LeafletMap />
-
         </div>
-
 
         <div className={styles.messageHeader}>
           <div className={styles.headerLeft}>

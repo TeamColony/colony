@@ -32,8 +32,9 @@ export const connections = (Socket: userExtention) => {
     })
 
     Socket.on('send', (data) => {
-        Messages.updateOne({_id: data.roomName}, {$push: {messages : { message: data.text, user: (Socket.whoami as whoami)._id }} }).then((status) => {
+        Messages.updateOne({_id: data.roomName}, {$push: {messages : { message: data.text, user: (Socket.whoami as whoami)._id, id: data.id }} }).then((status) => {
             if (status.nModified == 1) {
+                Socket.emit('success', {"id" : data.id})
                 Socket.to(data.roomName).emit('message', {user: (Socket.whoami as whoami)._id, message: data.text})
             } else {
                 Socket.emit('failure', {"issue" : "Failed to deliver message."})
