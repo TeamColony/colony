@@ -12,7 +12,18 @@ export default {
         },
 
         findUserJobs(_: any, {id}: any) {
-            return Jobs.find({workers: {$elemMatch: {user:Types.ObjectId(id)}}})
+            return Jobs.aggregate([
+                {$match: {'workers.user': Types.ObjectId(id)}},
+                { $project: {
+                    image: 1,
+                    name: 1,
+                    workers: {$filter: {
+                        input: '$workers',
+                        as: 'item',
+                        cond: {$eq: ['$$item.user', Types.ObjectId(id)]}
+                    }}
+                }}
+            ])
         },
 
         findQuickJobs(_: any, {id}: any) {
@@ -57,8 +68,7 @@ export default {
         removeJob(_: any, {input}: any){
             return Jobs.updateOne(
                 { '_id': Types.ObjectId(input.id) }, 
-                { $pull: { workers: { user: input.user } } },
-                { multi: true }
+                { $pull: { workers: { user: Types.ObjectId(input.user) } } }
             ).then((data) => {
                 if(data.nModified = 1){
                     return true;

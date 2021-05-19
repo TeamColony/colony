@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import Router from 'next/router';
 import styles from './jobModal.module.css';
 import { gql, useMutation } from '@apollo/client';
 import dynamic from 'next/dynamic'
@@ -55,6 +56,8 @@ export default function JobModal(props: any) {
                     }
                 }
             }); //todo: change to jobType
+
+            Router.push('/hive');
         }
 
         props.handler();

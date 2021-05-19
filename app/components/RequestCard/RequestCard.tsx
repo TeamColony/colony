@@ -32,11 +32,11 @@ export default function RequestCard(props: any){
 
             <div className={styles.requestBottom}>
                 <div className={styles.leftBottom}>
-                    <div>
+                    <div className={styles.thumbsUp}>
                         <span className="material-icons">thumb_up</span>
                     </div>
 
-                    <div>
+                    <div className={styles.thumbsDown}>
                         <span className="material-icons">thumb_down</span>
                     </div>
                 </div>
