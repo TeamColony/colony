@@ -88,15 +88,37 @@
 }
 
 
-.leftBottom div:first-of-type{
+.thumbsUp{
     background-color: #8FD7BD;
+    transition:all 0.2s ease;
+    width: 30px;
+    height: 30px;
+    
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
 }
 
+.thumbsUp:hover{
+    background: #81ceb2;
+    border: solid #6eb198;
+    box-shadow: 2px 2px #8787877b;
+}
 
-.leftBottom div:last-of-type{
+.thumbsDown{
     margin-left: 10px;
+
+    width: 30px;
+    height: 30px;
     background-color: #EFAAAA;
-    color: #C37474;
+    transition:all 0.2s ease;
+}
+
+.thumbsDown:hover{
+    background: #df9191;
+    border: solid #ca7d7d;
+    box-shadow: 2px 2px #8787877b;
 }
 
 .leftBottom div{
@@ -117,7 +139,7 @@
 }
 
 .rightBottom img{
-    height: auto;
+    height: 50px;
     width: 50px;
     border-radius: 50%;
 }
