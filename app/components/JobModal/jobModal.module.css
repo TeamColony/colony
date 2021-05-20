@@ -9,6 +9,41 @@
     border-radius: 2rem 2rem 0 0;
 }
 
+.optionMenu{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 50px;
+    margin-bottom: 140px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 2px 5px 10px #88888875;
+    display: flex;
+    flex-direction: column;
+}
+
+.menuBody{
+    display: flex;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    align-items: center;
+}
+
+.menuBody:nth-child(2){
+    margin-top: 17px;
+    margin-bottom: 5px;
+}
+
+.menuBody:last-child{
+    margin-bottom: 10px;
+}
+
+.menuName{
+    margin-left: 10px;
+}
+
 
 .map{
     display: flex;
@@ -74,10 +109,25 @@
     color: #5E5E5E;
     padding: 10px;
     border-radius: 20px;
+
+    width: 100%;
 }
 
 .inputBox:focus-within{
+    border: solid #8d86c9;
+}
 
+
+.typeBox{
+    display: flex;
+    color: #5E5E5E;
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.typeBox:focus-within{
     border: solid #8d86c9;
 }
 
