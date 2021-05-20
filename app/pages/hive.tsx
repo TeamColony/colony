@@ -202,7 +202,6 @@ export default function Hive(props: any) {
                     </div>
 
                     {jobs.findUserJobs.length != 0 ? (
-
                         <div className={styles.jobScroll}>
                             {jobs.findUserJobs.map((job: any, i: number) => (
                                 <div onClick={() => selectJob(i)} className={`${styles.jobItem}  ${item === i && styles.selectedJob}`}>
@@ -271,7 +270,7 @@ export default function Hive(props: any) {
                 {requests.findUserRequests.length != 0 ? (
                     <div>
                         {requests.findUserRequests[0] != null ? (
-                            <div >
+                            <div>
                                 {requests.findUserRequests.map((request: any, key: Number) => (
                                     <RequestCard key={key} request={request} />
                                 ))}

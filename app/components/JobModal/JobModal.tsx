@@ -9,8 +9,24 @@ const LeafletMap = dynamic(() => import("../../components/Map"), { ssr: false })
 
 export default function JobModal(props: any) {
 
-    const [jobType, setType] = useState("");
+    let typeOptions = [
+        {
+            name: 'Hourly',
+            icon: 'schedule'
+        },
+        {
+            name: 'Daily',
+            icon: 'light_mode'
+        },
+        {
+            name: 'Monthly',
+            icon: 'date_range'
+        }
+    ]
+
+    const [jobType, setType] = useState("Hourly");
     const [colour, setColour] = useState("#B8B8B8");
+    const [options, setOptions] = useState(false);
 
     const priceInput = useRef<HTMLInputElement>(null);
 
@@ -21,12 +37,6 @@ export default function JobModal(props: any) {
     `
 
     const [add] = useMutation(addJobMutation);
-
-    //todo: Change this based on type select data
-
-    const changeType = (event: any) => {
-        setType(event.toDate())
-    }
 
     const onChange = (e: any) => {
         const re = /^[0-9\b.]+$/;
@@ -85,15 +95,28 @@ export default function JobModal(props: any) {
                         <LeafletMap />
                     </div>
 
+                    {options ? (
+
+                        <div className={styles.optionMenu}>
+                        {typeOptions.map((item, number) =>(
+                            <div onClick={()=> {setOptions(false); setType(item.name)}} className={styles.menuBody}>
+                                <span className={`${styles.unselectable} material-icons`}>{item.icon}</span>
+                                <span className={styles.menuName}>{item.name}</span>
+                            </div>
+                        ))}
+                        </div>
+                    ): (null)}
+
+
                     <div className={styles.inputSection}>
                         <div className={styles.inputBox} style={{border: `solid ${colour}`}}>
                             <span className={`${styles.unselectable} material-icons`}>payments</span>
                             <input ref={priceInput} autoComplete="off" id="price" onChange={onChange} className={styles.infoInput} prefix="£" placeholder="Price..."></input>
                         </div>
 
-                        <div className={styles.inputBox} style={{border: `solid #B8B8B8`}}>
+                        <div onClick={()=> setOptions(!options)} className={styles.typeBox} style={{border: `solid #B8B8B8`}}>
                             <span className={`${styles.unselectable} material-icons`}>category</span>
-                            <input autoComplete="on" id="address" className={styles.infoInput} placeholder="Type"></input>
+                            <span id="address" className={styles.infoInput}>{jobType}</span>
                         </div>
                     </div>
 
