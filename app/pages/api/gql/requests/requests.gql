@@ -18,3 +18,8 @@ input requestInput {
         time: String!,
         status: Int!
 }
+
+input updateRequest{
+        id: ID!,
+        status: Int!
+}

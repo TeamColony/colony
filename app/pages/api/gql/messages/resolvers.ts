@@ -86,6 +86,7 @@ export default {
 
         },
         async joinChat(_: any, {users}: any) {
+            console.log(users);
             //note: index 1 - other user
             let existing = await Messages.find({users: {$all: users}})
             if (existing.length > 0) {

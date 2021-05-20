@@ -39,7 +39,6 @@ export default function Explorer(props: any) {
         } else {
             document.removeEventListener("mousedown", handleClickOutside);
         }
-
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
@@ -156,7 +155,6 @@ export default function Explorer(props: any) {
                     }}>
 
                     {near.findNearWorkers.map((worker: any, i: number) => (
-
                         <SplideSlide key={i} className={`${i == 1 && styles.firstSplide}`}>
                             <WorkerCard worker={worker}></WorkerCard>
                         </SplideSlide>

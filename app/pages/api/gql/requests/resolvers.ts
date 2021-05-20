@@ -1,4 +1,5 @@
 import {Requests, Users, Jobs} from '../../mongodb/schemas'
+import {Types} from 'mongoose'
 
 export default {
     Query: {
@@ -7,6 +8,15 @@ export default {
                 return data!;
             })
         },
+
+        findOngoing(_: any, {id}: any){
+            
+            return Requests.find( { $and: [
+                { $or: [ { user: Types.ObjectId(id) }, { worker: Types.ObjectId(id) } ] },
+                { status: 1 }
+            ]} ).sort({_id:-1}).limit(1).then((data) => data);
+
+        }
     },
 
     Mutation: {
@@ -20,6 +30,22 @@ export default {
                 time: input.time,
                 status: input.status
             }).then((data) => data)
+        },
+
+        updateStatus(_: any, {input}: any){
+            
+            console.log(Types.ObjectId(input.id))
+
+            return Requests.updateOne(
+                { _id : Types.ObjectId(input.id) },
+                { $set: { status : input.status } }
+            ).then((data) => {
+                if(data.nModified = 1){
+                    return true;
+                } else{
+                    return false;
+                }
+            });
         }
     },
 

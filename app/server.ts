@@ -28,8 +28,9 @@ const Query = gql`
         findUserRequests(id: String): [requests],
         findQuickJobs(id: String): [jobs],
         findNewJobs(id: String): [jobs],
-        findAllMessages(id: String): [messages]
-        findAllPosMessages(id: String): [posMsg]
+        findAllMessages(id: String): [messages],
+        findAllPosMessages(id: String): [posMsg],
+        findOngoing(id: String): [requests]
     },
     
     type Mutation {
@@ -39,6 +40,7 @@ const Query = gql`
         createRequest(input: requestInput!): requests
         addJob(input: userInput!): Boolean
         removeJob(input: jobInput!): Boolean
+        updateStatus(input: updateRequest!): Boolean
     }
 `
 

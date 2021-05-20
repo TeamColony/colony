@@ -1,0 +1,96 @@
+.onBody{
+    z-index: 999;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    background: white;
+    width: 100%;
+    border-radius: 50px 50px 0px 0px;
+    box-shadow: 0px -0px 20px 2px #88888858;
+    
+}
+
+.onHeader{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-left: 30px;
+    margin-right: 50px;
+    margin-top: 20px;
+    
+}
+
+.headerRight{
+    color: #786fc5;
+}
+
+.onHeader div{
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.separator{
+    height: 2px;
+    margin-right: 30px;
+    margin-left: 30px;
+
+    justify-content: center;
+    display: flex;
+    margin-top: 16px;
+    background: rgba(104, 104, 104, 0.152);
+}
+
+.onMain{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    margin-right: 20px;
+}
+
+.onMain div{
+    display: flex;
+    align-items: center;
+}
+
+.jobImage{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.bodyRight{
+    margin-right: 5px;
+    border: solid #8d86c9;
+    color: rgb(97, 97, 97);
+
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+
+.bodyRight span{
+    font-size: 20px;
+}
+
+.bodyRight div{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.messageText{
+    margin-bottom: 2px;
+}
+
+.messageText{
+    margin-left: 10px;
+}
+
+.bodyLeft span{
+    margin-left: 10px;
+}
+
+

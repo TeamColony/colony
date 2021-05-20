@@ -18,6 +18,7 @@ export default function App(props: any) {
                
     const [session, loading] = useSession();
     const [socketInstance, setSocketInstance]: any = useState(false);
+    const [displayOngo, setDisplayOngo] = useState('true');
 
     useEffect(() => {
         if(!socketInstance && session){
@@ -53,9 +54,11 @@ export default function App(props: any) {
     return (
         <ApolloProvider client={client}>
             {session && socketInstance?
-                <Layout pathname={router.pathname} useNav={standalone.includes(router.pathname) ? false : true} user={session}>
+                <Layout pathname={router.pathname} ongo={displayOngo} 
+                    setOngo={setDisplayOngo} useNav={standalone.includes(router.pathname) ? false : true} user={session}>
                     <SocketCtx.Provider value={socketInstance}> 
-                        <Component formatter={formatter} router={router} user={session}/>
+                        <Component formatter={formatter} router={router} 
+                            setOngo={setDisplayOngo} ongo={displayOngo} user={session}/>
                     </SocketCtx.Provider>
                 </Layout>
             : loading ? 
