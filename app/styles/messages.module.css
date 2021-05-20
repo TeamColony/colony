@@ -110,3 +110,7 @@
 .list {
     overflow-y: scroll;
 }
+
+.msgContainer {
+    display: flex;
+}

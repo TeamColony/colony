@@ -208,10 +208,30 @@ const userSchema = new Schema({
     },
 })
 
+export interface IReviews extends Document {
+    user: Types.ObjectId,
+    comment: string,
+    rating: number
+}
+
+const reviewSchema = new Schema({
+    user: {
+        type: Types.ObjectId,
+        required: true
+    },
+    comment: {
+        type: String,
+        required: true
+    },
+    rating: {
+        type: Number,
+        required: true
+    }
+})
+
 export const Jobs: Model<IJobs> = models['jobs'] || model('jobs', jobSchema);
 export const Messages: Model<IMessages> = models['messages'] || model('messages', messageSchema);
 export const Users: Model<IUsers> = models['users'] || model('users', userSchema);
 export const Sessions: Model<ISessions> = models['sessions'] || model('sessions', sessionSchema);
 export const Requests: Model<IRequests> = models['requests'] || model('requests', requestSchema);
-
-
+export const Reviews: Model<IReviews> = models['reviews'] || model('reviews', reviewSchema)
