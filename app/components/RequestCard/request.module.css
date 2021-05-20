@@ -4,14 +4,24 @@
     justify-content: flex-start;
 
     background-color: transparent;
-
-    border: solid #8d86c9 3px;
     border-radius: 30px;
     padding: 15px 20px 20px 20px;
 
     margin-top: 30px;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.upStatus{
+    background-color: #88d1b7;
+    transition:all 0.2s ease;
+    width: 30px;
+    height: 30px;
+    
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .requestHeader{
@@ -54,7 +64,6 @@
 .separator{
   display: flex;
   align-self: flex-start !important;
-  border-top: 2px solid #9e98d0;
   border-radius: 5px;
 
   margin-left: 0;
@@ -88,15 +97,37 @@
 }
 
 
-.leftBottom div:first-of-type{
+.thumbsUp{
     background-color: #8FD7BD;
+    transition:all 0.2s ease;
+    width: 30px;
+    height: 30px;
+    
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
 }
 
+.thumbsUp:hover{
+    background: #81ceb2;
+    border: solid #6eb198;
+    box-shadow: 2px 2px #8787877b;
+}
 
-.leftBottom div:last-of-type{
+.thumbsDown{
     margin-left: 10px;
+
+    width: 30px;
+    height: 30px;
     background-color: #EFAAAA;
-    color: #C37474;
+    transition:all 0.2s ease;
+}
+
+.thumbsDown:hover{
+    background: #df9191;
+    border: solid #ca7d7d;
+    box-shadow: 2px 2px #8787877b;
 }
 
 .leftBottom div{
@@ -117,8 +148,8 @@
 }
 
 .rightBottom img{
-    height: auto;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     border-radius: 50%;
 }
 

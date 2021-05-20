@@ -32,6 +32,7 @@ const Query = gql`
         findAllPosMessages(id: String): [posMsg]
         findReviewsForProfile(id: String): [review]
         canUserReview(id: String, worker: String): Boolean
+        findOngoing(id: String): [requests]
     },
     
     type Mutation {
@@ -42,6 +43,7 @@ const Query = gql`
         addJob(input: userInput!): Boolean
         removeJob(input: jobInput!): Boolean
         createReviewForWorker(data: reviewInput!): Boolean
+        updateStatus(input: updateRequest!): Boolean
     }
 `
 
