@@ -197,12 +197,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: auto;
 }
 
 .sendMsgContainer span {
     font-size: 1.6rem;
     margin-right: 0 !important;
+}
+
+.right {
+    display: flex;
+    margin-left: auto;
 }
 
 @media only screen and (max-width: 560px) {
@@ -213,4 +217,85 @@
     .jobScroll::-webkit-scrollbar { 
         display: none;  /* Safari and Chrome */
     }
+}
+
+
+/* modal stuff */
+
+.modalPfp {
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    margin-left: 2rem;
+    margin-right: 1rem;
+}
+
+.modalHeading {
+    color: #777777;
+    display: flex;
+    align-items: center;
+}
+
+.modalGrid {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 0.2fr 0.7fr 0.1fr;
+}
+
+.inputRow {
+    padding: 1rem;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.modalInput {
+    display: grid;
+    grid-template-rows: 0.7fr 0.2fr;
+}
+
+.modalInput span {
+    margin-bottom: 0.3rem;
+}
+
+.modalComment {
+    border: 2px solid grey;
+    border-radius: 20px;
+    padding: 1rem;
+    height: 100%;
+}
+
+.modalStars {
+    border-radius: 20px;
+    border: 2px solid grey;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalStars span {
+    color: #B2B2B2;
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+.modalStars span:last-child {
+    margin-right: 0;
+}
+
+.submitReview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: #A4A4A4;
+}
+
+.submitReview span:last-child {
+    margin-left: 0.5rem;
+}
+
+.noReviews {
+    margin-top: 1.5rem;
 }

@@ -1,35 +1,34 @@
 import styles from './review.module.css'
 
 type Props = {
+    picture?: string
     name?: string
+    comment?: string
     rating?: number
-    stars?: number
 }
 
-const ReviewCard = (props: Props) => {
-
+const ReviewCard = ({options}: {options: Props}) => {
+    console.log(options.picture)
     return (
         <div className={`${styles.reviewParent}`}>
             <div className={styles.profileInfoContainer}>
-                <img className={styles.profilePicture} src="../profile_pics/stark.png" />
+                <img className={styles.profilePicture} src={options.picture} />
                 <div className={styles.profileText}>
-                    <div className={styles.profileName}>Liam Debell</div>
+                    <div className={styles.profileName}>{options.name}</div>
                 </div>
             </div>
 
             <div>
                 <div className={styles.reviewRow}>
                     <div className={styles.reviewDetails}>
-                        Clide was able to collect my medicine
-                        right on time before my meal!
+                        {options.comment}
                     </div>
-                    
                 </div>
 
                 <div className={styles.starContainer}>
-                        {[1,2,3,4,5].map(() => (
-                                 <img className={styles.star} src="/star.svg"/>
-                        ))}
+                    {Array(options.rating).fill(0).map(() => (
+                        <img className={styles.star} src="/star.svg"/>
+                    ))}
                 </div>
             </div>
         </div>

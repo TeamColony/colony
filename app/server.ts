@@ -31,6 +31,7 @@ const Query = gql`
         findAllMessages(id: String): [messages]
         findAllPosMessages(id: String): [posMsg]
         findReviewsForProfile(id: String): [review]
+        canUserReview(id: String, worker: String): Boolean
     },
     
     type Mutation {
@@ -40,7 +41,7 @@ const Query = gql`
         createRequest(input: requestInput!): requests
         addJob(input: userInput!): Boolean
         removeJob(input: jobInput!): Boolean
-        createReviewForWorker(data: String): Boolean
+        createReviewForWorker(data: reviewInput!): Boolean
     }
 `
 
@@ -58,7 +59,6 @@ const requestResolvers = require("./pages/api/gql/requests/resolvers.ts").defaul
 
 const reviewTypeDef = gql(readFileSync(path.resolve('pages/api/gql/reviews/reviews.gql'), 'utf8'))
 const reviewResolvers = require("./pages/api/gql/reviews/resolvers.ts").default;
-// var clients: {[k: string]: any} = [];
 
 (async () => {
     try {

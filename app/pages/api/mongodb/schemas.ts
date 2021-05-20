@@ -209,12 +209,17 @@ const userSchema = new Schema({
 })
 
 export interface IReviews extends Document {
+    by: Types.ObjectId,
     user: Types.ObjectId,
     comment: string,
     rating: number
 }
 
 const reviewSchema = new Schema({
+    by: {
+        type: Types.ObjectId,
+        required: true
+    },
     user: {
         type: Types.ObjectId,
         required: true
