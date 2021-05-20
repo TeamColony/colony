@@ -28,8 +28,10 @@ const Query = gql`
         findUserRequests(id: String): [requests],
         findQuickJobs(id: String): [jobs],
         findNewJobs(id: String): [jobs],
-        findAllMessages(id: String): [messages],
-        findAllPosMessages(id: String): [posMsg],
+        findAllMessages(id: String): [messages]
+        findAllPosMessages(id: String): [posMsg]
+        findReviewsForProfile(id: String): [review]
+        canUserReview(id: String, worker: String): Boolean
         findOngoing(id: String): [requests]
     },
     
@@ -40,6 +42,7 @@ const Query = gql`
         createRequest(input: requestInput!): requests
         addJob(input: userInput!): Boolean
         removeJob(input: jobInput!): Boolean
+        createReviewForWorker(data: reviewInput!): Boolean
         updateStatus(input: updateRequest!): Boolean
     }
 `
@@ -56,7 +59,8 @@ const userResolvers = require("./pages/api/gql/users/resolvers.ts").default;
 const requestTypeDef = gql(readFileSync(path.resolve('pages/api/gql/requests/requests.gql'), 'utf8'))
 const requestResolvers = require("./pages/api/gql/requests/resolvers.ts").default;
 
-// var clients: {[k: string]: any} = [];
+const reviewTypeDef = gql(readFileSync(path.resolve('pages/api/gql/reviews/reviews.gql'), 'utf8'))
+const reviewResolvers = require("./pages/api/gql/reviews/resolvers.ts").default;
 
 (async () => {
     try {
@@ -72,8 +76,8 @@ const requestResolvers = require("./pages/api/gql/requests/resolvers.ts").defaul
         });
 
         const apolloServer = new ApolloServer({
-            typeDefs: [Query, jobTypeDef, messageTypeDef, userTypeDef, requestTypeDef], 
-            resolvers: merge(jobResolvers, messageResolvers, userResolvers, requestResolvers),
+            typeDefs: [Query, jobTypeDef, messageTypeDef, userTypeDef, requestTypeDef, reviewTypeDef], 
+            resolvers: merge(jobResolvers, messageResolvers, userResolvers, requestResolvers, reviewResolvers),
             introspection: true,
             playground: true,
           });

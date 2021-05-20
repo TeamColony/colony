@@ -3,6 +3,7 @@ import styles from '../../styles/chat.module.css';
 import Router from 'next/router';
 import {SocketCtx} from '../../context/socket'
 import BottomModal from '../../components/BottomModal/BottomModal'
+import {Types} from 'mongoose'
 
 import {useLazyQuery, gql, useMutation} from '@apollo/client'
 
@@ -11,14 +12,20 @@ interface userData {
     image: string,
 }
 
+interface message {
+    [k: string] : {
+        user: string,
+        message: string
+    }
+}
+
 export default function Chat(props: any) {
     const bottomRef = useRef<HTMLDivElement>(null);
     const toggleRef = useRef<HTMLSpanElement>(null);
-
     const messageInput = useRef<HTMLInputElement>(null);
     const Socket = useContext(SocketCtx)
 
-    const [messages, appendMessage] = useState<object[]>([]);
+    const [messages, appendMessage] = useState<message[] | any>({});
     const [userData, setUserData] = useState<Array<userData>>(Object);
 
     const [displayModal, setDisplayModal] = useState(false);
@@ -32,6 +39,7 @@ export default function Chat(props: any) {
                 image
             }
             messages{
+                id
                 user
                 message
             }
@@ -65,7 +73,12 @@ export default function Chat(props: any) {
 
     useEffect(() => {
         if (data) {
-            appendMessage(data.findChatInfo.messages);
+            appendMessage(
+                data.findChatInfo.messages.reduce((map: any, obj: any) => {
+                    map[obj.id] = { msg: obj.message, user: obj.user }
+                    return map
+                }, {})
+            );
             setUserData(data!.findChatInfo.users.filter((item:any) => props.user.id !== item._id));
         }
     }, [data])
@@ -92,9 +105,18 @@ export default function Chat(props: any) {
             console.log(error)
         })
 
+        Socket.on('success', (data) => {
+            appendMessage((latest: any) => {
+                let buf = latest[data.id.toString()]
+                buf.delivered = true;
+                return {...latest, [data.id.toString()] : buf}
+            })
+        })
+
         Socket.on('message', (data) => {
-            console.log(data)
-            appendMessage(msg => [...msg, data])
+            appendMessage((msg: any) => {
+                return {...msg, data}
+            })
         })
 
         return () => {
@@ -106,11 +128,12 @@ export default function Chat(props: any) {
 
     const HandleSend = () => {
         if (messageInput.current && messageInput.current.value != '') {
-            Socket.emit('send', {roomName: props.router.query.slug, text: messageInput.current.value})
-            appendMessage(msg => {
+            const id = Types.ObjectId()
+            Socket.emit('send', {roomName: props.router.query.slug, text: messageInput.current.value, id: id})
+            appendMessage((msg: message) => {
                 let curMsg = messageInput.current?.value
                 messageInput.current!.value = '';
-                return [...msg, {user: props.user.id, message: curMsg}]
+                return {...msg, [id.toString()] : { user: props.user.id, msg: curMsg, id: id, delivered: false }}
             })
         }
     }
@@ -156,8 +179,13 @@ export default function Chat(props: any) {
             </div>
             <div ref={bottomRef} className={styles.messageContainer}>
                 <div id="messageContainer" className={styles.messages}>
-                    {messages.map((msg: any, i: number) => (
-                        <span key={i} className={msg.user != props.user.id ? styles.otherUser : ''}>{msg.message}</span>
+                    {Object.keys(messages).map((msg: string, i: number) => (
+                        <div className={styles.msgContainer}>
+                            <span key={i} className={messages[msg].user != props.user.id ? styles.otherUser : ''}>{messages[msg].msg}</span>
+                            {messages[msg].delivered == false &&
+                                <div className={styles.delivered}>delivered</div>
+                            }
+                        </div>
                     ))}
                 </div>
             </div>

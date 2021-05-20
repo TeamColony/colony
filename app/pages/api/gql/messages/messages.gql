@@ -5,6 +5,7 @@ type messages{
 }
 
 type imsg {
+        id: ID!
         message: String!,
         user: String!
 }

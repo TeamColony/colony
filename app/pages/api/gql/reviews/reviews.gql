@@ -1,0 +1,13 @@
+input reviewInput {
+    by: String!,
+    user: String!,
+    comment: String!,
+    rating: Int!
+}
+
+type review {
+    by: users!,
+    user: ID!,
+    comment: String!,
+    rating: Int!
+}

@@ -8,7 +8,8 @@ export default function bottomModal(props: any) {
     const listener = (e: MouseEvent) => {
         const path = (e as any).path || (e.composedPath && e.composedPath())
         props.options.toggle((prev: boolean) => {
-            if (props.options.toggles.filter((el: any) => el.current == e.target).length > 0) {
+            if (props.options.toggles.filter((el: any) => Array.from(el.current.children).includes(e.target) || el.current == e.target
+            ).length > 0) {
                 return true
             }
             if (path.includes(modalRef.current)) {
@@ -30,7 +31,7 @@ export default function bottomModal(props: any) {
     }, [])
 
     return (
-        <div ref={modalRef} style={{height: props.options.initialDisplay ? '16rem' : 0}} className={styles.parent}>
+        <div ref={modalRef} style={{height: props.options.initialDisplay ? props.options.height || '16rem' : 0}} className={styles.parent}>
             {props.children}
         </div>
     )
