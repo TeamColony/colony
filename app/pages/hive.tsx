@@ -39,6 +39,7 @@ export default function Hive(props: any) {
     {
 
         findUserRequests(id: "${String(props.user.id)}") {
+            _id
             user{
                 name,
                 image
@@ -48,6 +49,7 @@ export default function Hive(props: any) {
                 image
             },
             address,
+            status,
             request
                     
         }
@@ -267,12 +269,21 @@ export default function Hive(props: any) {
                 </div>
 
                 {requests.findUserRequests.length != 0 ? (
+                    <div>
+                        {requests.findUserRequests[0] != null ? (
+                            <div >
+                                {requests.findUserRequests.map((request: any, key: Number) => (
+                                    <RequestCard key={key} request={request} />
+                                ))}
+                            </div>
+                        ): (<div className={styles.noRequests}>
+                                <span className="material-icons">info</span>
+                                <div>Could not load request!</div>
+                            </div>)}
 
-                    <div >
-                        {requests.findUserRequests.map((request: any) => (
-                            <RequestCard request={request} />
-                        ))}
                     </div>
+
+                    
 
                 ) : (
                         <div className={styles.noRequests}>

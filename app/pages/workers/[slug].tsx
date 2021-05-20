@@ -29,22 +29,21 @@ export default function WorkerProfile(props: any) {
  `;
 
     const findUserJobs = gql`
-   {
+    {
         findUserJobs(id: "${String(slug)}") {
             name
             image
         }
-   }
+    }
    `;
 
     const messageUserMutation = gql`
-    mutation {
-        joinChat(users: ["${props.user.id}", "${String(slug)}"]) {
-            _id
+        mutation {
+            joinChat(users: ["${props.user.id}", "${String(slug)}"]) {
+                _id
+            }
         }
-    }
    `
-
 
     const [startMessage, startMessageResponse] = useMutation(messageUserMutation)
 
@@ -54,11 +53,11 @@ export default function WorkerProfile(props: any) {
         }
     }, [startMessageResponse])
 
-   const queryMultiple = () => {
-      const userData = useQuery(getUser);
-      const jobData = useQuery(findUserJobs);
-      return [userData, jobData];
-   }
+    const queryMultiple = () => {
+        const userData = useQuery(getUser);
+        const jobData = useQuery(findUserJobs);
+        return [userData, jobData];
+    }
 
     const [
         { loading: loading1, data: user },
