@@ -7,6 +7,7 @@ import styles from '../styles/newjob.module.css';
 import "leaflet/dist/leaflet.css";
 
 import JobModal from '../components/JobModal/JobModal'
+import Loading from '../components/Loading';
 
 import Router from 'next/router';
 
@@ -62,7 +63,7 @@ export default function NewJob(props: any) {
     const {error, loading, data} = useQuery(findNewJobs);
 
     if(loading){
-        return <div>Loading Data!</div>
+        return <Loading/>
     }
 
     return (
