@@ -180,11 +180,8 @@ export default function Chat(props: any) {
             <div ref={bottomRef} className={styles.messageContainer}>
                 <div id="messageContainer" className={styles.messages}>
                     {Object.keys(messages).map((msg: string, i: number) => (
-                        <div className={styles.msgContainer}>
-                            <span key={i} className={messages[msg].user != props.user.id ? styles.otherUser : ''}>{messages[msg].msg}</span>
-                            {messages[msg].delivered == false &&
-                                <div className={styles.delivered}>delivered</div>
-                            }
+                        <div className={`${styles.msgContainer} ${messages[msg].user != props.user.id ? styles.otherUser : ''}`}>
+                            <span key={i} >{messages[msg].msg}</span>
                         </div>
                     ))}
                 </div>
