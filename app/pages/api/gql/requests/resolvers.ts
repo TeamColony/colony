@@ -14,7 +14,9 @@ export default {
             return Requests.find( { $and: [
                 { $or: [ { user: Types.ObjectId(id) }, { worker: Types.ObjectId(id) } ] },
                 { status: 1 }
-            ]} ).sort({_id:-1}).limit(1).then((data) => data);
+            ]} ).sort({_id:-1}).limit(1).then((data) => {
+                return data;
+            });
 
         }
     },

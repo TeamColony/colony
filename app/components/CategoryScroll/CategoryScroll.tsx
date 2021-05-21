@@ -1,7 +1,7 @@
 import styles from './categoryscroll.module.css';
 import popularJobs from '../../interfaces/popular';
 import Router from 'next/router';
-
+import Loading from '../../components/Loading';
 
 import { useQuery, gql } from '@apollo/client';
 
@@ -25,7 +25,7 @@ export default function CategoryScroll() {
 
  const {error, loading, data} = useQuery(jobs);
 
- if(loading) {return <div>Loading</div>}
+ if(loading) {return <Loading/>}
  if(error) {return <div>{error}</div>}
 
     return (

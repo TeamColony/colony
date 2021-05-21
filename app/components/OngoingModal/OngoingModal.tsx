@@ -21,7 +21,8 @@ function OnGoing(props: any) {
                 image
             },
             worker{
-                _id
+                _id,
+                image
             }      
         }
     }
@@ -60,14 +61,23 @@ function OnGoing(props: any) {
             {requestData.data && visible == true ? (
                 <div>
                     {requestData.data.findOngoing.length != 0 ? (
+            
                         props.margin('150px'),
 
                         <div className={styles.onBody}>
                             <div className={styles.onHeader}>
-                                <div>
-                                    <span className="material-icons">work_outline</span>
-                                    <div>Ongoing Job</div>
-                                </div>
+                                {requestData.data.findOngoing[0].user._id == props.user.id ? (
+                                    console.log(requestData.data.findOngoing),
+                                    <div onClick={()=> Router.push(`/workers/${requestData.data.findOngoing[0].worker._id}`)}>
+                                        <img className={styles.orderImage} src={requestData.data.findOngoing[0].worker.image}/>
+                                        <div>Ongoing Order</div>
+                                    </div>
+                                ):(
+                                    <div>
+                                        <span className="material-icons">work_outline</span>
+                                        <div>Ongoing Job</div>
+                                    </div>
+                                )}
                                 <div onClick={()=> dismissModal()} className={styles.headerRight}>
                                     <span>Dismiss</span>
                                 </div>

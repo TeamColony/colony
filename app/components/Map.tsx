@@ -5,8 +5,13 @@ import L from 'leaflet'
 var Map: any;
 var TileLayer: any;
 var Marker: any;
-var Icon: any;
-class LeafletMap extends Component  {
+
+const InitialState = {
+  icon: null
+}
+
+class LeafletMap extends Component{
+  public readonly state = InitialState
 
   constructor(props: any) {
     super(props)
@@ -20,7 +25,7 @@ class LeafletMap extends Component  {
     TileLayer = require('react-leaflet').TileLayer
     Marker = require('react-leaflet').Marker
     this.setState({icon : L.icon({
-      iconUrl: 'http://localhost:3000/mapEx.svg',
+      iconUrl: 'https://www.colonyapp.co.uk/mapEx.svg',
       iconSize: [30, 30]
     })})
     this.forceUpdate()
