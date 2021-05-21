@@ -87,6 +87,7 @@ export default function Chat(props: any) {
     useEffect(() => {
         const scroll = bottomRef.current!.scrollHeight - bottomRef.current!.clientHeight;
         bottomRef.current!.scrollTo({top: scroll, behavior: 'smooth'});
+        console.log(messages)
     }, [messages])
 
 
@@ -114,8 +115,9 @@ export default function Chat(props: any) {
         })
 
         Socket.on('message', (data) => {
+            console.log(data)
             appendMessage((msg: any) => {
-                return {...msg, data}
+                return {...msg, [Object.keys(data)[0]] : data[Object.keys(data)[0]]}
             })
         })
 
