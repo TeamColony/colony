@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 
 //Packages
 import { useQuery, gql } from '@apollo/client';
-
 //Styles
 import styles from '../styles/newjob.module.css';
+import "leaflet/dist/leaflet.css";
 
 import JobModal from '../components/JobModal/JobModal'
 

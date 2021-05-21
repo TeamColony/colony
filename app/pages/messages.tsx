@@ -14,13 +14,15 @@ interface user {
 
 
 export default function MessageList(props: any) {
+
+    const [posMsgs, setPosMsgs] = useState<any[any]>();
+
     const searchAble = (data: Array<user>, query: string) => {
         const inputRegex = RegExp(query.split('').join('.*'))
         var results = data.filter((key) => {
             return inputRegex.exec(key.name.toLowerCase())
         })
-        console.log(results)
-        // setResults(results)
+        setPosMsgs(results)
     }
     const jobs = gql`
         {
@@ -71,6 +73,12 @@ export default function MessageList(props: any) {
     }, [startMessageResponse])
 
     useEffect(() => {
+        if (getPosMsgData.data) {
+            setPosMsgs(getPosMsgData.data.findAllPosMessages)
+        }
+    }, [getPosMsgData])
+
+    useEffect(() => {
         getPosMsg();
     }, [])
 
@@ -89,10 +97,10 @@ export default function MessageList(props: any) {
                     <span>New Message</span>
                 </div>
                 <div className={styles.searchContainer}>
-                    <input onChange={(e) => searchAble((getPosMsgData as any).data.findAllPosMessages, e.target.value.toLowerCase()) } className={styles.searchField} placeholder="search"/>
+                    <input onChange={(e) => searchAble(getPosMsgData.data.findAllPosMessages, e.target.value.toLowerCase()) } className={styles.searchField} placeholder="search"/>
                 </div>
                 <div className={styles.list}>
-                    {(getPosMsgData as any).data.findAllPosMessages.map((user: any) => (
+                    {(posMsgs as any).map((user: any) => (
                         <MessageCard options={{
                             data: user,
                             callBack: {

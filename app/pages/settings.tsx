@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styles from '../styles/settings.module.css';
 import { GetServerSidePropsContext } from 'next';
+import { signOut } from 'next-auth/client'
 
 export type Object = {
     category: string
@@ -22,7 +23,7 @@ export default function Settings(props: any) {
                 {
                     icon: "notifications",
                     name: "ongoing job",
-                    description: String(props.ongo)
+                    description: String(props.ongo || false)
                 },
                 {
                     icon: "lock",
@@ -119,7 +120,7 @@ export default function Settings(props: any) {
                         </div>
                     </div>
                 ))}
-
+                <button className={styles.signOutBtn} onClick={() => signOut()}>Sign Out</button>
             </div>
         </div>
     )

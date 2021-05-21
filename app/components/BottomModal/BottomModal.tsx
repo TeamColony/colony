@@ -8,6 +8,11 @@ export default function bottomModal(props: any) {
     const listener = (e: MouseEvent) => {
         const path = (e as any).path || (e.composedPath && e.composedPath())
         props.options.toggle((prev: boolean) => {
+            if (props.options.untoggles) {
+                if (props.options.untoggles.filter((el: any) => Array.from(el.current.children).includes(e.target) || el.current == e.target).length > 0) {
+                    return false
+                }
+            }
             if (props.options.toggles.filter((el: any) => Array.from(el.current.children).includes(e.target) || el.current == e.target
             ).length > 0) {
                 return true

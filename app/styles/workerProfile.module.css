@@ -234,6 +234,16 @@
     color: #777777;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.modalHeading div {
+    display: inherit;
+    align-items: center;
+}
+
+.modalHeading div:last-child {
+    margin-right: 2rem;
 }
 
 .modalGrid {
@@ -255,10 +265,12 @@
 }
 
 .modalInput span {
+    color: #5A5A5A;
     margin-bottom: 0.3rem;
 }
 
 .modalComment {
+    font-family: inherit;
     border: 2px solid grey;
     border-radius: 20px;
     padding: 1rem;
@@ -275,6 +287,7 @@
 }
 
 .modalStars span {
+    transition: all ease-in-out 0.15s;
     color: #B2B2B2;
     font-size: 2rem;
     margin-right: 1rem;
@@ -285,11 +298,16 @@
 }
 
 .submitReview {
+    transition: 1s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     background: #A4A4A4;
+}
+
+.submitReview:active {
+    color: green;
 }
 
 .submitReview span:last-child {

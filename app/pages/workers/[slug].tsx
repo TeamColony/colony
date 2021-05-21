@@ -26,6 +26,8 @@ export default function WorkerProfile(props: any) {
     const toggleRef = useRef<HTMLDivElement>(null);
     const [modalOpen, toggleModal] = useState<Boolean>(false);
     const [stars, setStars] = useState<number>(1);
+    const closeBtn = useRef<HTMLSpanElement>(null);
+    const successBtn = useRef<HTMLDivElement>(null);
 
     const [reviewsState, setReviews] = useState<any[any]>();
 
@@ -251,12 +253,18 @@ export default function WorkerProfile(props: any) {
                     initialDisplay: modalOpen,
                     toggle: toggleModal,
                     toggles: [toggleRef],
+                    untoggles: [closeBtn, successBtn],
                     height: '26rem'
                 }}>
                     <div className={styles.modalGrid}>
                         <div className={styles.modalHeading}>
-                            <img className={styles.modalPfp} src={user.findUserByID.image}/>
-                            <span>{user.findUserByID.name}</span>
+                            <div>
+                                <img className={styles.modalPfp} src={user.findUserByID.image}/>
+                                <span>{user.findUserByID.name}</span>
+                            </div>
+                            <div>
+                                <span ref={closeBtn} className="material-icons">close</span>
+                            </div>
                         </div>
                         <div className={styles.modalInput}>
                             <div className={styles.inputRow}>
@@ -277,7 +285,7 @@ export default function WorkerProfile(props: any) {
                                 </div>
                             </div>
                         </div>
-                        <div onClick={handleCreateReview} className={styles.submitReview}>
+                        <div ref={successBtn} onClick={handleCreateReview} className={styles.submitReview}>
                             <span className="material-icons">verified</span>
                             <span>submit</span>
                         </div>
